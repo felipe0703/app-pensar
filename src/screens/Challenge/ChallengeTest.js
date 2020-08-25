@@ -1,46 +1,50 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, View, Text, ScrollView} from 'react-native';
-import {Button} from 'react-native-elements';
-import {size, slice} from 'lodash';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import {StyleSheet, View, Text} from 'react-native';
 import Loading from '../../components/Loading';
-import Intro from '../Intro/Intro';
-import ChallengeController from '../Challenge1/ChallengeController';
+// import Intro from '../Intro/Intro';
+// import ChallengeController from '../Challenge1/ChallengeController';
 
 import {firebaseApp} from '../../utils/firebase';
 import firebase from 'firebase/app';
 import 'firebase/storage';
+import IntroTest from '../Intro/IntroTest';
+import Challenge1Text from '../Challenge1/Challenge1Text';
+import ThesisAlternative from '../Challenge1/ThesisAlternative';
 
 const db = firebase.firestore(firebaseApp);
 
-export default function ChallengeTest(props) {
-  const {navigation, route} = props;
-  const {id, nombre} = route.params;
+export default function ChallengeTest({navigation, route}) {
+  const {id, name} = route.params;
   const [challenge, setChallente] = useState(null);
-  const [idText, setIdText] = useState(0);
-  navigation.setOptions({title: nombre}); //al actualizar el componente traer un warning
-
+  console.log(challenge);
+  // navigation.setOptions({title: name}); //al actualizar el componente traer un warning
   useEffect(() => {
-    db.collection('challenges')
-      .doc(id)
-      .get()
-      .then((response) => {
-        const data = response.data();
-        data.id = response.id;
-        setChallente(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    id !== 0 &&
+      db
+        .collection('challenges')
+        .doc(id)
+        .get()
+        .then((response) => {
+          const data = response.data();
+          data.id = response.id;
+          setChallente(data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
   }, []);
 
-  if (!challenge) return <Loading isVisible={true} text="Cargando" />;
+  if (!challenge && id !== 0)
+    return <Loading isVisible={true} text="Cargando" />;
 
   return (
     <View style={styles.viewBody}>
-      {nombre === 'Introducción' && <Intro navigation={navigation} />}
-      {nombre === 'Desafío 1' && (
-        <ChallengeController navigation={navigation} />
+      {name === 'Introducción' && <IntroTest navigation={navigation} />}
+      {name === 'Desafío 1' && (
+        <Challenge1Text challenge={challenge} navigation={navigation} />
+      )}
+      {name !== 'Introducción' && name !== 'Desafío 1' && (
+        <ThesisAlternative challenge={challenge} navigation={navigation} />
       )}
     </View>
   );

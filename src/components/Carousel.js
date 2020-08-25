@@ -17,16 +17,26 @@ export default function CorouselChallenge(props) {
   const {arrayChallenges, navigation} = props;
   const [activeChallenge, setActiveChallenge] = useState(0);
 
+  const intro = {
+    id: 0,
+    order: 0,
+    name: 'Introducción',
+    description:
+      'Esta es la instroducción de la aplicación, el inicio de tu viaje',
+  };
+  const newChallenges = [intro, ...arrayChallenges];
+
   const renderItem = ({item}) => {
-    const {nombre, descripcion, image, id} = item;
+    const {name, description, image, id} = item;
+
     const onNavigation = () => {
-      navigation.navigate('challenge', {id, nombre});
+      navigation.navigate('challenge', {id, name});
     };
 
     return (
       <TouchableWithoutFeedback onPress={onNavigation}>
         <View style={styles.card}>
-          <Text style={styles.title}>{nombre}</Text>
+          <Text style={styles.title}>{name} 😁</Text>
           <Image
             resizeMode="contain"
             PlaceholderContent={<ActivityIndicator color="#196674" />}
@@ -34,7 +44,7 @@ export default function CorouselChallenge(props) {
             style={styles.imageChallenge}
           />
           <Text style={styles.description}>
-            {descripcion.substring(0, 60)}...
+            {description.substring(0, 60)}...
           </Text>
         </View>
       </TouchableWithoutFeedback>
@@ -44,7 +54,7 @@ export default function CorouselChallenge(props) {
   return (
     <Carousel
       layout={'default'}
-      data={arrayChallenges}
+      data={newChallenges}
       sliderWidth={width}
       itemWidth={ITEM_WIDTH}
       renderItem={renderItem}
@@ -63,7 +73,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 1,
     shadowRadius: 10,
-    borderRadius: 20,
+    borderRadius: 10,
     marginBottom: 20,
     alignItems: 'center',
     justifyContent: 'space-evenly',
@@ -79,7 +89,7 @@ const styles = StyleSheet.create({
     width: 250,
     height: 150,
     borderRadius: 10,
-    resizeMode: 'cover',
+    resizeMode: 'contain',
   },
   description: {
     marginVertical: 20,

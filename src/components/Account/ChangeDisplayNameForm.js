@@ -39,7 +39,7 @@ export default function ChangeDisplayNameForm(props) {
   return (
     <View style={styles.view}>
       <Input
-        placeholder="Nombre y apellidos"
+        placeholder="Nombre y Apellido"
         containerStyle={styles.input}
         inputStyle={{color: '#3c3c3c'}}
         rightIcon={{

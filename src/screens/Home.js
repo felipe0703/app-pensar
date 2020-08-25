@@ -15,12 +15,13 @@ export default function Home(props) {
   useEffect(() => {
     const resultChallenges = [];
     db.collection('challenges')
-      .orderBy('nombre', 'desc')
+      .orderBy('order', 'asc')
       .get()
       .then((response) => {
         response.forEach((doc) => {
           const challenge = doc.data();
           challenge.id = doc.id;
+          // challenge.status && resultChallenges.push(challenge);
           resultChallenges.push(challenge);
         });
         setChallenges(resultChallenges);
@@ -43,8 +44,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   title: {
-    marginTop: 60,
-    marginBottom: 60,
+    marginTop: 50,
+    marginBottom: 50,
     fontSize: 20,
     color: 'white',
     fontWeight: 'bold',

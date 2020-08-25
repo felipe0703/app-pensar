@@ -1,7 +1,8 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import Challenges from '../screens/Challenges';
-import Challenge from '../screens/Challenge/Challenge';
+import Challenge from '../screens/Challenge/ChallengeTest';
+import Thesis from '../screens/Challenge1/Thesis';
 
 const Stack = createStackNavigator();
 

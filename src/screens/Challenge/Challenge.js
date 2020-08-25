@@ -19,11 +19,11 @@ const screenWidth = Dimensions.get('window').width;
 
 export default function Challenge(props) {
   const {navigation, route} = props;
-  const {id, nombre} = route.params;
+  const {id, name} = route.params;
   const [challenge, setChallenge] = useState(null);
   console.log(challenge);
 
-  navigation.setOptions({title: nombre});
+  navigation.setOptions({title: name});
 
   useEffect(() => {
     db.collection('challenges')
@@ -51,8 +51,8 @@ export default function Challenge(props) {
         style={styles.imageChallenge}
       />
       <TitleChallenge
-        name={challenge.nombre}
-        description={challenge.descripcion}
+        name={challenge.name}
+        description={challenge.description}
       />
     </ScrollView>
   );

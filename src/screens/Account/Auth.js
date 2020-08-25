@@ -1,6 +1,7 @@
 import React, {useState, useRef} from 'react';
 import {StyleSheet, View, Image} from 'react-native';
 import Toast from 'react-native-easy-toast';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
@@ -14,20 +15,22 @@ export default function Auth() {
   };
 
   return (
-    <View style={styles.viewBody}>
-      <View>
-        <Image
-          style={styles.logo}
-          source={require('../../assets/img/image.png')}
-        />
-        {isLogin ? (
-          <LoginForm changeForm={changeForm} />
-        ) : (
-          <RegisterForm changeForm={changeForm} toastRef={toastRef} />
-        )}
+    <KeyboardAwareScrollView>
+      <View style={styles.viewBody}>
+        <View>
+          <Image
+            style={styles.logo}
+            source={require('../../assets/img/image.png')}
+          />
+          {isLogin ? (
+            <LoginForm changeForm={changeForm} />
+          ) : (
+            <RegisterForm changeForm={changeForm} toastRef={toastRef} />
+          )}
+        </View>
+        <Toast ref={toastRef} position="center" opacity={0.9} />
       </View>
-      <Toast ref={toastRef} position="center" opacity={0.9} />
-    </View>
+    </KeyboardAwareScrollView>
   );
 }
 
