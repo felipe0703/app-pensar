@@ -7,7 +7,6 @@ export default function Arguments({route, navigation}) {
   const {challenge} = route.params;
   const {thesis1} = challenge;
   const argument = thesis1.arguments;
-  console.log(argument);
 
   const goAgainstArguments = () => {
     navigation.navigate('against-arguments', {challenge});
@@ -20,7 +19,7 @@ export default function Arguments({route, navigation}) {
   return (
     <ScrollView style={styles.viewBody}>
       {argument.map((argument, index) => (
-        <Text style={styles.argument}>
+        <Text style={styles.argument} key={index}>
           {index + 1} ) {argument}
         </Text>
       ))}

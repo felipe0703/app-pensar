@@ -1,9 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useCallback} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
-import Carousel from '../components/Carousel';
+import {useFocusEffect} from '@react-navigation/native';
 import {firebaseApp} from '../utils/firebase';
-import firebase from 'firebase/app';
+import firebase from 'firebase';
 import 'firebase/storage';
+import Carousel from '../components/Carousel';
+import Thesis from './Challenge1/ThesisAlternative';
 
 firebase.firestore().settings({experimentalForceLongPolling: true});
 const db = firebase.firestore(firebaseApp);
@@ -12,29 +14,36 @@ export default function Home(props) {
   const {navigation} = props;
   const [challenges, setChallenges] = useState([]);
 
-  useEffect(() => {
-    const resultChallenges = [];
-    db.collection('challenges')
-      .orderBy('order', 'asc')
-      .get()
-      .then((response) => {
-        response.forEach((doc) => {
-          const challenge = doc.data();
-          challenge.id = doc.id;
-          // challenge.status && resultChallenges.push(challenge);
-          resultChallenges.push(challenge);
+  useFocusEffect(
+    useCallback(() => {
+      const resultChallenges = [];
+
+      db.collection('challenges')
+        .orderBy('order', 'asc')
+        .get()
+        .then((response) => {
+          response.forEach((doc) => {
+            const challenge = doc.data();
+            challenge.id = doc.id;
+            // challenge.status && resultChallenges.push(challenge);
+            resultChallenges.push(challenge);
+          });
+          setChallenges(resultChallenges);
+        })
+        .catch((error) => {
+          console.log(error);
         });
-        setChallenges(resultChallenges);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+    }, []),
+  );
 
   return (
     <View style={styles.viewBody}>
       <Text style={styles.title}>Elige tu desafío</Text>
-      <Carousel arrayChallenges={challenges} navigation={navigation} />
+      {challenges ? (
+        <Carousel arrayChallenges={challenges} navigation={navigation} />
+      ) : (
+        <Text>NO hay</Text>
+      )}
     </View>
   );
 }
