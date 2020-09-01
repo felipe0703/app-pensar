@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, View, Text} from 'react-native';
-import {textIntro} from './textIntro';
 import * as firebase from 'firebase';
+
+import {textIntro} from './textIntro';
 import ShowInfo from '../Challenge/ShowInfo';
 import ChangeDisplayNameForm from '../../components/Account/ChangeDisplayNameForm';
 import Modal from '../../components/Modal';
 
-export default function IntroTest({navigation}) {
+export default function Introduction({navigation}) {
   const [userInfo, setUserInfo] = useState(null);
   const [reloadUserInfo, setReloadUserInfo] = useState(false);
   const [showModal, setShowModal] = useState(true);
@@ -40,5 +40,3 @@ export default function IntroTest({navigation}) {
     </>
   );
 }
-
-const styles = StyleSheet.create({});

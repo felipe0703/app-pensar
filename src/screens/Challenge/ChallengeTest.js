@@ -1,13 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import Loading from '../../components/Loading';
-// import Intro from '../Intro/Intro';
-// import ChallengeController from '../Challenge1/ChallengeController';
 
 import {firebaseApp} from '../../utils/firebase';
 import firebase from 'firebase/app';
 import 'firebase/storage';
-import IntroTest from '../Intro/IntroTest';
+import Introduction from '../Intro/Introduction';
 import Challenge1Text from '../Challenge1/Challenge1Text';
 import ThesisAlternative from '../Challenge1/ThesisAlternative';
 
@@ -39,7 +37,7 @@ export default function ChallengeTest({navigation, route}) {
 
   return (
     <View style={styles.viewBody}>
-      {name === 'Introducción' && <IntroTest navigation={navigation} />}
+      {name === 'Introducción' && <Introduction navigation={navigation} />}
       {name === 'Desafío 1' && (
         <Challenge1Text challenge={challenge} navigation={navigation} />
       )}
