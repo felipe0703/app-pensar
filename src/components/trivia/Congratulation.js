@@ -1,24 +1,24 @@
 import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {Button} from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome';
 
-export default function Challenge4({nextText}) {
+export default function Congratulation({navigation}) {
+  const go = () => {
+    navigation.navigate('home');
+  };
   return (
     <View style={styles.viewBody}>
       <View style={styles.viewContent}>
-        <Text style={styles.content}>Empecemos el desafío 1</Text>
+        <Text style={styles.title}>🎉¡Felicidades!🎉</Text>
+        <Text style={styles.content}>Terminaste el primer desafío</Text>
       </View>
       <View style={styles.viewBtns}>
         <Button
-          title="Vamos"
-          type="solid"
-          icon={<Icon name="arrow-right" size={15} color="#196674" />}
-          iconRight
+          onPress={go}
+          title="Continuar"
           buttonStyle={styles.btn}
           containerStyle={styles.btnContainer}
           titleStyle={styles.btnText}
-          onPress={nextText}
         />
       </View>
     </View>
@@ -37,11 +37,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 30,
   },
-  content: {
+  title: {
     color: '#fff',
     fontWeight: 'bold',
     fontSize: 16,
     textAlign: 'center',
+    marginBottom: 20,
+  },
+  content: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 16,
   },
   viewBtns: {
     flexDirection: 'row',

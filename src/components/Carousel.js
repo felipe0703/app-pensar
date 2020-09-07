@@ -21,8 +21,7 @@ export default function CorouselChallenge(props) {
     id: 0,
     order: 0,
     name: 'Introducción',
-    description:
-      'Esta es la instroducción de la aplicación, el inicio de tu viaje',
+    description: 'Esta es el inicio de tu viaje',
   };
   const newChallenges = [intro, ...arrayChallenges];
 
@@ -30,7 +29,11 @@ export default function CorouselChallenge(props) {
     const {name, description, image, id} = item;
 
     const onNavigation = () => {
-      navigation.navigate('challenge', {id, name});
+      if (id === 0) {
+        navigation.navigate('introduction');
+      } else {
+        navigation.navigate('challenge', {id, name});
+      }
     };
 
     return (

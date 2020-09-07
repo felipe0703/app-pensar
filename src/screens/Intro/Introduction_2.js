@@ -1,47 +1,43 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, Text} from 'react-native';
-import {Button, Card} from 'react-native-elements';
+import {StyleSheet, Text, View} from 'react-native';
+import {Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {textIntro_2, textFeedback} from './text_Intro_1';
 import Modal from '../../components/Modal';
-import {
-  challengeText_6,
-  textFeedback_6_1,
-  textFeedback_6_2,
-  textFeedback_6_3,
-} from './challengeText';
 
-export default function Challenge6({nextText}) {
+export default function Introduction_2({navigation}) {
   const [showModal, setShowModal] = useState(false);
-  const [showNext, setShowNext] = useState(false);
-  const [response, setResponse] = useState(false);
+  const [showSiguiente, setShowSiguiente] = useState(false);
 
-  const resp = (response) => {
-    setShowModal(true);
-    setResponse(response);
-    setShowNext(true);
+  const goChallenge = () => {
+    navigation.navigate('introduction_3');
   };
+
+  const resp = () => {
+    setShowModal(true);
+    setShowSiguiente(true);
+  };
+
   return (
     <View style={styles.viewBody}>
       <View style={styles.viewContent}>
-        <Text style={styles.content}>{challengeText_6}</Text>
-        <Card
-          image={require('../../assets/img/Selects/img4.jpg')}
-          imageStyle={styles.cardImage}></Card>
+        <Text style={styles.content}>{textIntro_2}</Text>
       </View>
       <View style={styles.viewBtns}>
-        {!showNext ? (
+        {!showSiguiente ? (
           <>
             <Button
-              onPress={() => resp(true)}
-              title="Verdadero"
+              onPress={resp}
+              title="Si"
               icon={<Icon name="thumbs-o-up" size={15} color="#196674" />}
               buttonStyle={styles.btn}
               containerStyle={styles.btnContainer}
               titleStyle={styles.btnText}
             />
+
             <Button
-              onPress={() => resp(false)}
-              title="Falso"
+              onPress={resp}
+              title="No"
               buttonStyle={styles.btn}
               containerStyle={styles.btnContainer}
               titleStyle={styles.btnText}
@@ -53,29 +49,18 @@ export default function Challenge6({nextText}) {
           </>
         ) : (
           <Button
+            onPress={goChallenge}
             title="Siguiente"
-            type="solid"
-            icon={<Icon name="arrow-right" size={15} color="#196674" />}
-            iconRight
             buttonStyle={styles.btn}
-            titleStyle={styles.btnText}
             containerStyle={styles.btnContainer}
-            onPress={nextText}
+            titleStyle={styles.btnText}
+            icon={<Icon name="arrow-right" size={15} color="#196674" icon />}
+            iconRight
           />
         )}
       </View>
       <Modal isVisible={showModal} setIsVisible={setShowModal}>
-        {response ? (
-          <View style={styles.correct}>
-            <Text style={styles.textFeedback}>{textFeedback_6_2}</Text>
-            <Text style={styles.textFeedback}>{textFeedback_6_3}</Text>
-          </View>
-        ) : (
-          <View style={styles.incorrect}>
-            <Text style={styles.textFeedback}>{textFeedback_6_1}</Text>
-            <Text style={styles.textFeedback}>{textFeedback_6_3}</Text>
-          </View>
-        )}
+        <Text style={styles.textFeedback}>{textFeedback}</Text>
       </Modal>
     </View>
   );
@@ -96,7 +81,7 @@ const styles = StyleSheet.create({
   content: {
     color: '#fff',
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: 22,
     textAlign: 'center',
   },
   viewBtns: {
@@ -116,21 +101,9 @@ const styles = StyleSheet.create({
     color: '#196674',
     marginHorizontal: 10,
   },
-  cardImage: {
-    width: 300,
-    height: 300,
-    resizeMode: 'contain',
-  },
-  correct: {
-    backgroundColor: '#ff4b4b',
-  },
-  incorrect: {
-    backgroundColor: '#78c800',
-  },
   textFeedback: {
-    color: '#fff',
-    fontWeight: 'bold',
+    marginVertical: 10,
     textAlign: 'center',
-    margin: 10,
+    fontSize: 16,
   },
 });

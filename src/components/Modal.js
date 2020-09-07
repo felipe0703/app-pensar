@@ -21,5 +21,7 @@ const styles = StyleSheet.create({
   overlay: {
     height: 'auto',
     width: '90%',
+    // margin: 0,
+    // padding: 0,
   },
 });

@@ -1,24 +1,26 @@
 import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import {Button} from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import {challengeText_16_1, challengeText_16_2} from './challengeText';
 
-export default function Challenge4({nextText}) {
+export default function Challenge16({navigation}) {
+  // const textIntro = challengeText_16.split('|');
+  const go = () => {
+    navigation.navigate('trivia');
+  };
   return (
     <View style={styles.viewBody}>
       <View style={styles.viewContent}>
-        <Text style={styles.content}>Empecemos el desafío 1</Text>
+        <Text style={styles.title}>{challengeText_16_1}</Text>
+        <Text style={styles.content}>{challengeText_16_2}</Text>
       </View>
       <View style={styles.viewBtns}>
         <Button
+          onPress={go}
           title="Vamos"
-          type="solid"
-          icon={<Icon name="arrow-right" size={15} color="#196674" />}
-          iconRight
           buttonStyle={styles.btn}
           containerStyle={styles.btnContainer}
           titleStyle={styles.btnText}
-          onPress={nextText}
         />
       </View>
     </View>
@@ -37,11 +39,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 30,
   },
-  content: {
+  title: {
     color: '#fff',
     fontWeight: 'bold',
     fontSize: 16,
     textAlign: 'center',
+    marginBottom: 20,
+  },
+  content: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 16,
   },
   viewBtns: {
     flexDirection: 'row',

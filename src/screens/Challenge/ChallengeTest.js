@@ -5,7 +5,7 @@ import Loading from '../../components/Loading';
 import {firebaseApp} from '../../utils/firebase';
 import firebase from 'firebase/app';
 import 'firebase/storage';
-import Introduction from '../Intro/Introduction';
+import Introduction from '../Intro/Introduction_1';
 import Challenge1Text from '../Challenge1/Challenge1Text';
 import ThesisAlternative from '../Challenge1/ThesisAlternative';
 
@@ -17,19 +17,17 @@ export default function ChallengeTest({navigation, route}) {
   console.log(challenge);
   // navigation.setOptions({title: name}); //al actualizar el componente traer un warning
   useEffect(() => {
-    id !== 0 &&
-      db
-        .collection('challenges')
-        .doc(id)
-        .get()
-        .then((response) => {
-          const data = response.data();
-          data.id = response.id;
-          setChallente(data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+    db.collection('challenges')
+      .doc(id)
+      .get()
+      .then((response) => {
+        const data = response.data();
+        data.id = response.id;
+        setChallente(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
   if (!challenge && id !== 0)
@@ -37,11 +35,10 @@ export default function ChallengeTest({navigation, route}) {
 
   return (
     <View style={styles.viewBody}>
-      {name === 'Introducción' && <Introduction navigation={navigation} />}
       {name === 'Desafío 1' && (
         <Challenge1Text challenge={challenge} navigation={navigation} />
       )}
-      {name !== 'Introducción' && name !== 'Desafío 1' && (
+      {name !== 'Desafío 1' && (
         <ThesisAlternative challenge={challenge} navigation={navigation} />
       )}
     </View>

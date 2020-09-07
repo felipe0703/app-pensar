@@ -1,29 +1,18 @@
-import React, {useState, useEffect} from 'react';
-import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import React, {useState} from 'react';
+import {StyleSheet, View, Text} from 'react-native';
 import {Button, CheckBox} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {
-  challengeText_10_1,
-  challengeText_10_2,
-  challengeText_10_3,
-  challengeText_10_4,
-  textFeedback_10,
+  challengeText_15_1,
+  challengeText_15_2,
+  challengeText_15_3,
+  challengeText_15_4,
 } from './challengeText';
-import Modal from '../../components/Modal';
 
-export default function Challenge10({nextText, setThesis}) {
-  const [showModal, setShowModal] = useState(false);
+export default function Challenge15({nextText}) {
   const [showNext, setShowNext] = useState(false);
-  const [allowShowNext, setAllowShowNext] = useState(false);
   const [checkedThesis1, setCheckedThesis1] = useState(false);
   const [checkedThesis2, setCheckedThesis2] = useState(false);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setShowModal(true);
-      setAllowShowNext(true);
-    }, 500);
-  }, []);
 
   const resp = (thesis) => {
     if (thesis === 1) {
@@ -33,20 +22,17 @@ export default function Challenge10({nextText, setThesis}) {
       setCheckedThesis1(false);
       setCheckedThesis2(true);
     }
-    setThesis(thesis);
-    if (allowShowNext) {
-      setShowNext(true);
-    }
+    setShowNext(true);
   };
 
   return (
     <View style={styles.viewBody}>
       <View style={styles.viewContent}>
-        <Text style={styles.title}>{challengeText_10_1}</Text>
-        <Text style={styles.content}>{challengeText_10_2}</Text>
+        <Text style={styles.title}>{challengeText_15_1}</Text>
+        <Text style={styles.content}>{challengeText_15_2}</Text>
         <View style={styles.viewOptions}>
           <CheckBox
-            title={challengeText_10_3}
+            title={challengeText_15_3}
             checkedIcon="dot-circle-o"
             uncheckedIcon="circle-o"
             checked={checkedThesis1}
@@ -54,7 +40,7 @@ export default function Challenge10({nextText, setThesis}) {
             onPress={() => resp(1)}
           />
           <CheckBox
-            title={challengeText_10_4}
+            title={challengeText_15_4}
             checkedIcon="dot-circle-o"
             uncheckedIcon="circle-o"
             checked={checkedThesis2}
@@ -75,10 +61,6 @@ export default function Challenge10({nextText, setThesis}) {
           />
         )}
       </View>
-
-      <Modal isVisible={showModal} setIsVisible={setShowModal}>
-        <Text style={styles.textFeedback}>{textFeedback_10}</Text>
-      </Modal>
     </View>
   );
 }

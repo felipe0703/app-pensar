@@ -9,7 +9,7 @@ export default function Challenge1Text({navigation, challenge}) {
   //trabajo del texto estatico
   const textWithName = challengeText.replace('[]', userInfo);
   const text = textWithName.split('##');
-  const textIntro = text[0].split('.');
+  const textIntro = text[0].split('|');
   const textContent = text.slice(1, text.length - 1);
   const textFinish = text[text.length - 1].split('.');
   const textChallenge1 = [...textIntro, ...textContent, ...textFinish];

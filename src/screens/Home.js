@@ -24,6 +24,7 @@ export default function Home(props) {
         .then((response) => {
           response.forEach((doc) => {
             const challenge = doc.data();
+
             challenge.id = doc.id;
             // challenge.status && resultChallenges.push(challenge);
             resultChallenges.push(challenge);
