@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import {Text, View, StyleSheet} from 'react-native';
-import {Button} from 'react-native-elements';
+import {Text, View, StyleSheet, ActivityIndicator} from 'react-native';
+import {Button, Image} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {
   textIntro_2,
@@ -70,11 +70,21 @@ export default function Introduction_2({navigation}) {
       <Modal isVisible={showModal} setIsVisible={setShowModal}>
         {response ? (
           <View style={globalStyles.correct}>
+            <Image
+              style={globalStyles.brain}
+              source={require('../../assets/img/cerebrito/cerebro-rosado.png')}
+              PlaceholderContent={<ActivityIndicator />}
+            />
             <Text style={styles.textFeedback}>{textFeedback_2_1}</Text>
             <Text style={styles.textFeedback2}>{textFeedback_2_3}</Text>
           </View>
         ) : (
           <View style={globalStyles.incorrect}>
+            <Image
+              style={globalStyles.brain}
+              source={require('../../assets/img/cerebrito/cerebro-celeste.png')}
+              PlaceholderContent={<ActivityIndicator />}
+            />
             <Text style={styles.textFeedback}>{textFeedback_2_2}</Text>
             <Text style={styles.textFeedback2}>{textFeedback_2_3}</Text>
           </View>

@@ -9,5 +9,12 @@ export default function Challenge2_slice12({navigation}) {
     navigation.navigate('trivia', {challenge: 2});
   };
 
-  return <ShowInfo text={allText} go={goTrivia} textButton="Listo" />;
+  return (
+    <ShowInfo
+      text={allText}
+      go={goTrivia}
+      textButton="Listo"
+      showBrain={true}
+    />
+  );
 }

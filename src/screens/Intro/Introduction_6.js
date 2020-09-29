@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import {Text, View} from 'react-native';
-import {Button, CheckBox, ListItem} from 'react-native-elements';
+import {Text, View, ActivityIndicator} from 'react-native';
+import {Button, CheckBox, Image} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {
   textIntro_6,
@@ -91,15 +91,22 @@ export default function Introduction_4({navigation}) {
         )}
       </View>
       <Modal isVisible={showModal} setIsVisible={setShowModal}>
-        {checked_1 && (
-          <Text style={globalStyles.options}>{textFeedback_6_1}</Text>
-        )}
-        {checked_2 && (
-          <Text style={globalStyles.options}>{textFeedback_6_2}</Text>
-        )}
-        {checked_3 && (
-          <Text style={globalStyles.options}>{textFeedback_6_3}</Text>
-        )}
+        <View style={globalStyles.incorrect}>
+          <Image
+            style={globalStyles.brain}
+            source={require('../../assets/img/cerebrito/cerebro-celeste.png')}
+            PlaceholderContent={<ActivityIndicator />}
+          />
+          {checked_1 && (
+            <Text style={globalStyles.options}>{textFeedback_6_1}</Text>
+          )}
+          {checked_2 && (
+            <Text style={globalStyles.options}>{textFeedback_6_2}</Text>
+          )}
+          {checked_3 && (
+            <Text style={globalStyles.options}>{textFeedback_6_3}</Text>
+          )}
+        </View>
       </Modal>
     </View>
   );

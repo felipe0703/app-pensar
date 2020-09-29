@@ -78,6 +78,8 @@ export const challege2Text_12 = `🎊 ¡Excelente! 🎊
 
 Para finalizar el viaje, contesta estas tres preguntas que te ayudarán a aprender un poco más sobre los sesgos cognitivos y la evaluación de información.`;
 
-export const congratulation = `¡Has concluido la 2ª etapa!
+export const congratulation_challenge1 = `Sabías que en los programas y bases curriculares de Historia, Geografía y Cs. Sociales se señalan que “el énfasis está en desarrollar un pensamiento crítico basado en la capacidad de integrar elementos para el análisis y de reconocer la complejidad inherente a los fenómenos humanos que estudian la Historia y las Ciencias Sociales  (Ministerio de educación, 2016b, p. 44)`;
+
+export const congratulation_challenge2 = `¡Has concluido la 2ª etapa!
 
 Es hora de descansar 🥱😴`;

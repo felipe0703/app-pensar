@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, View, Text} from 'react-native';
-import {Button, CheckBox} from 'react-native-elements';
+import {StyleSheet, View, Text, ActivityIndicator} from 'react-native';
+import {Button, CheckBox, Image} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {
   challengeText_10_1,
@@ -78,7 +78,14 @@ export default function Challenge10({nextText, setThesis}) {
       </View>
 
       <Modal isVisible={showModal} setIsVisible={setShowModal}>
-        <Text style={styles.textFeedback}>{textFeedback_10}</Text>
+        <View style={globalStyles.modalFeedback}>
+          <Image
+            style={globalStyles.brain}
+            source={require('../../assets/img/cerebrito/cerebro-rosado.png')}
+            PlaceholderContent={<ActivityIndicator />}
+          />
+          <Text style={styles.textFeedback}>{textFeedback_10}</Text>
+        </View>
       </Modal>
     </View>
   );

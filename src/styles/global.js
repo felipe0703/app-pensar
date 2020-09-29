@@ -9,6 +9,12 @@ import {StyleSheet} from 'react-native';
 // #3c3c3c
 
 const globalStyles = StyleSheet.create({
+  brain: {
+    height: 100,
+    width: 110,
+    resizeMode: 'contain',
+    marginBottom: 20,
+  },
   btn: {
     borderRadius: 10,
     backgroundColor: '#c2ddc7',
@@ -40,17 +46,30 @@ const globalStyles = StyleSheet.create({
     marginTop: 10,
     textAlign: 'center',
   },
+  content3: {
+    color: '#fff',
+    fontSize: 16,
+    textAlign: 'justify',
+  },
   correct: {
     backgroundColor: '#78c800',
+    alignItems: 'center',
   },
   incorrect: {
     backgroundColor: '#ff4b4b',
+    alignItems: 'center',
+  },
+  modalFeedback: {
+    alignItems: 'center',
   },
   options: {
     marginVertical: 10,
+    marginHorizontal: 20,
+    color: '#fff',
   },
   textFeedback: {
     marginVertical: 10,
+    marginHorizontal: 5,
     textAlign: 'center',
     fontSize: 16,
   },

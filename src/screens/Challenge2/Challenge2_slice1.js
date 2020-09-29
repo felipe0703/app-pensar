@@ -1,7 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import * as firebase from 'firebase';
+
 import ShowInfo from '../Challenge/ShowInfo';
 import {challege2Text_1} from './challenge2text';
+import globalStyles from '../../styles/global';
 
 export default function Challenge2_slice1({nextText}) {
   const [userInfo, setUserInfo] = useState(null);
@@ -15,5 +17,5 @@ export default function Challenge2_slice1({nextText}) {
     })();
   }, []);
 
-  return <ShowInfo text={allText} go={nextText} />;
+  return <ShowInfo text={allText} go={nextText} showBrain={true} />;
 }

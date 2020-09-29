@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, View, Text} from 'react-native';
-import {Button} from 'react-native-elements';
+import {StyleSheet, View, Text, ActivityIndicator} from 'react-native';
+import {Button, Image} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {challengeText_3, textFeedback_3} from './challengeText';
 import Modal from '../../components/Modal';
@@ -37,7 +37,14 @@ export default function Challenge3({nextText}) {
         )}
       </View>
       <Modal isVisible={showModal} setIsVisible={setShowModal}>
-        <Text style={styles.textModal}>{textFeedback_3}</Text>
+        <View style={globalStyles.modalFeedback}>
+          <Image
+            style={globalStyles.brain}
+            source={require('../../assets/img/cerebrito/cerebro-rosado.png')}
+            PlaceholderContent={<ActivityIndicator />}
+          />
+          <Text style={styles.textModal}>{textFeedback_3}</Text>
+        </View>
       </Modal>
     </View>
   );

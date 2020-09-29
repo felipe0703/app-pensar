@@ -1,6 +1,12 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import {Button} from 'react-native-elements';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  ActivityIndicator,
+} from 'react-native';
+import {Button, Image} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {usePages} from '../../hooks/usePages';
 import Modal from '../../components/Modal';
@@ -13,6 +19,7 @@ export default function Challenge1Text({
   isVisibleLearnMore = false,
   learnMore = '',
   pageToLearMore = 0,
+  showBrain = false,
 }) {
   const {state: page, nextText, backText} = usePages();
   const [showModal, setShowModal] = useState(false);
@@ -23,6 +30,13 @@ export default function Challenge1Text({
   return (
     <View style={globalStyles.viewBody}>
       <View style={globalStyles.viewContent}>
+        {showBrain && (
+          <Image
+            style={globalStyles.brain}
+            source={require('../../assets/img/cerebrito/cerebro-rosado.png')}
+            PlaceholderContent={<ActivityIndicator />}
+          />
+        )}
         <Text style={globalStyles.content}>{text[page]}</Text>
       </View>
       {isVisibleLearnMore && pageToLearMore === page && (
@@ -65,7 +79,14 @@ export default function Challenge1Text({
         )}
       </View>
       <Modal isVisible={showModal} setIsVisible={setShowModal}>
-        <Text style={styles.textModal}>{learnMore}</Text>
+        <View style={globalStyles.correct}>
+          <Image
+            style={globalStyles.brain}
+            source={require('../../assets/img/cerebrito/cerebro-rosado.png')}
+            PlaceholderContent={<ActivityIndicator />}
+          />
+          <Text style={styles.textModal}>{learnMore}</Text>
+        </View>
       </Modal>
     </View>
   );
@@ -79,7 +100,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   textModal: {
-    marginVertical: 10,
+    // marginVertical: 10,
+    marginHorizontal: 10,
     textAlign: 'justify',
   },
 });

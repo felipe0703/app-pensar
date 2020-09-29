@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import {Text, View} from 'react-native';
-import {Button, CheckBox} from 'react-native-elements';
+import {Text, View, ActivityIndicator} from 'react-native';
+import {Button, CheckBox, Image} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {textIntro_4, textFeedback_4} from './text_Intro_1';
 import Modal from '../../components/Modal';
@@ -118,7 +118,14 @@ export default function Introduction_4({navigation}) {
         )}
       </View>
       <Modal isVisible={showModal} setIsVisible={setShowModal}>
-        <Text style={globalStyles.textFeedback}>{textFeedback_4}</Text>
+        <View style={globalStyles.correct}>
+          <Image
+            style={globalStyles.brain}
+            source={require('../../assets/img/cerebrito/cerebro-rosado.png')}
+            PlaceholderContent={<ActivityIndicator />}
+          />
+          <Text style={globalStyles.textFeedback}>{textFeedback_4}</Text>
+        </View>
       </Modal>
     </View>
   );

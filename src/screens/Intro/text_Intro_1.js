@@ -16,7 +16,9 @@ export const textIntro_3 = `[] , tú tienes la capacidad de reflexionar sobre tu
 
 Bienvenido a un viaje en el que observarás los pasos que damos al pensar.`;
 
-export const textLearMore = `¿Sabías que nuestro cerebro a lo largo de la evolución como especie ha logrado hacer sentido del mundo? Los atajos mentales o sesgos cognitivos son parte de esta evolución. Nos han servido para sobrevivir, pero no siempre responden a una percepción clara de la realidad. Por eso que es importante reconocerlos y ver cómo afectan la formación del pensamiento.`;
+export const textLearMore = `¿Sabías que nuestro cerebro a lo largo de la evolución como especie ha logrado hacer sentido del mundo? 
+
+Los atajos mentales o sesgos cognitivos son parte de esta evolución. Nos han servido para sobrevivir, pero no siempre responden a una percepción clara de la realidad. Por eso que es importante reconocerlos y ver cómo afectan la formación del pensamiento.`;
 
 export const textIntro_4 = `¿A qué crees que le ponemos más atención? A cosas: | Bien hecho, sigamos avanzando`;
 

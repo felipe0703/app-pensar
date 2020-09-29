@@ -1,8 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {Text, View} from 'react-native';
-import {Button} from 'react-native-elements';
+import {Text, View, ActivityIndicator} from 'react-native';
+import {Button, Image} from 'react-native-elements';
 import globalStyles from '../../styles/global';
-import {congratulation} from '../../screens/Challenge2/challenge2text';
+import {
+  congratulation_challenge1,
+  congratulation_challenge2,
+} from '../../screens/Challenge2/challenge2text';
 
 export default function Congratulation({navigation, route}) {
   const {challenge} = route.params;
@@ -14,9 +17,9 @@ export default function Congratulation({navigation, route}) {
 
   useEffect(() => {
     if (challenge === 1) {
-      setText('Terminaste el primer desafío');
+      setText(congratulation_challenge1);
     } else if (challenge === 2) {
-      setText(congratulation);
+      setText(congratulation_challenge2);
     } else {
       setText('Terminaste el desafío');
     }
@@ -25,8 +28,13 @@ export default function Congratulation({navigation, route}) {
   return (
     <View style={globalStyles.viewBody}>
       <View style={globalStyles.viewContent}>
+        <Image
+          style={globalStyles.brain}
+          source={require('../../assets/img/cerebrito/cerebro-rosado.png')}
+          PlaceholderContent={<ActivityIndicator />}
+        />
         <Text style={globalStyles.title}>🎉¡Felicidades!🎉</Text>
-        <Text style={globalStyles.content}>{text}</Text>
+        <Text style={globalStyles.content3}>{text}</Text>
       </View>
       <View style={globalStyles.viewBtns}>
         <Button
