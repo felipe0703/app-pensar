@@ -87,7 +87,7 @@ export default function AccountOptions(props) {
 function generateOptions(selectedComponent) {
   return [
     {
-      title: 'Cambiar Nombre y Apellidos',
+      title: 'Cambiar Nombre',
       iconType: 'material-community',
       iconNameLeft: 'account-circle',
       iconColorLeft: '#C2DDC7',

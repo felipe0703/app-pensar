@@ -1,69 +1,42 @@
-import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {Text, View} from 'react-native';
 import {Button} from 'react-native-elements';
+import globalStyles from '../../styles/global';
+import {congratulation} from '../../screens/Challenge2/challenge2text';
 
-export default function Congratulation({navigation}) {
+export default function Congratulation({navigation, route}) {
+  const {challenge} = route.params;
+  const [text, setText] = useState('');
+
   const go = () => {
     navigation.navigate('home');
   };
+
+  useEffect(() => {
+    if (challenge === 1) {
+      setText('Terminaste el primer desafío');
+    } else if (challenge === 2) {
+      setText(congratulation);
+    } else {
+      setText('Terminaste el desafío');
+    }
+  }, []);
+
   return (
-    <View style={styles.viewBody}>
-      <View style={styles.viewContent}>
-        <Text style={styles.title}>🎉¡Felicidades!🎉</Text>
-        <Text style={styles.content}>Terminaste el primer desafío</Text>
+    <View style={globalStyles.viewBody}>
+      <View style={globalStyles.viewContent}>
+        <Text style={globalStyles.title}>🎉¡Felicidades!🎉</Text>
+        <Text style={globalStyles.content}>{text}</Text>
       </View>
-      <View style={styles.viewBtns}>
+      <View style={globalStyles.viewBtns}>
         <Button
           onPress={go}
           title="Continuar"
-          buttonStyle={styles.btn}
-          containerStyle={styles.btnContainer}
-          titleStyle={styles.btnText}
+          buttonStyle={globalStyles.btn}
+          containerStyle={globalStyles.btnContainer}
+          titleStyle={globalStyles.btnText}
         />
       </View>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  viewBody: {
-    flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  viewContent: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 30,
-  },
-  title: {
-    color: '#fff',
-    fontWeight: 'bold',
-    fontSize: 16,
-    textAlign: 'center',
-    marginBottom: 20,
-  },
-  content: {
-    color: '#fff',
-    fontWeight: 'bold',
-    fontSize: 16,
-  },
-  viewBtns: {
-    flexDirection: 'row',
-  },
-  btn: {
-    borderRadius: 10,
-    backgroundColor: '#c2ddc7',
-    paddingVertical: 10,
-  },
-  btnContainer: {
-    width: 150,
-    marginVertical: 30,
-    marginHorizontal: 10,
-  },
-  btnText: {
-    color: '#196674',
-    marginHorizontal: 10,
-  },
-});

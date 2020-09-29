@@ -1,6 +1,7 @@
-export const challengeText_1 = `Comprender la forma en que pensamos ha sido parte del interés del ser humano a lo largo de la historia. Ya en la edad antigua, filósofos griegos como Platón y Sócrates reflexionaban sobre las formas correctas de guiar el proceso del pensamiento. Hoy, comprender los procesos involucrados en pensar cobran mayor relevancia dada la complejidad del entorno de información que vivimos`;
+export const challengeText_1 = `Comprender la forma en que pensamos ha sido parte del interés del ser humano a lo largo de la historia. Ya en la edad antigua, filósofos griegos como Platón y Sócrates reflexionaban sobre las formas correctas de guiar el proceso del pensamiento. Hoy, comprender los procesos involucrados en pensar cobran mayor relevancia dada la complejidad del entorno de información en que vivimos.`;
 
 export const challengeText_2 = `¿Conoces algunos de estos reconocidos pensadores críticos?`;
+export const challengeText_2_1 = `Pincha en cada uno de los pensadores para saber más`;
 
 export const textFeedback_2_1 = `Martin Luther King Jr.: Promovió la noción de igualdad de derechos en EE.UU. con una argumentación y capacidad de persuasión notoria que llamaba a soñar con un futuro mejor y a lograr cambios sin violencia.`;
 
@@ -16,10 +17,9 @@ export const textFeedback_3 = `¡Bien hecho!🎉🎉🎊
 
 Pensar críticamente comienza reflexionando sobre tus propias ideas. 👏👏👏`;
 
-export const challengeText_5 = `1.	Seleccionar 
+export const challengeText_5 = `1.	Selección de información
 
-Esta etapa es fundamental. El Pensamiento Crítico se basa en ella. A continuación, te daremos algunos ejemplos para que ejercites esta primera fase
-`;
+Esta etapa es fundamental. El Pensamiento Crítico se basa en ella. A continuación, te daremos algunos ejemplos para que ejercites esta primera fase.`;
 
 export const challengeText_6 = `¿Cómo evaluarías esta información?`;
 
@@ -39,9 +39,9 @@ export const textFeedback_7_1 = `👍
 export const textFeedback_7_2 = `👎
 ¡Incorrecto!`;
 
-export const textFeedback_7_3 = `Una de las formas más comunes de transmitir información falsa es a través de redes sociales como WhatsApp. Usualmente, estas cadenas de información comparten ciertos rasgos que permiten ayudarnos a reconocer su falsedad o dudar de su veracidad.
+export const textFeedback_7_3 = `Una de las formas más comunes de transmitir información falsa es a través de redes sociales como WhatsApp. Usualmente, estas cadenas de información comparten ciertos rasgos que permiten ayudarnos a reconocer su falsedad o dudar de su veracidad.`;
 
-1.	Se trata de información que no se puede encontrar en medios de comunicación establecidos o canales de comunicación oficial.
+export const textFeedback_7_4 = `1.	Se trata de información que no se puede encontrar en medios de comunicación establecidos o canales de comunicación oficial.
 
 2.	Se apela a la idea de que hay una realidad mantenida en secreto por intereses que quieren mantenernos en la ignorancia sobre algunos temas.
 
@@ -49,8 +49,7 @@ export const textFeedback_7_3 = `Una de las formas más comunes de transmitir in
 
 4.	Generalmente, se trata de cuestiones muy impactantes o potencialmente muy disruptivas, que explotan temores o prejuicios de las audiencias receptoras del mensaje.
 
-5.	 Generalmente abundan las faltas de ortografía y puntuación, así como se incluyen palabras que habitualmente no encontraríamos en un tipo de texto determinado.
-`;
+5.	 Generalmente abundan las faltas de ortografía y puntuación, así como se incluyen palabras que habitualmente no encontraríamos en un tipo de texto destinado a difundir información de utilidad pública.`;
 
 export const challengeText_8 = `¿Es este un “dato bueno” que debe compartirse masivamente?`;
 
@@ -64,7 +63,9 @@ export const textFeedback_8_3 = `La información de la publicación informa de m
 Además, el contenido de esta publicación es contradictorio: por una parte afirma que la Covid-19 es “inmune a organismos con un PH mayor de 5,5” y luego aconseja consumir alimentos con un PH mayor a ese índice, lo cual, según este razonamiento, crearía un ambiente al que el virus sería inmune. Esto es todo lo contrario de lo que se busca.
 `;
 
-export const challengeText_9 = `Bien hecho, ¡[]!|Vamos paso a paso. Un segundo paso del pensamiento crítico es la elaboración de un punto de vista, lo que se denomina ‘elaboración de tesis’ cuando se desarrolla académicamente. Vamos a ver.`;
+export const challengeText_9 = `Bien hecho, ¡[]!
+
+Has ejercitado tu capacidad de seleccionar información, reconociendo y analizando el contenido, y los medios de difusión de información falsa o sesgada.|Vamos paso a paso. Un segundo paso del pensamiento crítico es la elaboración de un punto de vista, lo que se denomina ‘elaboración de tesis’ cuando se desarrolla académicamente. Vamos a ver.`;
 
 export const challengeText_10_1 = `2.  Elaboración de tesis`;
 export const challengeText_10_2 = `
@@ -110,7 +111,7 @@ export const challengeText_12_3 = {
 
 export const challengeText_13 = `¡Excelente!👏👏
 
-¿Sabías que el pensamiento crítico también requiere la inclusión de contraargumentos? 
+¿Sabías que el pensamiento crítico también requiere la consideración de contraargumentos? 
 
 Esto es importante, ya que de esta forma puedes ampliar tu perspectiva de razonamiento.`;
 

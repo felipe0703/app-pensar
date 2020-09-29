@@ -19,7 +19,7 @@ export default function Home(props) {
       const resultChallenges = [];
 
       db.collection('challenges')
-        .orderBy('order', 'asc')
+        .orderBy('order', 'desc')
         .get()
         .then((response) => {
           response.forEach((doc) => {

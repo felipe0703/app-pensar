@@ -4,12 +4,14 @@ import {Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {
   challengeText_2,
+  challengeText_2_1,
   textFeedback_2_1,
   textFeedback_2_2,
   textFeedback_2_3,
   textFeedback_2_4,
 } from './challengeText';
 import Modal from '../../components/Modal';
+import globalStyles from '../../styles/global';
 
 export default function Challenge2({nextText}) {
   const [showModal, setShowModal] = useState(false);
@@ -29,47 +31,49 @@ export default function Challenge2({nextText}) {
   };
 
   return (
-    <View style={styles.viewBody}>
-      <View style={styles.viewContent}>
-        <Text style={styles.content}>{challengeText_2}</Text>
+    <View style={globalStyles.viewBody}>
+      <View style={globalStyles.viewContent}>
+        <Text style={globalStyles.content}>{challengeText_2}</Text>
+        <Text style={globalStyles.content2}>{challengeText_2_1}</Text>
         <View style={styles.viewOptions}>
           <TouchableOpacity
             onPress={() => showInfo(1)}
-            style={styles.touchable}>
+            style={globalStyles.touchable}>
             <Text style={{fontSize: 16, color: '#fff'}}>
-              1. <Text style={styles.textInfo}>Martin Luther King Jr.</Text>
+              1.{' '}
+              <Text style={globalStyles.textInfo}>Martin Luther King Jr.</Text>
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => showInfo(2)}
-            style={styles.touchable}>
+            style={globalStyles.touchable}>
             <Text style={{fontSize: 16, color: '#fff'}}>
-              2. <Text style={styles.textInfo}>Simone de Beauvoir</Text>
+              2. <Text style={globalStyles.textInfo}>Simone de Beauvoir</Text>
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => showInfo(3)}
-            style={styles.touchable}>
+            style={globalStyles.touchable}>
             <Text style={{fontSize: 16, color: '#fff'}}>
-              3. <Text style={styles.textInfo}>Elena Caffarena</Text>
+              3. <Text style={globalStyles.textInfo}>Elena Caffarena</Text>
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => showInfo(4)}
-            style={styles.touchable}>
+            style={globalStyles.touchable}>
             <Text style={{fontSize: 16, color: '#fff'}}>
-              4. <Text style={styles.textInfo}>Camilo Henríquez</Text>
+              4. <Text style={globalStyles.textInfo}>Camilo Henríquez</Text>
             </Text>
           </TouchableOpacity>
         </View>
       </View>
-      <View style={styles.viewBtns}>
+      <View style={globalStyles.viewBtns}>
         <Button
           onPress={nextText}
           title="Siguiente"
-          buttonStyle={styles.btn}
-          containerStyle={styles.btnContainer}
-          titleStyle={styles.btnText}
+          buttonStyle={globalStyles.btn}
+          containerStyle={globalStyles.btnContainer}
+          titleStyle={globalStyles.btnText}
           icon={<Icon name="arrow-right" size={15} color="#196674" icon />}
           iconRight
         />
@@ -83,51 +87,9 @@ export default function Challenge2({nextText}) {
 }
 
 const styles = StyleSheet.create({
-  viewBody: {
-    flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  viewContent: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 30,
-  },
-  content: {
-    color: '#fff',
-    fontWeight: 'bold',
-    fontSize: 16,
-    textAlign: 'center',
-  },
   viewOptions: {
     marginLeft: 15,
     marginVertical: 20,
-  },
-  touchable: {
-    marginVertical: 10,
-  },
-  textInfo: {
-    color: '#fff',
-    textDecorationLine: 'underline',
-    fontSize: 16,
-  },
-  viewBtns: {
-    flexDirection: 'row',
-  },
-  btn: {
-    borderRadius: 10,
-    backgroundColor: '#c2ddc7',
-    paddingVertical: 10,
-  },
-  btnContainer: {
-    width: 150,
-    marginVertical: 30,
-    marginHorizontal: 10,
-  },
-  btnText: {
-    color: '#196674',
-    marginHorizontal: 10,
   },
   textFeedback: {
     marginVertical: 10,

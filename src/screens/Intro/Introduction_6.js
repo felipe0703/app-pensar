@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
 import {Button, CheckBox, ListItem} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {
@@ -10,6 +10,7 @@ import {
 } from './text_Intro_1';
 import Modal from '../../components/Modal';
 import {usePages} from '../../hooks/usePages';
+import globalStyles from '../../styles/global';
 
 export default function Introduction_4({navigation}) {
   const [showModal, setShowModal] = useState(false);
@@ -41,11 +42,11 @@ export default function Introduction_4({navigation}) {
   };
 
   return (
-    <View style={styles.viewBody}>
-      <View style={styles.viewContent}>
-        <Text style={styles.content}>{allText[page]}</Text>
+    <View style={globalStyles.viewBody}>
+      <View style={globalStyles.viewContent}>
+        <Text style={globalStyles.content}>{allText[page]}</Text>
         {!ready && (
-          <View style={styles.viewOptions}>
+          <View style={globalStyles.viewOptions}>
             <CheckBox
               title="Una crítica"
               // checkedIcon="dot-circle-o"
@@ -66,15 +67,15 @@ export default function Introduction_4({navigation}) {
           </View>
         )}
       </View>
-      <View style={styles.viewBtns}>
+      <View style={globalStyles.viewBtns}>
         {showNext && !ready && (
           <Button
             onPress={resp}
             title="Listo"
             icon={<Icon name="thumbs-o-up" size={15} color="#196674" />}
-            buttonStyle={styles.btn}
-            containerStyle={styles.btnContainer}
-            titleStyle={styles.btnText}
+            buttonStyle={globalStyles.btn}
+            containerStyle={globalStyles.btnContainer}
+            titleStyle={globalStyles.btnText}
           />
         )}
         {ready && (
@@ -82,66 +83,24 @@ export default function Introduction_4({navigation}) {
             onPress={goNext}
             title="Siguiente"
             icon={<Icon name="arrow-right" size={15} color="#196674" />}
-            buttonStyle={styles.btn}
-            containerStyle={styles.btnContainer}
-            titleStyle={styles.btnText}
+            buttonStyle={globalStyles.btn}
+            containerStyle={globalStyles.btnContainer}
+            titleStyle={globalStyles.btnText}
             iconRight
           />
         )}
       </View>
       <Modal isVisible={showModal} setIsVisible={setShowModal}>
-        {checked_1 && <Text style={styles.options}>{textFeedback_6_1}</Text>}
-        {checked_2 && <Text style={styles.options}>{textFeedback_6_2}</Text>}
-        {checked_3 && <Text style={styles.options}>{textFeedback_6_3}</Text>}
+        {checked_1 && (
+          <Text style={globalStyles.options}>{textFeedback_6_1}</Text>
+        )}
+        {checked_2 && (
+          <Text style={globalStyles.options}>{textFeedback_6_2}</Text>
+        )}
+        {checked_3 && (
+          <Text style={globalStyles.options}>{textFeedback_6_3}</Text>
+        )}
       </Modal>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  viewBody: {
-    flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  viewContent: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 30,
-  },
-  content: {
-    color: '#fff',
-    fontWeight: 'bold',
-    fontSize: 22,
-    textAlign: 'center',
-  },
-  viewOptions: {
-    marginTop: 15,
-  },
-  viewBtns: {
-    flexDirection: 'row',
-  },
-  btn: {
-    borderRadius: 10,
-    backgroundColor: '#c2ddc7',
-    paddingVertical: 10,
-  },
-  btnContainer: {
-    width: 150,
-    marginVertical: 30,
-    marginHorizontal: 10,
-  },
-  btnText: {
-    color: '#196674',
-    marginHorizontal: 10,
-  },
-  textFeedback: {
-    marginVertical: 10,
-    textAlign: 'center',
-    fontSize: 16,
-  },
-  options: {
-    marginVertical: 10,
-  },
-});

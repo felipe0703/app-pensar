@@ -9,6 +9,7 @@ import {
   textFeedback_8_2,
   textFeedback_8_3,
 } from './challengeText';
+import globalStyles from '../../styles/global';
 
 export default function Challenge8({nextText}) {
   const [showModal, setShowModal] = useState(false);
@@ -21,30 +22,30 @@ export default function Challenge8({nextText}) {
     setShowNext(true);
   };
   return (
-    <View style={styles.viewBody}>
-      <View style={styles.viewContent}>
-        <Text style={styles.content}>{challengeText_8}</Text>
+    <View style={globalStyles.viewBody}>
+      <View style={globalStyles.viewContent}>
+        <Text style={globalStyles.content}>{challengeText_8}</Text>
         <Card
           image={require('../../assets/img/Selects/img6.jpg')}
-          imageStyle={styles.cardImage}></Card>
+          imageStyle={globalStyles.cardImage}></Card>
       </View>
-      <View style={styles.viewBtns}>
+      <View style={globalStyles.viewBtns}>
         {!showNext ? (
           <>
             <Button
               onPress={() => resp(true)}
               title="Si"
               icon={<Icon name="thumbs-o-up" size={15} color="#196674" />}
-              buttonStyle={styles.btn}
-              containerStyle={styles.btnContainer}
-              titleStyle={styles.btnText}
+              buttonStyle={globalStyles.btn}
+              containerStyle={globalStyles.btnContainer}
+              titleStyle={globalStyles.btnText}
             />
             <Button
               onPress={() => resp(false)}
               title="No"
-              buttonStyle={styles.btn}
-              containerStyle={styles.btnContainer}
-              titleStyle={styles.btnText}
+              buttonStyle={globalStyles.btn}
+              containerStyle={globalStyles.btnContainer}
+              titleStyle={globalStyles.btnText}
               icon={
                 <Icon name="thumbs-o-down" size={15} color="#196674" icon />
               }
@@ -57,22 +58,22 @@ export default function Challenge8({nextText}) {
             type="solid"
             icon={<Icon name="arrow-right" size={15} color="#196674" />}
             iconRight
-            buttonStyle={styles.btn}
-            titleStyle={styles.btnText}
-            containerStyle={styles.btnContainer}
+            buttonStyle={globalStyles.btn}
+            titleStyle={globalStyles.btnText}
+            containerStyle={globalStyles.btnContainer}
             onPress={nextText}
           />
         )}
       </View>
       <Modal isVisible={showModal} setIsVisible={setShowModal}>
-        {response ? (
-          <View style={styles.correct}>
-            <Text style={styles.textFeedback}>{textFeedback_8_2}</Text>
+        {!response ? (
+          <View style={globalStyles.correct}>
+            <Text style={styles.textFeedback}>{textFeedback_8_1}</Text>
             <Text style={styles.textFeedback}>{textFeedback_8_3}</Text>
           </View>
         ) : (
-          <View style={styles.incorrect}>
-            <Text style={styles.textFeedback}>{textFeedback_8_1}</Text>
+          <View style={globalStyles.incorrect}>
+            <Text style={styles.textFeedback}>{textFeedback_8_2}</Text>
             <Text style={styles.textFeedback}>{textFeedback_8_3}</Text>
           </View>
         )}
@@ -82,51 +83,6 @@ export default function Challenge8({nextText}) {
 }
 
 const styles = StyleSheet.create({
-  viewBody: {
-    flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  viewContent: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 30,
-  },
-  content: {
-    color: '#fff',
-    fontWeight: 'bold',
-    fontSize: 16,
-    textAlign: 'center',
-  },
-  viewBtns: {
-    flexDirection: 'row',
-  },
-  btn: {
-    borderRadius: 10,
-    backgroundColor: '#c2ddc7',
-    paddingVertical: 10,
-  },
-  btnContainer: {
-    width: 150,
-    marginVertical: 30,
-    marginHorizontal: 10,
-  },
-  btnText: {
-    color: '#196674',
-    marginHorizontal: 10,
-  },
-  cardImage: {
-    width: 300,
-    height: 350,
-    resizeMode: 'contain',
-  },
-  correct: {
-    backgroundColor: '#ff4b4b',
-  },
-  incorrect: {
-    backgroundColor: '#78c800',
-  },
   textFeedback: {
     color: '#fff',
     fontWeight: 'bold',

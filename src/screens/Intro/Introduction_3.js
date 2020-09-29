@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import {StyleSheet} from 'react-native';
 import * as firebase from 'firebase';
 import ShowInfo from '../Challenge/ShowInfo';
 import {textIntro_3, textLearMore} from './text_Intro_1';
@@ -25,9 +24,6 @@ export default function Introduction_3({navigation}) {
       go={goNext}
       isVisibleLearnMore={true}
       learnMore={textLearMore}
-      pageToLearMore={1}
     />
   );
 }
-
-const styles = StyleSheet.create({});

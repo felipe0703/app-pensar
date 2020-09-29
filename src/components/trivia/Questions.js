@@ -6,7 +6,7 @@ export const questions = [
     category: 'Sesgo cognitivo, heurística, falacia',
     response: true,
     feedback:
-      'Este tipo de sesgo cognitivo se denomina sesgo de confirmación. Esto significa que le creemos más a aquellas publicaciones o ideas que concuerdan con nuestros pensamientos o hipótesis. Por ejemplo, dudaremos de una determinada publicación, si no le creemos a la persona o medio que lo publica. Además, buscamos, interpretamos y recordamos más ideas que confirman nuestras creencias e hipótesis. Los algoritmos de redes sociales y motores de búsqueda reconocen esta tendencia y generan burbujas de información. Según Shermer, tendemos a reaccionar primero de manera emocional a datos conflictivos y luego racionalizamos las razones por las que concordamos (o no) con ellos.',
+      'Este tipo de sesgo cognitivo se denomina sesgo de confirmación. Esto significa que le creemos más a aquellas publicaciones o ideas que concuerdan con nuestros pensamientos o hipótesis. Por ejemplo, dudaremos de una determinada publicación, si no le creemos a la persona o medio que lo publica. Además, buscamos, interpretamos y recordamos más ideas que confirman nuestras creencias e hipótesis. Los algoritmos de redes sociales y motores de búsqueda reconocen esta tendencia y generan burbujas de información. Según el experto en cognición Michael Shermer, tendemos a reaccionar primero de manera emocional a datos conflictivos y luego racionalizamos las razones por las que concordamos (o no) con ellos.',
     imageFeedback: '',
     image: '',
   },
@@ -27,7 +27,7 @@ export const questions = [
     category: 'Funcionamiento cerebral',
     response: false,
     feedback:
-      'El cerebro no puede realizar simultáneamente tareas cognitivas complejas. “Diversos estudios han mostrado que cuando nos enfrentamos a dos tareas complejas, el cerebro no las realiza de forma simultánea, sino que alterna rápidamente entre una y otra”… “cuando nos ponemos a hacer muchas cosas diferentes al mismo tiempo, gastamos un tiempo considerable llevando nuestro cerebro a reclutar los diferentes circuitos para cada una de las diferentes tareas”. (p.137)  ',
+      'El cerebro no puede realizar simultáneamente tareas cognitivas complejas. Como señala el neurocientífico Pedro Maldonado “Diversos estudios han mostrado que cuando nos enfrentamos a dos tareas complejas, el cerebro no las realiza de forma simultánea, sino que alterna rápidamente entre una y otra”… “cuando nos ponemos a hacer muchas cosas diferentes al mismo tiempo, gastamos un tiempo considerable llevando nuestro cerebro a reclutar los diferentes circuitos para cada una de las diferentes tareas”. (p.137)',
     imageFeedback: '',
     image: '',
   },

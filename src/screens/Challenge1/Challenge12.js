@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View, ScrollView} from 'react-native';
+import {Text, View, ScrollView} from 'react-native';
 import {Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {
@@ -8,14 +8,15 @@ import {
   challengeText_12_3,
 } from './challengeText';
 import Argument from './Argument';
+import globalStyles from '../../styles/global';
 
 export default function Challenge12({nextText, thesis}) {
   const {thesis1, thesis2} = challengeText_12_3;
   return (
-    <View style={styles.viewBody}>
-      <View style={styles.viewContent}>
-        <Text style={styles.title}>{challengeText_12_1}</Text>
-        <Text style={styles.content}>{challengeText_12_2}</Text>
+    <View style={globalStyles.viewBody}>
+      <View style={globalStyles.viewContent}>
+        <Text style={globalStyles.title}>{challengeText_12_1}</Text>
+        <Text style={globalStyles.content}>{challengeText_12_2}</Text>
         <ScrollView>
           {thesis === 1 &&
             thesis1.map((text, id) => (
@@ -27,13 +28,13 @@ export default function Challenge12({nextText, thesis}) {
             ))}
         </ScrollView>
       </View>
-      <View style={styles.viewBtns}>
+      <View style={globalStyles.viewBtns}>
         <Button
           onPress={nextText}
           title="Siguiente"
-          buttonStyle={styles.btn}
-          containerStyle={styles.btnContainer}
-          titleStyle={styles.btnText}
+          buttonStyle={globalStyles.btn}
+          containerStyle={globalStyles.btnContainer}
+          titleStyle={globalStyles.btnText}
           icon={<Icon name="arrow-right" size={15} color="#196674" icon />}
           iconRight
         />
@@ -41,48 +42,3 @@ export default function Challenge12({nextText, thesis}) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  viewBody: {
-    flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  viewContent: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 30,
-  },
-  title: {
-    color: '#fff',
-    fontWeight: 'bold',
-    fontSize: 16,
-    textAlign: 'center',
-    marginBottom: 20,
-  },
-  content: {
-    color: '#fff',
-    fontWeight: 'bold',
-    fontSize: 16,
-    marginBottom: 10,
-  },
-  viewBtns: {
-    flexDirection: 'row',
-  },
-  btn: {
-    borderRadius: 10,
-    backgroundColor: '#c2ddc7',
-    paddingVertical: 10,
-  },
-  btnContainer: {
-    width: 150,
-    marginBottom: 30,
-    marginTop: 10,
-    marginHorizontal: 10,
-  },
-  btnText: {
-    color: '#196674',
-    marginHorizontal: 10,
-  },
-});

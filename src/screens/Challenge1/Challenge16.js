@@ -1,71 +1,29 @@
 import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {View, Text} from 'react-native';
 import {Button} from 'react-native-elements';
 import {challengeText_16_1, challengeText_16_2} from './challengeText';
+import globalStyles from '../../styles/global';
 
 export default function Challenge16({navigation}) {
   // const textIntro = challengeText_16.split('|');
   const go = () => {
-    navigation.navigate('trivia');
+    navigation.navigate('trivia', {challenge: 1});
   };
   return (
-    <View style={styles.viewBody}>
-      <View style={styles.viewContent}>
-        <Text style={styles.title}>{challengeText_16_1}</Text>
-        <Text style={styles.content}>{challengeText_16_2}</Text>
+    <View style={globalStyles.viewBody}>
+      <View style={globalStyles.viewContent}>
+        <Text style={globalStyles.title}>{challengeText_16_1}</Text>
+        <Text style={globalStyles.content}>{challengeText_16_2}</Text>
       </View>
-      <View style={styles.viewBtns}>
+      <View style={globalStyles.viewBtns}>
         <Button
           onPress={go}
           title="Vamos"
-          buttonStyle={styles.btn}
-          containerStyle={styles.btnContainer}
-          titleStyle={styles.btnText}
+          buttonStyle={globalStyles.btn}
+          containerStyle={globalStyles.btnContainer}
+          titleStyle={globalStyles.btnText}
         />
       </View>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  viewBody: {
-    flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  viewContent: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 30,
-  },
-  title: {
-    color: '#fff',
-    fontWeight: 'bold',
-    fontSize: 16,
-    textAlign: 'center',
-    marginBottom: 20,
-  },
-  content: {
-    color: '#fff',
-    fontWeight: 'bold',
-    fontSize: 16,
-  },
-  viewBtns: {
-    flexDirection: 'row',
-  },
-  btn: {
-    borderRadius: 10,
-    backgroundColor: '#c2ddc7',
-    paddingVertical: 10,
-  },
-  btnContainer: {
-    width: 150,
-    marginVertical: 30,
-    marginHorizontal: 10,
-  },
-  btnText: {
-    color: '#196674',
-    marginHorizontal: 10,
-  },
-});

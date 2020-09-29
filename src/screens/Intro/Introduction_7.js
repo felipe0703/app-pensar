@@ -3,8 +3,10 @@ import {StyleSheet, TouchableOpacity, View, Text} from 'react-native';
 import {Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Modal from '../../components/Modal';
+import globalStyles from '../../styles/global';
 import {
   textIntro_7_1,
+  textIntro_7_1_1,
   textIntro_7_2,
   textFeedback_7_1,
   textFeedback_7_2,
@@ -45,68 +47,75 @@ export default function Introduction_3({navigation}) {
   };
 
   return (
-    <View style={styles.viewBody}>
-      <View style={styles.viewContent}>
-        <Text style={styles.content}>{text_1}</Text>
+    <View style={globalStyles.viewBody}>
+      <View style={globalStyles.viewContent}>
+        <Text style={globalStyles.content}>{text_1}</Text>
+        <Text style={globalStyles.content2}>{textIntro_7_1_1}</Text>
         <View style={styles.viewOptions}>
           <TouchableOpacity
             onPress={() => showInfo(1)}
-            style={styles.touchable}>
+            style={globalStyles.touchable}>
             <Text style={{fontSize: 16, color: '#fff'}}>
-              1. <Text style={styles.textInfo}>Selección de información</Text>
+              1.
+              <Text style={globalStyles.textInfo}>
+                Selección de información
+              </Text>
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => showInfo(2)}
-            style={styles.touchable}>
+            style={globalStyles.touchable}>
             <Text style={{fontSize: 16, color: '#fff'}}>
-              2. <Text style={styles.textInfo}>Elaboración de tesis</Text>
+              2. <Text style={globalStyles.textInfo}>Elaboración de tesis</Text>
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => showInfo(3)}
-            style={styles.touchable}>
+            style={globalStyles.touchable}>
             <Text style={{fontSize: 16, color: '#fff'}}>
-              3. <Text style={styles.textInfo}>Desarrollo de argumentos</Text>
+              3.
+              <Text style={globalStyles.textInfo}>
+                Desarrollo de argumentos
+              </Text>
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => showInfo(4)}
-            style={styles.touchable}>
+            style={globalStyles.touchable}>
             <Text style={{fontSize: 16, color: '#fff'}}>
-              4.{' '}
-              <Text style={styles.textInfo}>
+              4.
+              <Text style={globalStyles.textInfo}>
                 Desarrollo de contraargumentos
               </Text>
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => showInfo(5)}
-            style={styles.touchable}>
+            style={globalStyles.touchable}>
             <Text style={{fontSize: 16, color: '#fff'}}>
-              5. <Text style={styles.textInfo}>Conclusión</Text>
+              5. <Text style={globalStyles.textInfo}>Conclusión</Text>
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => showInfo(6)}
-            style={styles.touchable}>
+            style={globalStyles.touchable}>
             <Text style={{fontSize: 16, color: '#fff'}}>
-              6.{' '}
-              <Text style={styles.textInfo}>
+              6.
+              <Text style={globalStyles.textInfo}>
                 Reconocimiento de sesgos cognitivos y heurísticas
               </Text>
             </Text>
           </TouchableOpacity>
         </View>
-        <Text style={styles.content}>{text_2}</Text>
+        <Text style={globalStyles.content}>{text_2}</Text>
       </View>
-      <View style={styles.viewBtns}>
+      <View style={globalStyles.viewBtns}>
         <Button
           onPress={goHome}
           title="Vamos"
-          buttonStyle={styles.btn}
-          containerStyle={styles.btnContainer}
-          titleStyle={styles.btnText}
+          buttonStyle={globalStyles.btn}
+          containerStyle={globalStyles.btnContainer}
+          titleStyle={globalStyles.btnText}
           // icon={<Icon name="arrow-right" size={15} color="#196674" icon />}
           iconRight
         />
@@ -119,51 +128,9 @@ export default function Introduction_3({navigation}) {
 }
 
 const styles = StyleSheet.create({
-  viewBody: {
-    flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  viewContent: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 30,
-  },
-  content: {
-    color: '#fff',
-    fontWeight: 'bold',
-    fontSize: 18,
-    textAlign: 'center',
-  },
   viewOptions: {
     marginLeft: 35,
     marginVertical: 20,
-  },
-  touchable: {
-    marginVertical: 10,
-  },
-  textInfo: {
-    color: '#fff',
-    textDecorationLine: 'underline',
-    fontSize: 16,
-  },
-  viewBtns: {
-    flexDirection: 'row',
-  },
-  btn: {
-    borderRadius: 10,
-    backgroundColor: '#c2ddc7',
-    paddingVertical: 10,
-  },
-  btnContainer: {
-    width: 150,
-    marginVertical: 30,
-    marginHorizontal: 10,
-  },
-  btnText: {
-    color: '#196674',
-    marginHorizontal: 10,
   },
   textFeedback: {
     marginVertical: 10,

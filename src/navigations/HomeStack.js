@@ -2,6 +2,7 @@ import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import Home from '../screens/Home';
 import Challenge from '../screens/Challenge1/ChallengeController';
+import Challenge2 from '../screens/Challenge2/ChallengeController2';
 import Thesis from '../screens/Challenge1/Thesis';
 import Arguments from '../screens/Challenge1/Arguments';
 import AgainstArguments from '../screens/Challenge1/AgainstArguments';
@@ -21,7 +22,16 @@ export default function HomeStack() {
   return (
     <Stack.Navigator screenOptions={{headerTitleAlign: 'center'}}>
       <Stack.Screen name="home" component={Home} options={{title: 'Inicio'}} />
-      <Stack.Screen name="challenge" component={Challenge} />
+      <Stack.Screen
+        name="challenge"
+        component={Challenge}
+        options={{title: 'Desafío 1'}}
+      />
+      <Stack.Screen
+        name="challenge2"
+        component={Challenge2}
+        options={{title: 'Desafío 2'}}
+      />
       <Stack.Screen
         name="introduction"
         component={Introduction}

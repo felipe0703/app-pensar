@@ -15,7 +15,6 @@ const ITEM_WIDTH = Math.round(width * 0.7);
 
 export default function CorouselChallenge(props) {
   const {arrayChallenges, navigation} = props;
-  const [activeChallenge, setActiveChallenge] = useState(0);
 
   const intro = {
     id: 0,
@@ -31,8 +30,10 @@ export default function CorouselChallenge(props) {
     const onNavigation = () => {
       if (id === 0) {
         navigation.navigate('introduction');
-      } else {
+      } else if (name === 'Desafío 1') {
         navigation.navigate('challenge', {id, name});
+      } else {
+        navigation.navigate('challenge2');
       }
     };
 

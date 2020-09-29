@@ -1,46 +1,54 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Text, View, StyleSheet} from 'react-native';
 import {Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {textIntro_2, textFeedback} from './text_Intro_1';
+import {
+  textIntro_2,
+  textFeedback_2_1,
+  textFeedback_2_2,
+  textFeedback_2_3,
+} from './text_Intro_1';
 import Modal from '../../components/Modal';
+import globalStyles from '../../styles/global';
 
 export default function Introduction_2({navigation}) {
   const [showModal, setShowModal] = useState(false);
   const [showSiguiente, setShowSiguiente] = useState(false);
+  const [response, setResponse] = useState(false);
 
   const goChallenge = () => {
     navigation.navigate('introduction_3');
   };
 
-  const resp = () => {
+  const resp = (resp) => {
     setShowModal(true);
     setShowSiguiente(true);
+    setResponse(resp);
   };
 
   return (
-    <View style={styles.viewBody}>
-      <View style={styles.viewContent}>
-        <Text style={styles.content}>{textIntro_2}</Text>
+    <View style={globalStyles.viewBody}>
+      <View style={globalStyles.viewContent}>
+        <Text style={globalStyles.content}>{textIntro_2}</Text>
       </View>
-      <View style={styles.viewBtns}>
+      <View style={globalStyles.viewBtns}>
         {!showSiguiente ? (
           <>
             <Button
-              onPress={resp}
+              onPress={() => resp(true)}
               title="Si"
               icon={<Icon name="thumbs-o-up" size={15} color="#196674" />}
-              buttonStyle={styles.btn}
-              containerStyle={styles.btnContainer}
-              titleStyle={styles.btnText}
+              buttonStyle={globalStyles.btn}
+              containerStyle={globalStyles.btnContainer}
+              titleStyle={globalStyles.btnText}
             />
 
             <Button
-              onPress={resp}
+              onPress={() => resp(false)}
               title="No"
-              buttonStyle={styles.btn}
-              containerStyle={styles.btnContainer}
-              titleStyle={styles.btnText}
+              buttonStyle={globalStyles.btn}
+              containerStyle={globalStyles.btnContainer}
+              titleStyle={globalStyles.btnText}
               icon={
                 <Icon name="thumbs-o-down" size={15} color="#196674" icon />
               }
@@ -51,59 +59,42 @@ export default function Introduction_2({navigation}) {
           <Button
             onPress={goChallenge}
             title="Siguiente"
-            buttonStyle={styles.btn}
-            containerStyle={styles.btnContainer}
-            titleStyle={styles.btnText}
+            buttonStyle={globalStyles.btn}
+            containerStyle={globalStyles.btnContainer}
+            titleStyle={globalStyles.btnText}
             icon={<Icon name="arrow-right" size={15} color="#196674" icon />}
             iconRight
           />
         )}
       </View>
       <Modal isVisible={showModal} setIsVisible={setShowModal}>
-        <Text style={styles.textFeedback}>{textFeedback}</Text>
+        {response ? (
+          <View style={globalStyles.correct}>
+            <Text style={styles.textFeedback}>{textFeedback_2_1}</Text>
+            <Text style={styles.textFeedback2}>{textFeedback_2_3}</Text>
+          </View>
+        ) : (
+          <View style={globalStyles.incorrect}>
+            <Text style={styles.textFeedback}>{textFeedback_2_2}</Text>
+            <Text style={styles.textFeedback2}>{textFeedback_2_3}</Text>
+          </View>
+        )}
       </Modal>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  viewBody: {
-    flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  viewContent: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 30,
-  },
-  content: {
+  textFeedback: {
     color: '#fff',
     fontWeight: 'bold',
-    fontSize: 22,
     textAlign: 'center',
+    margin: 5,
   },
-  viewBtns: {
-    flexDirection: 'row',
-  },
-  btn: {
-    borderRadius: 10,
-    backgroundColor: '#c2ddc7',
-    paddingVertical: 10,
-  },
-  btnContainer: {
-    width: 150,
-    marginVertical: 30,
-    marginHorizontal: 10,
-  },
-  btnText: {
-    color: '#196674',
-    marginHorizontal: 10,
-  },
-  textFeedback: {
-    marginVertical: 10,
+  textFeedback2: {
+    color: '#fff',
     textAlign: 'center',
-    fontSize: 16,
+    marginHorizontal: 10,
+    marginVertical: 5,
   },
 });

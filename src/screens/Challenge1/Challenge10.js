@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, Text} from 'react-native';
 import {Button, CheckBox} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {
@@ -10,6 +10,7 @@ import {
   textFeedback_10,
 } from './challengeText';
 import Modal from '../../components/Modal';
+import globalStyles from '../../styles/global';
 
 export default function Challenge10({nextText, setThesis}) {
   const [showModal, setShowModal] = useState(false);
@@ -40,11 +41,11 @@ export default function Challenge10({nextText, setThesis}) {
   };
 
   return (
-    <View style={styles.viewBody}>
-      <View style={styles.viewContent}>
-        <Text style={styles.title}>{challengeText_10_1}</Text>
-        <Text style={styles.content}>{challengeText_10_2}</Text>
-        <View style={styles.viewOptions}>
+    <View style={globalStyles.viewBody}>
+      <View style={globalStyles.viewContent}>
+        <Text style={globalStyles.title}>{challengeText_10_1}</Text>
+        <Text style={globalStyles.content}>{challengeText_10_2}</Text>
+        <View style={globalStyles.viewOptions}>
           <CheckBox
             title={challengeText_10_3}
             checkedIcon="dot-circle-o"
@@ -62,14 +63,14 @@ export default function Challenge10({nextText, setThesis}) {
           />
         </View>
       </View>
-      <View style={styles.viewBtns}>
+      <View style={globalStyles.viewBtns}>
         {showNext && (
           <Button
             onPress={nextText}
             title="Siguiente"
-            buttonStyle={styles.btn}
-            containerStyle={styles.btnContainer}
-            titleStyle={styles.btnText}
+            buttonStyle={globalStyles.btn}
+            containerStyle={globalStyles.btnContainer}
+            titleStyle={globalStyles.btnText}
             icon={<Icon name="arrow-right" size={15} color="#196674" icon />}
             iconRight
           />
@@ -84,59 +85,12 @@ export default function Challenge10({nextText, setThesis}) {
 }
 
 const styles = StyleSheet.create({
-  viewBody: {
-    flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  viewContent: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 30,
-  },
-  title: {
-    color: '#fff',
-    fontWeight: 'bold',
-    fontSize: 16,
-    textAlign: 'center',
-    marginBottom: 20,
-  },
-  content: {
-    color: '#fff',
-    fontWeight: 'bold',
-    fontSize: 16,
-  },
-  viewOptions: {
-    marginVertical: 20,
-  },
   touchable: {
     backgroundColor: '#fff',
     marginVertical: 10,
     width: 350,
     padding: 10,
     borderRadius: 8,
-  },
-  textInfo: {
-    color: '#3c3c3c',
-    fontSize: 16,
-  },
-  viewBtns: {
-    flexDirection: 'row',
-  },
-  btn: {
-    borderRadius: 10,
-    backgroundColor: '#c2ddc7',
-    paddingVertical: 10,
-  },
-  btnContainer: {
-    width: 150,
-    marginVertical: 30,
-    marginHorizontal: 10,
-  },
-  btnText: {
-    color: '#196674',
-    marginHorizontal: 10,
   },
   textFeedback: {
     marginVertical: 10,
