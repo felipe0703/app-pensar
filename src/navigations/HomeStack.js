@@ -37,13 +37,30 @@ export default function HomeStack() {
         <Stack.Screen
           name="challenge"
           component={Challenge}
-          // options={{title: 'Desafío 1'}}
-          options={{headerTitle: () => <HeaderBar />}}
+          // options={{title: 'Desafío 2'}}
+          options={({navigation, route}) => ({
+            headerTitle: (props) => (
+              <HeaderBar
+                {...props}
+                name={route.params.name}
+                progress={route.params.progress}
+              />
+            ),
+          })}
         />
         <Stack.Screen
           name="challenge2"
           component={Challenge2}
-          options={{title: 'Desafío 2'}}
+          // options={{title: 'Desafío 2'}}
+          options={({navigation, route}) => ({
+            headerTitle: (props) => (
+              <HeaderBar
+                {...props}
+                name={route.params.name}
+                progress={route.params.progress}
+              />
+            ),
+          })}
         />
         <Stack.Screen
           name="introduction"

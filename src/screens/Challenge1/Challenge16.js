@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {View, Text, ScrollView} from 'react-native';
 import {Button, CheckBox} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -11,11 +11,15 @@ import {
 import globalStyles from '../../styles/global';
 import {ChallengeContext} from '../../navigations/ChallengeContext';
 
-export default function Challenge16({nextText}) {
+export default function Challenge16({nextText, navigation}) {
   const [showNext, setShowNext] = useState(false);
   const [checkedThesis1, setCheckedThesis1] = useState(false);
   const [checkedThesis2, setCheckedThesis2] = useState(false);
   const {challenge, setChallenge} = useContext(ChallengeContext);
+
+  useEffect(() => {
+    navigation.setParams({name: 'Conclusión', progress: 0.84});
+  }, []);
 
   const resp = (thesis) => {
     if (thesis === 1) {

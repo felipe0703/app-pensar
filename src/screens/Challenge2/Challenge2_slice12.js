@@ -7,12 +7,15 @@ import {challege2Text_12, textFeedback_12} from './challenge2text';
 import Modal from '../../components/Modal';
 import {ChallengeContext} from '../../navigations/ChallengeContext';
 
-export default function Challenge2_slice12({nextText}) {
+export default function Challenge2_slice12({nextText, navigation}) {
   const [value, setValue] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [showBtnNext, setShowBtnNext] = useState(true);
   const {challenge, setChallenge} = useContext(ChallengeContext);
 
+  useEffect(() => {
+    navigation.setParams({name: 'Sesgo', progress: 1});
+  }, []);
   useEffect(() => {
     setTimeout(() => {
       setShowModal(true);

@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {StyleSheet, Text, View, TextInput, ScrollView} from 'react-native';
 import {Button, ListItem} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -7,7 +7,7 @@ import Modal from '../../components/Modal';
 import globalStyles from '../../styles/global';
 import {ChallengeContext} from '../../navigations/ChallengeContext';
 
-export default function Challenge2_slice8({nextText}) {
+export default function Challenge2_slice8({nextText, navigation}) {
   const [value, setValue] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [btnAdd, setBtnAdd] = useState(false);
@@ -15,6 +15,10 @@ export default function Challenge2_slice8({nextText}) {
   const [argument, setArgument] = useState([]);
   const [indexEditRemove, setIndexEditRemove] = useState(0);
   const {challenge, setChallenge} = useContext(ChallengeContext);
+
+  useEffect(() => {
+    navigation.setParams({name: 'Contraargumentos', progress: 0.7});
+  }, []);
 
   const addArgument = () => {
     setArgument([...argument, {argument: value}]);

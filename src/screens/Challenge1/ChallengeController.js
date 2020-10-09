@@ -37,18 +37,40 @@ export default function ControllerChallenge({navigation}) {
       {slice === 1 && <Challenge2 nextText={nextText} />}
       {slice === 2 && <Challenge3 nextText={nextText} />}
       {slice === 3 && <Challenge4 nextText={nextText} />}
-      {slice === 4 && <Challenge5 nextText={nextText} />}
+      {slice === 4 && (
+        <Challenge5 nextText={nextText} navigation={navigation} />
+      )}
       {slice === 5 && <Challenge6 nextText={nextText} />}
       {slice === 6 && <Challenge7 nextText={nextText} />}
       {slice === 7 && <Challenge8 nextText={nextText} />}
       {slice === 8 && <Challenge9 nextText={nextText} />}
-      {slice === 9 && <Challenge10 nextText={nextText} setThesis={setThesis} />}
+      {slice === 9 && (
+        <Challenge10
+          nextText={nextText}
+          setThesis={setThesis}
+          navigation={navigation}
+        />
+      )}
       {slice === 10 && <Challenge11 nextText={nextText} />}
-      {slice === 11 && <Challenge12 nextText={nextText} thesis={thesis} />}
+      {slice === 11 && (
+        <Challenge12
+          nextText={nextText}
+          thesis={thesis}
+          navigation={navigation}
+        />
+      )}
       {slice === 12 && <Challenge13 nextText={nextText} />}
-      {slice === 13 && <Challenge14 nextText={nextText} thesis={thesis} />}
+      {slice === 13 && (
+        <Challenge14
+          nextText={nextText}
+          thesis={thesis}
+          navigation={navigation}
+        />
+      )}
       {slice === 14 && <Challenge15 nextText={nextText} />}
-      {slice === 15 && <Challenge16 nextText={nextText} />}
+      {slice === 15 && (
+        <Challenge16 nextText={nextText} navigation={navigation} />
+      )}
       {slice === 16 && <Challenge17 nextText={nextText} />}
       {slice === 17 && <Challenge18 navigation={navigation} />}
     </View>

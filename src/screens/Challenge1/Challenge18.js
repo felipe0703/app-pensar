@@ -1,10 +1,13 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {View, Text} from 'react-native';
 import {Button} from 'react-native-elements';
 import {challengeText_18_1, challengeText_18_2} from './challengeText';
 import globalStyles from '../../styles/global';
 
 export default function Challenge18({navigation}) {
+  useEffect(() => {
+    navigation.setParams({name: 'Sesgo', progress: 1});
+  }, []);
   const go = () => {
     navigation.navigate('trivia', {challenge: 1});
   };

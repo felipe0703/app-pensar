@@ -14,13 +14,17 @@ import Modal from '../../components/Modal';
 import globalStyles from '../../styles/global';
 import {ChallengeContext} from '../../navigations/ChallengeContext';
 
-export default function Challenge10({nextText, setThesis}) {
+export default function Challenge10({nextText, setThesis, navigation}) {
   const [showModal, setShowModal] = useState(false);
   const [showNext, setShowNext] = useState(false);
   const [allowShowNext, setAllowShowNext] = useState(false);
   const [checkedThesis1, setCheckedThesis1] = useState(false);
   const [checkedThesis2, setCheckedThesis2] = useState(false);
   const {challenge, setChallenge} = useContext(ChallengeContext);
+
+  useEffect(() => {
+    navigation.setParams({name: 'Tesis', progress: 0.42});
+  }, []);
 
   useEffect(() => {
     setTimeout(() => {

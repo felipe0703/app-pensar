@@ -31,9 +31,9 @@ export default function CorouselChallenge(props) {
       if (id === 0) {
         navigation.navigate('introduction');
       } else if (name === 'Desafío 1') {
-        navigation.navigate('challenge', {id, name});
+        navigation.navigate('challenge', {id, name, progress: 0.14});
       } else {
-        navigation.navigate('challenge2');
+        navigation.navigate('challenge2', {id, name, progress: 0.14});
       }
     };
 

@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Text, View, ScrollView} from 'react-native';
 import {Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -11,11 +11,15 @@ import Argument from './Argument';
 import globalStyles from '../../styles/global';
 import {ChallengeContext} from '../../navigations/ChallengeContext';
 
-export default function Challenge14({nextText, thesis}) {
+export default function Challenge14({nextText, thesis, navigation}) {
   const {thesis1, thesis2} = challengeText_12_3;
   const [argument, setArgument] = useState([]);
 
   const {challenge, setChallenge} = useContext(ChallengeContext);
+
+  useEffect(() => {
+    navigation.setParams({name: 'Contraargumentos', progress: 0.7});
+  }, []);
 
   const setContext = () => {
     setChallenge({...challenge, counterargument: argument});

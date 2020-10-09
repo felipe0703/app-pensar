@@ -6,10 +6,14 @@ import {ChallengeContext} from '../../navigations/ChallengeContext';
 import globalStyles from '../../styles/global';
 import {challege2Text_6} from './challenge2text';
 
-export default function Challenge2_slice6({nextText}) {
+export default function Challenge2_slice6({nextText, navigation}) {
   const [value, setValue] = useState('');
   const [showBtnNext, setShowBtnNext] = useState(true);
   const {challenge, setChallenge} = useContext(ChallengeContext);
+
+  useEffect(() => {
+    navigation.setParams({name: 'Tesis', progress: 0.42});
+  }, []);
 
   useEffect(() => {
     Keyboard.addListener('keyboardDidShow', _keyboardDidShow);
