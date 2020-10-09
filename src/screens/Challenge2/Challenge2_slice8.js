@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {StyleSheet, Text, View, TextInput, ScrollView} from 'react-native';
 import {Button, ListItem} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {challege2Text_8} from './challenge2text';
 import Modal from '../../components/Modal';
 import globalStyles from '../../styles/global';
+import {ChallengeContext} from '../../navigations/ChallengeContext';
 
 export default function Challenge2_slice8({nextText}) {
   const [value, setValue] = useState('');
@@ -13,6 +14,7 @@ export default function Challenge2_slice8({nextText}) {
   const [countArgument, setCountArgument] = useState(0);
   const [argument, setArgument] = useState([]);
   const [indexEditRemove, setIndexEditRemove] = useState(0);
+  const {challenge, setChallenge} = useContext(ChallengeContext);
 
   const addArgument = () => {
     setArgument([...argument, {argument: value}]);
@@ -47,44 +49,48 @@ export default function Challenge2_slice8({nextText}) {
     setCountArgument(countArgument - 1);
     setShowModal(false);
   };
-
+  const goNextText = () => {
+    setChallenge({...challenge, counterargument: argument});
+    nextText();
+  };
   return (
     <View style={globalStyles.viewBody}>
-      <View style={globalStyles.viewContent}>
+      <ScrollView style={styles.viewArgument}>
         <Text style={globalStyles.content}>{challege2Text_8}</Text>
         <Text style={globalStyles.content2}>Máximo 3 contra-argumentos</Text>
-        <ScrollView style={styles.viewArgument}>
-          {argument.map((item, index) => (
-            <ListItem
-              key={index}
-              title={item.argument}
-              rightIcon={{
-                type: 'material-community',
-                name: 'pencil',
-                color: '#F2A922',
-              }}
-              containerStyle={styles.menuItem}
-              onPress={() => showEditArgument(item.argument, index)}
-              titleStyle={{color: '#3c3c3c'}}
-            />
-          ))}
-        </ScrollView>
         {countArgument < 3 && (
-          <Button
-            onPress={showAddArgument}
-            title="Agregar"
-            buttonStyle={globalStyles.btn}
-            containerStyle={globalStyles.btnContainer}
-            titleStyle={globalStyles.btnText}
-            icon={<Icon name="plus" size={15} color="#196674" icon />}
-            iconRight
-          />
+          <View style={globalStyles.viewBtns}>
+            <Button
+              onPress={showAddArgument}
+              title="Agregar"
+              buttonStyle={globalStyles.btn}
+              containerStyle={styles.btnContainer}
+              titleStyle={globalStyles.btnText}
+              icon={<Icon name="plus" size={15} color="#196674" icon />}
+              iconRight
+            />
+          </View>
         )}
-      </View>
+        {argument.map((item, index) => (
+          <ListItem
+            key={index}
+            title={item.argument}
+            rightIcon={{
+              type: 'material-community',
+              name: 'pencil',
+              color: '#F2A922',
+            }}
+            containerStyle={styles.menuItem}
+            onPress={() => showEditArgument(item.argument, index)}
+            titleStyle={{color: '#3c3c3c'}}
+          />
+        ))}
+      </ScrollView>
+
       <View style={globalStyles.viewBtns}>
         {countArgument > 0 && (
           <Button
-            onPress={nextText}
+            onPress={goNextText}
             title="Listo"
             buttonStyle={globalStyles.btn}
             containerStyle={globalStyles.btnContainer}
@@ -144,6 +150,10 @@ export default function Challenge2_slice8({nextText}) {
 }
 
 const styles = StyleSheet.create({
+  btnContainer: {
+    marginVertical: 10,
+    width: 150,
+  },
   input: {
     backgroundColor: '#fff',
     borderColor: 'gray',

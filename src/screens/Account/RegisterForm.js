@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     height: 50,
     width: 250,
     color: '#3c3c3c',
-    marginBottom: 25,
+    marginBottom: 10,
     backgroundColor: '#fff',
     paddingHorizontal: 20,
     borderRadius: 50,
@@ -133,6 +133,7 @@ const styles = StyleSheet.create({
   },
   register: {
     marginBottom: 20,
+    marginTop: 20,
   },
   error: {
     borderColor: '#ff4b4b',

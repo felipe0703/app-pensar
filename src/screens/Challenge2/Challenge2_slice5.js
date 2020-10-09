@@ -1,10 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useContext} from 'react';
 import {View, Text, StyleSheet, TextInput, ScrollView} from 'react-native';
 import {Button, ListItem} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {challege2Text_5, challege2Text_5_1} from './challenge2text';
 import globalStyles from '../../styles/global';
 import Modal from '../../components/Modal';
+import {ChallengeContext} from '../../navigations/ChallengeContext';
 
 export default function Challenge2_slice5({nextText}) {
   const [showModal, setShowModal] = useState(false);
@@ -13,6 +14,7 @@ export default function Challenge2_slice5({nextText}) {
   const [btnAdd, setBtnAdd] = useState(false);
   const [urls, setUrls] = useState([]);
   const [indexEditRemove, setIndexEditRemove] = useState(0);
+  const {challenge, setChallenge} = useContext(ChallengeContext);
 
   const addURL = () => {
     setUrls([...urls, {url: value}]);
@@ -41,52 +43,58 @@ export default function Challenge2_slice5({nextText}) {
   };
 
   const removeURL = () => {
-    const temp = [...urls];
-    const temp2 = temp.splice(indexEditRemove, 1);
-    setArgument(temp);
-    setCountURL(countURL - 1);
-    setShowModal(false);
+    // const temp = [...urls];
+    // const temp2 = temp.splice(indexEditRemove, 1);
+    // setArgument(temp);
+    // setCountURL(countURL - 1);
+    // setShowModal(false);
   };
 
+  const goNextText = () => {
+    setChallenge({...challenge, selectionURL: urls});
+    nextText();
+  };
+
+  console.log(urls);
   return (
     <View style={globalStyles.viewBody}>
-      <View style={globalStyles.viewContent}>
+      <ScrollView style={styles.viewURLs}>
         <Text style={globalStyles.content}>{challege2Text_5}</Text>
         <Text style={globalStyles.content2}>{challege2Text_5_1}</Text>
-        <ScrollView style={styles.viewURLs}>
-          {urls.map((item, index) => (
-            <ListItem
-              key={index}
-              title={item.url}
-              rightIcon={{
-                type: 'material-community',
-                name: 'pencil',
-                color: '#F2A922',
-              }}
-              containerStyle={styles.menuItem}
-              onPress={() => showEditURL(item.url, index)}
-              titleStyle={{color: '#3c3c3c'}}
-            />
-          ))}
-        </ScrollView>
         {countURL < 3 && (
-          <Button
-            onPress={showAddURL}
-            title="Agregar"
-            buttonStyle={globalStyles.btn}
-            containerStyle={globalStyles.btnContainer}
-            titleStyle={globalStyles.btnText}
-            icon={<Icon name="plus" size={15} color="#196674" icon />}
-            iconRight
-          />
+          <View style={styles.viewBtns}>
+            <Button
+              onPress={showAddURL}
+              title="Agregar"
+              buttonStyle={globalStyles.btn}
+              containerStyle={styles.btnContainer}
+              titleStyle={globalStyles.btnText}
+              icon={<Icon name="plus" size={15} color="#196674" icon />}
+              iconRight
+            />
+          </View>
         )}
-      </View>
+        {urls.map((item, index) => (
+          <ListItem
+            key={index}
+            title={item.url}
+            rightIcon={{
+              type: 'material-community',
+              name: 'pencil',
+              color: '#F2A922',
+            }}
+            containerStyle={styles.menuItem}
+            onPress={() => showEditURL(item.url, index)}
+            titleStyle={{color: '#3c3c3c'}}
+          />
+        ))}
+      </ScrollView>
       {countURL > 0 && (
         <>
-          <Text style={globalStyles.content}>🎉 ¡Excelente trabajo! 🎉</Text>
+          {/* <Text style={globalStyles.content}>🎉 ¡Excelente trabajo! 🎉</Text> */}
           <View style={globalStyles.viewBtns}>
             <Button
-              onPress={nextText}
+              onPress={goNextText}
               title="siguiente"
               buttonStyle={globalStyles.btn}
               containerStyle={globalStyles.btnContainer}
@@ -119,7 +127,7 @@ export default function Challenge2_slice5({nextText}) {
                 titleStyle={globalStyles.btnText}
               />
             ) : (
-              <View style={globalStyles.viewBtns}>
+              <View style={styles.viewBtns}>
                 <Button
                   onPress={editURL}
                   title="Editar"
@@ -130,7 +138,7 @@ export default function Challenge2_slice5({nextText}) {
                   iconRight
                 />
                 <Button
-                  // onPress={removeArgument}
+                  onPress={removeURL}
                   title="Borrar"
                   buttonStyle={styles.btn}
                   containerStyle={globalStyles.btnContainer}
@@ -163,6 +171,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#ff4b4b',
     paddingVertical: 10,
   },
+  btnContainer: {
+    marginVertical: 10,
+    width: 150,
+  },
   btnEdit: {
     borderRadius: 10,
     backgroundColor: '#1cb0f6',
@@ -176,13 +188,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   viewURLs: {
-    marginTop: 10,
-    width: 300,
+    padding: 20,
   },
   menuItem: {
     borderBottomWidth: 1,
     borderBottomColor: '#c3c3c3',
     borderRadius: 10,
     marginBottom: 10,
+  },
+  viewBtns: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
   },
 });

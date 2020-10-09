@@ -72,7 +72,7 @@ export default function Introduction_2({navigation}) {
           <View style={globalStyles.correct}>
             <Image
               style={globalStyles.brain}
-              source={require('../../assets/img/cerebrito/cerebro-rosado.png')}
+              source={require('../../assets/img/cerebrito/cerebro-like.png')}
               PlaceholderContent={<ActivityIndicator />}
             />
             <Text style={styles.textFeedback}>{textFeedback_2_1}</Text>
@@ -82,7 +82,7 @@ export default function Introduction_2({navigation}) {
           <View style={globalStyles.incorrect}>
             <Image
               style={globalStyles.brain}
-              source={require('../../assets/img/cerebrito/cerebro-celeste.png')}
+              source={require('../../assets/img/cerebrito/cerebro-dudando.png')}
               PlaceholderContent={<ActivityIndicator />}
             />
             <Text style={styles.textFeedback}>{textFeedback_2_2}</Text>

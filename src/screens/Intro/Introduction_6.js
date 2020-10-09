@@ -94,7 +94,7 @@ export default function Introduction_4({navigation}) {
         <View style={globalStyles.incorrect}>
           <Image
             style={globalStyles.brain}
-            source={require('../../assets/img/cerebrito/cerebro-celeste.png')}
+            source={require('../../assets/img/cerebrito/cerebro-dudando.png')}
             PlaceholderContent={<ActivityIndicator />}
           />
           {checked_1 && (

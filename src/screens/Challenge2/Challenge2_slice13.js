@@ -1,14 +1,22 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext} from 'react';
 import {StyleSheet, Text, View, ScrollView} from 'react-native';
 import {Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {challege2Text_9} from './challenge2text';
-import globalStyles from '../../styles/global';
 import {ChallengeContext} from '../../navigations/ChallengeContext';
+import {challenge2Text_13} from './challenge2text';
+import globalStyles from '../../styles/global';
 
-export default function Challenge2_slice9({nextText}) {
+export default function Challenge2_slice13({nextText}) {
   const {challenge} = useContext(ChallengeContext);
-  const {argument, counterargument} = challenge;
+  const {
+    argument,
+    counterargument,
+    proposal,
+    selectionURL,
+    thesis,
+    conclusion,
+    slant,
+  } = challenge;
 
   return (
     <View style={globalStyles.viewBody}>
@@ -18,8 +26,28 @@ export default function Challenge2_slice9({nextText}) {
           marginLeft: 20,
           marginRight: 30,
         }}>
-        <Text style={globalStyles.title}>{challege2Text_9}</Text>
+        <Text style={globalStyles.title}>{challenge2Text_13}</Text>
         <View style={globalStyles.viewOptions}>
+          <View style={styles.viewArgument}>
+            <Text style={styles.title}>Propuesta:</Text>
+            <Text style={styles.tick}>
+              ✔ <Text style={styles.argument}>{proposal}</Text>
+            </Text>
+          </View>
+          <View style={styles.viewArgument}>
+            <Text style={styles.title}>Selección de información:</Text>
+            {selectionURL.map((item, index) => (
+              <Text key={index} style={styles.tick}>
+                ✔ <Text style={styles.argument}>{item.url}</Text>
+              </Text>
+            ))}
+          </View>
+          <View style={styles.viewArgument}>
+            <Text style={styles.title}>Tesis:</Text>
+            <Text style={styles.tick}>
+              ✔ <Text style={styles.argument}>{thesis}</Text>
+            </Text>
+          </View>
           <View style={styles.viewArgument}>
             <Text style={styles.title}>Argumentos:</Text>
             {argument.map((item, index) => (
@@ -36,12 +64,24 @@ export default function Challenge2_slice9({nextText}) {
               </Text>
             ))}
           </View>
+          <View style={styles.viewArgument}>
+            <Text style={styles.title}>Conclusión:</Text>
+            <Text style={styles.tick}>
+              ✔ <Text style={styles.argument}>{conclusion}</Text>
+            </Text>
+          </View>
+          <View style={styles.viewArgument}>
+            <Text style={styles.title}>Sesgo:</Text>
+            <Text style={styles.tick}>
+              ✔ <Text style={styles.argument}>{slant}</Text>
+            </Text>
+          </View>
         </View>
       </ScrollView>
       <View style={globalStyles.viewBtns}>
         <Button
           onPress={nextText}
-          title="Listo"
+          title="Siguiente"
           buttonStyle={globalStyles.btn}
           containerStyle={globalStyles.btnContainer}
           titleStyle={globalStyles.btnText}

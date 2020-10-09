@@ -15,6 +15,8 @@ export default function Trivia({navigation, route}) {
   const [question, setQuestion] = useState({});
   const [countCorrect, setCountCorrect] = useState(0);
   const numbersOfQuestions = questions.length;
+
+  // console.log(idQuestion);
   useEffect(() => {
     const random = () => {
       // const numberQuestion = Math.floor(Math.random() * numbersOfQuestions);
@@ -57,22 +59,22 @@ export default function Trivia({navigation, route}) {
         <View style={globalStyles.viewContent}>
           <Text style={styles.content}>{question.question}</Text>
         </View>
-        <View style={globalStyles.viewBtns}>
+        <View style={styles.viewBtns}>
           <Button
             onPress={() => resp(true)}
             title="Verdadero"
-            icon={<Icon name="thumbs-up" size={15} color="#fff" />}
-            buttonStyle={styles.btn}
+            icon={<Icon name="thumbs-up" size={15} color="#196674" />}
+            buttonStyle={globalStyles.btn}
             containerStyle={globalStyles.btnContainer}
-            titleStyle={styles.btnText}
+            titleStyle={globalStyles.btnText}
           />
           <Button
             onPress={() => resp(false)}
             title="Falso"
-            buttonStyle={styles.btnFalse}
+            buttonStyle={globalStyles.btn}
             containerStyle={globalStyles.btnContainer}
-            titleStyle={styles.btnText}
-            icon={<Icon name="thumbs-down" size={15} color="#fff" icon />}
+            titleStyle={globalStyles.btnText}
+            icon={<Icon name="thumbs-down" size={15} color="#196674" icon />}
             iconRight
           />
         </View>
@@ -112,6 +114,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#78c800',
     paddingVertical: 10,
   },
+
   btnFalse: {
     borderRadius: 10,
     backgroundColor: '#ff4b4b',
@@ -148,5 +151,9 @@ const styles = StyleSheet.create({
     marginHorizontal: 30,
     marginVertical: 70,
     borderRadius: 10,
+  },
+  viewBtns: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 });

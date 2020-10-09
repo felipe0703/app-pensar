@@ -32,6 +32,7 @@ export default function Navigation() {
           activeTintColor: '#196674',
           activeBackgroundColor: '#C2DDC7',
           inactiveBackgroundColor: '#C2DDC7',
+          // borderTopWidth: 0,
         }}
         screenOptions={({route}) => ({
           tabBarIcon: ({focused}) => screenOptions(route, focused),

@@ -118,15 +118,23 @@ Esto es importante, ya que de esta forma puedes ampliar tu perspectiva de razona
 export const challengeText_14_1 = `4. Desarrollo de contraargumentos`;
 export const challengeText_14_2 = `Selecciona de los siguientes ejemplos. `;
 
-export const challengeText_15_1 = `5. Conclusión`;
-export const challengeText_15_2 = `Ya has llegado casi al final de la 1a etapa. 
+export const challengeText_15_1 = `Bien hecho👏👏
+
+Estos son los argumentos y contrargumentos que has considerado para apoyar tu punto de vista`;
+
+export const textFeedback_15 = `Recuerda que fundamentar tus opiniones basándose en evidencia, así como comparar distintos puntos de vista y evaluar críticamente las diversas alternativas de solución a un problema son pasos importantes para el desarrollo del pensamiento crítico.`;
+
+export const challengeText_16_1 = `5. Conclusión`;
+export const challengeText_16_2 = `Ya has llegado casi al final de la 1a etapa. 
 
 Selecciona de las siguientes alternativas la que sintetiza de mejor forma tu postura:`;
 
-export const challengeText_15_3 = `Considerando los argumentos elaborados, así como los contrargumentos incluidos en el análisis, se puede inferir que las redes sociales afectan negativamente las relaciones interpersonales y el aprendizaje. Este impacto se resume en el menor tiempo que le dedicamos a construir relaciones humanas y a generar conocimiento de calidad.`;
+export const challengeText_16_3 = `Considerando los argumentos elaborados, así como los contrargumentos incluidos en el análisis, se puede inferir que las redes sociales afectan negativamente las relaciones interpersonales y el aprendizaje. Este impacto se resume en el menor tiempo que le dedicamos a construir relaciones humanas y a generar conocimiento de calidad.`;
 
-export const challengeText_15_4 = `Considerando los argumentos elaborados, así como los contrargumentos incluidos en el análisis, se puede inferir que las redes sociales no afectan necesariamente las relaciones interpersonales ni el aprendizaje. Son más bien un recurso para construir relaciones interpersonales de una naturaleza diferente a las relaciones cara a cara y que democratiza el conocimiento.`;
+export const challengeText_16_4 = `Considerando los argumentos elaborados, así como los contrargumentos incluidos en el análisis, se puede inferir que las redes sociales no afectan necesariamente las relaciones interpersonales ni el aprendizaje. Son más bien un recurso para construir relaciones interpersonales de una naturaleza diferente a las relaciones cara a cara y que democratiza el conocimiento.`;
 
-export const challengeText_16_1 = `6. Reconocimiento de sesgos cognitivos y heurísticas`;
-export const challengeText_16_2 = `Antes de continuar el viaje, te encuentras con una zona de trivia que hay que resolver. 
+export const challengeText_17 = `Resumen final`;
+
+export const challengeText_18_1 = `6. Reconocimiento de sesgos cognitivos y heurísticas`;
+export const challengeText_18_2 = `Antes de continuar el viaje, te encuentras con una zona de trivia que hay que resolver. 
 Debes tener tres respuestas correctas para continuar.`;

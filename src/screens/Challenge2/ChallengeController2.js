@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import Challenge2_slice1 from './Challenge2_slice1';
 import Challenge2_slice2 from './Challenge2_slice2';
@@ -12,6 +12,9 @@ import Challenge2_slice9 from './Challenge2_slice9';
 import Challenge2_slice10 from './Challenge2_slice10';
 import Challenge2_slice11 from './Challenge2_slice11';
 import Challenge2_slice12 from './Challenge2_slice12';
+import Challenge2_slice13 from './Challenge2_slice13';
+import Challenge2_slice14 from './Challenge2_slice14';
+import {ChallengeContext} from '../../navigations/ChallengeContext';
 
 export default function ChallengeController2({navigation}) {
   const [slice, setSlice] = useState(0);
@@ -23,6 +26,7 @@ export default function ChallengeController2({navigation}) {
   const previousText = () => {
     setSlice(slice - 1);
   };
+
   return (
     <View style={styles.viewBody}>
       {slice === 0 && <Challenge2_slice1 nextText={nextText} />}
@@ -36,7 +40,9 @@ export default function ChallengeController2({navigation}) {
       {slice === 8 && <Challenge2_slice9 nextText={nextText} />}
       {slice === 9 && <Challenge2_slice10 nextText={nextText} />}
       {slice === 10 && <Challenge2_slice11 nextText={nextText} />}
-      {slice === 11 && <Challenge2_slice12 navigation={navigation} />}
+      {slice === 11 && <Challenge2_slice12 nextText={nextText} />}
+      {slice === 12 && <Challenge2_slice13 nextText={nextText} />}
+      {slice === 13 && <Challenge2_slice14 navigation={navigation} />}
     </View>
   );
 }

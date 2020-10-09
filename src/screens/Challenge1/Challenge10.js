@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {StyleSheet, View, Text, ActivityIndicator} from 'react-native';
 import {Button, CheckBox, Image} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -7,10 +7,12 @@ import {
   challengeText_10_2,
   challengeText_10_3,
   challengeText_10_4,
+  challengeText_14_1,
   textFeedback_10,
 } from './challengeText';
 import Modal from '../../components/Modal';
 import globalStyles from '../../styles/global';
+import {ChallengeContext} from '../../navigations/ChallengeContext';
 
 export default function Challenge10({nextText, setThesis}) {
   const [showModal, setShowModal] = useState(false);
@@ -18,6 +20,7 @@ export default function Challenge10({nextText, setThesis}) {
   const [allowShowNext, setAllowShowNext] = useState(false);
   const [checkedThesis1, setCheckedThesis1] = useState(false);
   const [checkedThesis2, setCheckedThesis2] = useState(false);
+  const {challenge, setChallenge} = useContext(ChallengeContext);
 
   useEffect(() => {
     setTimeout(() => {
@@ -28,9 +31,11 @@ export default function Challenge10({nextText, setThesis}) {
 
   const resp = (thesis) => {
     if (thesis === 1) {
+      setChallenge({...challenge, thesis: challengeText_10_3});
       setCheckedThesis1(true);
       setCheckedThesis2(false);
     } else if (thesis === 2) {
+      setChallenge({...challenge, thesis: challengeText_10_4});
       setCheckedThesis1(false);
       setCheckedThesis2(true);
     }

@@ -22,7 +22,7 @@ const globalStyles = StyleSheet.create({
   },
   btnContainer: {
     width: 150,
-    marginVertical: 30,
+    marginVertical: 25,
     marginHorizontal: 10,
   },
   btnText: {
@@ -30,8 +30,8 @@ const globalStyles = StyleSheet.create({
     marginHorizontal: 10,
   },
   cardImage: {
-    width: 300,
-    height: 300,
+    width: 280,
+    height: 280,
     resizeMode: 'contain',
   },
   content: {
@@ -83,10 +83,10 @@ const globalStyles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 16,
     textAlign: 'center',
-    marginBottom: 20,
+    marginBottom: 10,
   },
   touchable: {
-    marginVertical: 10,
+    marginVertical: 6,
   },
   viewBody: {
     flex: 1,

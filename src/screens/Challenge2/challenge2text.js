@@ -39,8 +39,7 @@ export const challege2Text_4_3 = `¿Crees que los productos de belleza influyen 
 
 export const challege2Text_5 = `Antes de empezar, reflexiona unos segundos sobre tu tesis. 
 
-Ahora, ¿qué evidencia y datos usarías para respaldar tu tesis?
-`;
+Ahora, ¿qué evidencia y datos usarías para respaldar tu tesis?`;
 
 export const challege2Text_5_1 = `Busca en Google evidencia y datos que apoyen tu punto de vista, selecciona la url y cópiala más abajo`;
 
@@ -54,18 +53,21 @@ Ahora puedes continuar con la formulación de tu tesis.
 
 export const challege2Text_8 = `¿Qué contra-argumentos utilizarías?`;
 
-export const challege2Text_9 = `🎊 ¡Genial! 🎊
+export const challege2Text_9 = `Bien hecho👏👏
+
+Estos son los argumentos y contrargumentos que has considerado para apoyar tu punto de vista`;
+
+export const challege2Text_10 = `🎊 ¡Genial! 🎊
 
 Has hecho un viaje excelente. Faltan los últimos kilómetros de la segunda etapa del trayecto.`;
 
-export const challege2Text_10 = `¿Cuál es la conclusión de tu argumento?`;
+export const challege2Text_11 = `¿Cuál es la conclusión de tu argumento?`;
 
-export const challege2Text_11 = `¡Estás cerca de ver tu resultado final!
+export const challege2Text_12 = `¡Estás cerca de ver tu resultado final!
 
-¿Puedes reconocer sesgos en tu propio argumento? 
-`;
+¿Puedes reconocer sesgos en tu propio argumento?`;
 
-export const textFeedback_11 = `Te puedes guiar por las siguientes preguntas:
+export const textFeedback_12 = `Te puedes guiar por las siguientes preguntas:
 
 ¿Qué limites podría tener tu propia argumentación?
 
@@ -74,7 +76,9 @@ export const textFeedback_11 = `Te puedes guiar por las siguientes preguntas:
 ¿Crees que cambiaría si, por ejemplo, estuvieras en otro país?
 `;
 
-export const challege2Text_12 = `🎊 ¡Excelente! 🎊
+export const challenge2Text_13 = `Resumen final`;
+
+export const challege2Text_14 = `🎊 ¡Excelente! 🎊
 
 Para finalizar el viaje, contesta estas tres preguntas que te ayudarán a aprender un poco más sobre los sesgos cognitivos y la evaluación de información.`;
 

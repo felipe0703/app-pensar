@@ -1,5 +1,11 @@
 import React, {useState} from 'react';
-import {StyleSheet, TouchableOpacity, View, Text} from 'react-native';
+import {
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  Text,
+  ScrollView,
+} from 'react-native';
 import {Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Modal from '../../components/Modal';
@@ -130,7 +136,8 @@ export default function Introduction_3({navigation}) {
 const styles = StyleSheet.create({
   viewOptions: {
     marginLeft: 35,
-    marginVertical: 20,
+    marginTop: 15,
+    marginBottom: 15,
   },
   textFeedback: {
     marginVertical: 10,

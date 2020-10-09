@@ -1,5 +1,11 @@
 import React, {useState} from 'react';
-import {Text, View, ActivityIndicator} from 'react-native';
+import {
+  Text,
+  View,
+  ActivityIndicator,
+  ScrollView,
+  StyleSheet,
+} from 'react-native';
 import {Button, CheckBox, Image} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {textIntro_4, textFeedback_4} from './text_Intro_1';
@@ -55,7 +61,8 @@ export default function Introduction_4({navigation}) {
 
   return (
     <View style={globalStyles.viewBody}>
-      <View style={globalStyles.viewContent}>
+      {/* <ScrollView style={globalStyles.viewContent}> */}
+      <ScrollView contentContainerStyle={styles.viewContent}>
         <Text style={globalStyles.content}>{allText[page]}</Text>
         {!ready && (
           <View style={globalStyles.viewOptions}>
@@ -93,7 +100,7 @@ export default function Introduction_4({navigation}) {
             />
           </View>
         )}
-      </View>
+      </ScrollView>
       <View style={globalStyles.viewBtns}>
         {showNext && !ready && (
           <Button
@@ -121,7 +128,7 @@ export default function Introduction_4({navigation}) {
         <View style={globalStyles.correct}>
           <Image
             style={globalStyles.brain}
-            source={require('../../assets/img/cerebrito/cerebro-rosado.png')}
+            source={require('../../assets/img/cerebrito/cerebro-like.png')}
             PlaceholderContent={<ActivityIndicator />}
           />
           <Text style={globalStyles.textFeedback}>{textFeedback_4}</Text>
@@ -130,3 +137,10 @@ export default function Introduction_4({navigation}) {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  viewContent: {
+    paddingVertical: 20,
+    paddingHorizontal: 30,
+  },
+});

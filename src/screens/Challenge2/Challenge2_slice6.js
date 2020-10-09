@@ -1,12 +1,41 @@
-import React, {useState} from 'react';
-import {StyleSheet, Text, View, TextInput} from 'react-native';
+import React, {useState, useEffect, useContext} from 'react';
+import {StyleSheet, Text, View, TextInput, Keyboard} from 'react-native';
 import {Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {ChallengeContext} from '../../navigations/ChallengeContext';
 import globalStyles from '../../styles/global';
 import {challege2Text_6} from './challenge2text';
 
 export default function Challenge2_slice6({nextText}) {
   const [value, setValue] = useState('');
+  const [showBtnNext, setShowBtnNext] = useState(true);
+  const {challenge, setChallenge} = useContext(ChallengeContext);
+
+  useEffect(() => {
+    Keyboard.addListener('keyboardDidShow', _keyboardDidShow);
+    Keyboard.addListener('keyboardDidHide', _keyboardDidHide);
+
+    // cleanup function
+    return () => {
+      Keyboard.removeListener('keyboardDidShow', _keyboardDidShow);
+      Keyboard.removeListener('keyboardDidHide', _keyboardDidHide);
+    };
+  }, []);
+
+  const _keyboardDidShow = () => {
+    setShowBtnNext(false);
+  };
+
+  const _keyboardDidHide = () => {
+    setShowBtnNext(true);
+  };
+
+  const goNextText = () => {
+    setChallenge({...challenge, thesis: value});
+    nextText();
+  };
+  console.log(value);
+
   return (
     <View style={globalStyles.viewBody}>
       <View style={globalStyles.viewContent}>
@@ -15,21 +44,23 @@ export default function Challenge2_slice6({nextText}) {
           multiline
           numberOfLines={4}
           editable
-          onChange={(text) => setValue(text)}
+          onChangeText={(val) => setValue(val)}
           value={value}
           style={styles.input}
         />
       </View>
       <View style={globalStyles.viewBtns}>
-        <Button
-          onPress={nextText}
-          title="Listo"
-          buttonStyle={globalStyles.btn}
-          containerStyle={globalStyles.btnContainer}
-          titleStyle={globalStyles.btnText}
-          icon={<Icon name="arrow-right" size={15} color="#196674" icon />}
-          iconRight
-        />
+        {showBtnNext && (
+          <Button
+            onPress={goNextText}
+            title="Listo"
+            buttonStyle={globalStyles.btn}
+            containerStyle={globalStyles.btnContainer}
+            titleStyle={globalStyles.btnText}
+            icon={<Icon name="arrow-right" size={15} color="#196674" icon />}
+            iconRight
+          />
+        )}
       </View>
     </View>
   );

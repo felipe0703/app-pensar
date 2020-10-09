@@ -3,6 +3,7 @@ import * as firebase from 'firebase';
 import {Button, Image} from 'react-native-elements';
 import {View, Text, ActivityIndicator} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+// import playsound
 
 import ChangeDisplayNameForm from '../../components/Account/ChangeDisplayNameForm';
 import Modal from '../../components/Modal';
@@ -35,7 +36,7 @@ export default function Introduction({navigation}) {
           <View style={globalStyles.viewContent}>
             <Image
               style={globalStyles.brain}
-              source={require('../../assets/img/cerebrito/cerebro-rosado.png')}
+              source={require('../../assets/img/cerebrito/cerebro-saludando.png')}
               PlaceholderContent={<ActivityIndicator />}
             />
             <Text style={globalStyles.content}>{allText}</Text>

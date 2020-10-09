@@ -1,6 +1,13 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
-import {Button} from 'react-native-elements';
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  ActivityIndicator,
+  ImageBackground,
+} from 'react-native';
+import {Button, Image} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {
   challengeText_2,
@@ -16,18 +23,35 @@ import globalStyles from '../../styles/global';
 export default function Challenge2({nextText}) {
   const [showModal, setShowModal] = useState(false);
   const [textFeedback, setTextFeedback] = useState('');
+  const [thinker, setThinker] = useState(1);
 
   const showInfo = (option) => {
     if (option === 1) {
       setTextFeedback(textFeedback_2_1);
+      setThinker(1);
     } else if (option === 2) {
       setTextFeedback(textFeedback_2_2);
+      setThinker(2);
     } else if (option === 3) {
       setTextFeedback(textFeedback_2_3);
+      setThinker(3);
     } else {
       setTextFeedback(textFeedback_2_4);
+      setThinker(4);
     }
     setShowModal(true);
+  };
+
+  const thinkers = () => {
+    if (thinker === 1) {
+      return require('../../assets/img/pensadores/martin-luther-king-jr.jpg');
+    } else if (thinker === 2) {
+      return require('../../assets/img/pensadores/Simone-de-Beauvoir.jpg');
+    } else if (thinker === 3) {
+      return require('../../assets/img/pensadores/elena-caffarena.jpg');
+    } else {
+      return require('../../assets/img/pensadores/camilo-henriquez.jpg');
+    }
   };
 
   return (
@@ -79,19 +103,75 @@ export default function Challenge2({nextText}) {
         />
       </View>
 
-      <Modal isVisible={showModal} setIsVisible={setShowModal}>
-        <Text style={styles.textFeedback}>{textFeedback}</Text>
+      <Modal
+        isVisible={showModal}
+        setIsVisible={setShowModal}
+        withPadding={true}>
+        <ImageBackground
+          source={require('../../assets/img/Pergamino.jpg')}
+          style={styles.background}>
+          <View style={globalStyles.modalFeedback}>
+            {thinker === 1 ? (
+              <Image
+                style={[styles.img]}
+                source={require('../../assets/img/pensadores/martin-luther-king-jr.jpg')}
+                PlaceholderContent={<ActivityIndicator />}
+                containerStyle={styles.containerImg}
+              />
+            ) : thinker === 2 ? (
+              <Image
+                style={[styles.img]}
+                source={require('../../assets/img/pensadores/Simone-de-Beauvoir.jpg')}
+                PlaceholderContent={<ActivityIndicator />}
+                containerStyle={styles.containerImg}
+              />
+            ) : thinker === 3 ? (
+              <Image
+                style={[styles.img]}
+                source={require('../../assets/img/pensadores/elena-caffarena.jpg')}
+                PlaceholderContent={<ActivityIndicator />}
+                containerStyle={styles.containerImg}
+              />
+            ) : (
+              <Image
+                style={[styles.img]}
+                source={require('../../assets/img/pensadores/camilo-henriquez.jpg')}
+                PlaceholderContent={<ActivityIndicator />}
+                containerStyle={styles.containerImg}
+              />
+            )}
+
+            <Text style={styles.textFeedback}>{textFeedback}</Text>
+          </View>
+        </ImageBackground>
       </Modal>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  viewOptions: {
-    marginLeft: 15,
-    marginVertical: 20,
+  containerImg: {
+    borderRadius: 50,
+    width: 100,
+    marginTop: 10,
+  },
+  img: {
+    height: 100,
+    width: 100,
+  },
+  background: {
+    // flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'center',
+    height: 'auto',
+    width: '100%',
   },
   textFeedback: {
     marginVertical: 10,
+    marginHorizontal: 10,
+  },
+  viewOptions: {
+    marginLeft: 15,
+    marginVertical: 20,
   },
 });

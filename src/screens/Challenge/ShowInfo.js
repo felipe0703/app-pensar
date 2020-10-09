@@ -33,7 +33,7 @@ export default function Challenge1Text({
         {showBrain && (
           <Image
             style={globalStyles.brain}
-            source={require('../../assets/img/cerebrito/cerebro-rosado.png')}
+            source={require('../../assets/img/cerebrito/cerebro-saludando.png')}
             PlaceholderContent={<ActivityIndicator />}
           />
         )}
@@ -82,7 +82,7 @@ export default function Challenge1Text({
         <View style={globalStyles.correct}>
           <Image
             style={globalStyles.brain}
-            source={require('../../assets/img/cerebrito/cerebro-rosado.png')}
+            source={require('../../assets/img/cerebrito/cerebro-saludando.png')}
             PlaceholderContent={<ActivityIndicator />}
           />
           <Text style={styles.textModal}>{learnMore}</Text>

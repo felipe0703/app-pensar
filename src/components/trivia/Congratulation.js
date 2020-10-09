@@ -30,7 +30,7 @@ export default function Congratulation({navigation, route}) {
       <View style={globalStyles.viewContent}>
         <Image
           style={globalStyles.brain}
-          source={require('../../assets/img/cerebrito/cerebro-rosado.png')}
+          source={require('../../assets/img/cerebrito/cerebro-saludando.png')}
           PlaceholderContent={<ActivityIndicator />}
         />
         <Text style={globalStyles.title}>🎉¡Felicidades!🎉</Text>

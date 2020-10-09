@@ -16,10 +16,13 @@ import Challenge13 from './Challenge13';
 import Challenge14 from './Challenge14';
 import Challenge15 from './Challenge15';
 import Challenge16 from './Challenge16';
+import Challenge17 from './Challenge17';
+import Challenge18 from './Challenge18';
 
 export default function ControllerChallenge({navigation}) {
   const [slice, setSlice] = useState(0);
   const [thesis, setThesis] = useState({});
+
   const nextText = () => {
     setSlice(slice + 1);
   };
@@ -45,7 +48,9 @@ export default function ControllerChallenge({navigation}) {
       {slice === 12 && <Challenge13 nextText={nextText} />}
       {slice === 13 && <Challenge14 nextText={nextText} thesis={thesis} />}
       {slice === 14 && <Challenge15 nextText={nextText} />}
-      {slice === 15 && <Challenge16 navigation={navigation} />}
+      {slice === 15 && <Challenge16 nextText={nextText} />}
+      {slice === 16 && <Challenge17 nextText={nextText} />}
+      {slice === 17 && <Challenge18 navigation={navigation} />}
     </View>
   );
 }
