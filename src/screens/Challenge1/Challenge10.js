@@ -13,6 +13,7 @@ import {
 import Modal from '../../components/Modal';
 import globalStyles from '../../styles/global';
 import {ChallengeContext} from '../../navigations/ChallengeContext';
+import {playSound_feedback} from '../../assets/playsound/playsound';
 
 export default function Challenge10({nextText, setThesis, navigation}) {
   const [showModal, setShowModal] = useState(false);
@@ -29,6 +30,7 @@ export default function Challenge10({nextText, setThesis, navigation}) {
   useEffect(() => {
     setTimeout(() => {
       setShowModal(true);
+      playSound_feedback();
       setAllowShowNext(true);
     }, 500);
   }, []);

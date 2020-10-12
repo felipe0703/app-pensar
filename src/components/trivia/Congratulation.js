@@ -6,6 +6,7 @@ import {
   congratulation_challenge1,
   congratulation_challenge2,
 } from '../../screens/Challenge2/challenge2text';
+import {playSound_congratulation} from '../../assets/playsound/playsound';
 
 export default function Congratulation({navigation, route}) {
   const {challenge} = route.params;
@@ -16,6 +17,7 @@ export default function Congratulation({navigation, route}) {
   };
 
   useEffect(() => {
+    playSound_congratulation();
     if (challenge === 1) {
       setText(congratulation_challenge1);
     } else if (challenge === 2) {

@@ -16,6 +16,7 @@ export default function HeaderBar({name, progress}) {
         indeterminate={false}
         indeterminateAnimationDuration={1000}
         progress={progress}
+        progress={progress}
         useNativeDriver={true}
         width={200}
       />

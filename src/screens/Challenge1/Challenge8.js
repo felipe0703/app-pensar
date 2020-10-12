@@ -10,6 +10,10 @@ import {
   textFeedback_8_3,
 } from './challengeText';
 import globalStyles from '../../styles/global';
+import {
+  playSound_correct,
+  playSound_incorrect,
+} from '../../assets/playsound/playsound';
 
 export default function Challenge8({nextText}) {
   const [showModal, setShowModal] = useState(false);
@@ -18,6 +22,11 @@ export default function Challenge8({nextText}) {
 
   const resp = (response) => {
     setShowModal(true);
+    if (!response) {
+      playSound_correct();
+    } else {
+      playSound_incorrect();
+    }
     setResponse(response);
     setShowNext(true);
   };

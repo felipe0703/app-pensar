@@ -11,17 +11,32 @@ import {
   textFeedback_7_4,
 } from './challengeText';
 import globalStyles from '../../styles/global';
+import {
+  playSound_correct,
+  playSound_incorrect,
+} from '../../assets/playsound/playsound';
 
 export default function Challenge7({nextText}) {
   const [showModal, setShowModal] = useState(false);
   const [showNext, setShowNext] = useState(false);
   const [response, setResponse] = useState(false);
+  const [backPress, setBackPress] = useState(false);
   const [pageFeedback, setPageFeedback] = useState(0);
 
   const resp = (response) => {
     setShowModal(true);
+    if (!response) {
+      playSound_correct();
+    } else {
+      playSound_incorrect();
+    }
     setResponse(response);
     setShowNext(true);
+  };
+
+  const nextPageFeedback = () => {
+    setBackPress(true);
+    setPageFeedback(pageFeedback + 1);
   };
   return (
     <View style={globalStyles.viewBody}>
@@ -67,7 +82,10 @@ export default function Challenge7({nextText}) {
           />
         )}
       </View>
-      <Modal isVisible={showModal} setIsVisible={setShowModal}>
+      <Modal
+        isVisible={showModal}
+        setIsVisible={setShowModal}
+        backPrees={backPress}>
         <View style={!response ? globalStyles.correct : globalStyles.incorrect}>
           {pageFeedback === 0 ? (
             <>
@@ -84,7 +102,7 @@ export default function Challenge7({nextText}) {
                   buttonStyle={globalStyles.btn}
                   titleStyle={globalStyles.btnText}
                   containerStyle={globalStyles.btnContainer}
-                  onPress={() => setPageFeedback(pageFeedback + 1)}
+                  onPress={nextPageFeedback}
                 />
               </View>
             </>

@@ -20,6 +20,7 @@ export default function Challenge1Text({
   learnMore = '',
   pageToLearMore = 0,
   showBrain = false,
+  showLike = false,
 }) {
   const {state: page, nextText, backText} = usePages();
   const [showModal, setShowModal] = useState(false);
@@ -33,7 +34,11 @@ export default function Challenge1Text({
         {showBrain && (
           <Image
             style={globalStyles.brain}
-            source={require('../../assets/img/cerebrito/cerebro-saludando.png')}
+            source={
+              showLike
+                ? require('../../assets/img/cerebrito/cerebro-like-rosa.png')
+                : require('../../assets/img/cerebrito/cerebro-saludando-rosa.png')
+            }
             PlaceholderContent={<ActivityIndicator />}
           />
         )}

@@ -15,6 +15,7 @@ export default function Challenge2_slice14({navigation}) {
       go={goTrivia}
       textButton="Listo"
       showBrain={true}
+      showLike={true}
     />
   );
 }

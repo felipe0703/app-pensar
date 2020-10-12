@@ -12,6 +12,7 @@ import {textIntro_4, textFeedback_4} from './text_Intro_1';
 import Modal from '../../components/Modal';
 import {usePages} from '../../hooks/usePages';
 import globalStyles from '../../styles/global';
+import {playSound_feedback} from '../../assets/playsound/playsound';
 
 export default function Introduction_4({navigation}) {
   const [showModal, setShowModal] = useState(false);
@@ -51,6 +52,7 @@ export default function Introduction_4({navigation}) {
 
   const resp = () => {
     setShowModal(true);
+    playSound_feedback();
     nextText();
     setReady(true);
   };

@@ -54,7 +54,9 @@ export default function Challenge12({nextText, thesis, navigation}) {
         </ScrollView>
       </View>
       <View style={globalStyles.viewBtns}>
-        <Button
+        {
+          argument.length >0 &&
+          <Button
           onPress={setContext}
           title="Siguiente"
           buttonStyle={globalStyles.btn}
@@ -62,7 +64,8 @@ export default function Challenge12({nextText, thesis, navigation}) {
           titleStyle={globalStyles.btnText}
           icon={<Icon name="arrow-right" size={15} color="#196674" icon />}
           iconRight
-        />
+          />
+        }
       </View>
     </View>
   );

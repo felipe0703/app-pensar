@@ -14,6 +14,9 @@ export default function Challenge2_slice7({nextText, navigation}) {
   const [countArgument, setCountArgument] = useState(0);
   const [argument, setArgument] = useState([]);
   const [indexEditRemove, setIndexEditRemove] = useState(0);
+  const [indexEdit, setIndexEdit] = useState(0)
+  const [idArgument, setIdArgument] = useState(0)
+  const [error, setError] = useState(false)
   const {challenge, setChallenge} = useContext(ChallengeContext);
 
   useEffect(() => {
@@ -21,9 +24,15 @@ export default function Challenge2_slice7({nextText, navigation}) {
   }, []);
 
   const addArgument = () => {
-    setArgument([...argument, {argument: value}]);
-    setShowModal(false);
-    setCountArgument(countArgument + 1);
+    if(value){
+      setError(false)
+      setArgument([...argument, {argument: value, id:idArgument}]);
+      setIdArgument(idArgument+1)
+      setShowModal(false);
+      setCountArgument(countArgument + 1);
+    }else{
+      setError(true)
+    }
   };
 
   const showAddArgument = () => {
@@ -33,25 +42,30 @@ export default function Challenge2_slice7({nextText, navigation}) {
   };
 
   const showEditArgument = (text, index) => {
-    setIndexEditRemove(index);
+    setIndexEditRemove(argument[index].id);
+    setIndexEdit(index)
     setValue(text);
     setShowModal(true);
     setBtnAdd(false);
   };
 
   const editArgument = () => {
-    const temp = [...argument];
-    const temp2 = temp.splice(indexEditRemove, 1, {argument: value});
-    setArgument(temp);
-    setShowModal(false);
+    if(value){
+      setError(false)
+      const temp = [...argument];
+      const temp2 = temp.splice(indexEdit, 1, {argument: value, id:indexEditRemove});
+      setArgument(temp);
+      setShowModal(false);
+    }else{
+      setError(true)
+    }
   };
 
   const removeArgument = () => {
-    const temp = [...argument];
-    const temp2 = temp.splice(indexEditRemove, 1);
-    setArgument(temp);
+    const data = argument.filter( arg => indexEditRemove !== arg.id)
+    setArgument(data);
     setCountArgument(countArgument - 1);
-    setShowModal(false);
+    setShowModal(false)
   };
 
   const goNextText = () => {
@@ -114,7 +128,7 @@ export default function Challenge2_slice7({nextText, navigation}) {
             editable
             onChangeText={(text) => setValue(text)}
             value={value}
-            style={styles.input}
+            style={ error ? styles.inputError:styles.input}
           />
           <View style={styles.viewBtn}>
             {btnAdd ? (
@@ -163,6 +177,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderColor: 'gray',
     borderWidth: 1,
+  },
+  inputError: {
+    backgroundColor: '#fff',
+    borderColor: '#ff4b4b',
+    borderWidth: 2,
   },
   txt: {
     textAlign: 'center',

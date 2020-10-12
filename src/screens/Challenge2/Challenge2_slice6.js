@@ -10,6 +10,7 @@ export default function Challenge2_slice6({nextText, navigation}) {
   const [value, setValue] = useState('');
   const [showBtnNext, setShowBtnNext] = useState(true);
   const {challenge, setChallenge} = useContext(ChallengeContext);
+  const [error, setError] = useState(false)
 
   useEffect(() => {
     navigation.setParams({name: 'Tesis', progress: 0.42});
@@ -35,8 +36,13 @@ export default function Challenge2_slice6({nextText, navigation}) {
   };
 
   const goNextText = () => {
-    setChallenge({...challenge, thesis: value});
-    nextText();
+    if(value){
+      setError(false)
+      setChallenge({...challenge, thesis: value});
+      nextText();
+    }else{
+      setError(true)
+    }
   };
   console.log(value);
 
@@ -50,7 +56,7 @@ export default function Challenge2_slice6({nextText, navigation}) {
           editable
           onChangeText={(val) => setValue(val)}
           value={value}
-          style={styles.input}
+          style={error ?styles.inputError: styles.input}
         />
       </View>
       <View style={globalStyles.viewBtns}>
@@ -75,6 +81,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderColor: 'gray',
     borderWidth: 1,
+    marginTop: 30,
+    width: 300,
+  },
+  inputError: {
+    backgroundColor: '#fff',
+    borderColor: '#ff4b4b',
+    borderWidth: 2,
     marginTop: 30,
     width: 300,
   },

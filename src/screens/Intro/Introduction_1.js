@@ -3,7 +3,6 @@ import * as firebase from 'firebase';
 import {Button, Image} from 'react-native-elements';
 import {View, Text, ActivityIndicator} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-// import playsound
 
 import ChangeDisplayNameForm from '../../components/Account/ChangeDisplayNameForm';
 import Modal from '../../components/Modal';

@@ -6,18 +6,22 @@ import globalStyles from '../../styles/global';
 import {challege2Text_12, textFeedback_12} from './challenge2text';
 import Modal from '../../components/Modal';
 import {ChallengeContext} from '../../navigations/ChallengeContext';
+import {playSound_feedback} from '../../assets/playsound/playsound';
 
 export default function Challenge2_slice12({nextText, navigation}) {
   const [value, setValue] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [showBtnNext, setShowBtnNext] = useState(true);
+  const [error, setError] = useState(false);
   const {challenge, setChallenge} = useContext(ChallengeContext);
 
   useEffect(() => {
     navigation.setParams({name: 'Sesgo', progress: 1});
   }, []);
+
   useEffect(() => {
     setTimeout(() => {
+      playSound_feedback();
       setShowModal(true);
     }, 3000);
   }, []);
@@ -42,8 +46,13 @@ export default function Challenge2_slice12({nextText, navigation}) {
   };
 
   const goNextText = () => {
-    setChallenge({...challenge, slant: value});
-    nextText();
+    if (value) {
+      setError(false);
+      setChallenge({...challenge, slant: value});
+      nextText();
+    } else {
+      setError(true);
+    }
   };
 
   return (
@@ -56,7 +65,7 @@ export default function Challenge2_slice12({nextText, navigation}) {
           editable
           onChangeText={(text) => setValue(text)}
           value={value}
-          style={styles.input}
+          style={error ? styles.inputError : styles.input}
           onSubmitEditing={Keyboard.dismiss}
         />
       </View>
@@ -85,6 +94,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderColor: 'gray',
     borderWidth: 1,
+    marginTop: 30,
+    width: 300,
+  },
+  inputError: {
+    backgroundColor: '#fff',
+    borderColor: '#ff4b4b',
+    borderWidth: 2,
     marginTop: 30,
     width: 300,
   },

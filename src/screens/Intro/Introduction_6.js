@@ -11,6 +11,7 @@ import {
 import Modal from '../../components/Modal';
 import {usePages} from '../../hooks/usePages';
 import globalStyles from '../../styles/global';
+import {playSound_incorrect} from '../../assets/playsound/playsound';
 
 export default function Introduction_4({navigation}) {
   const [showModal, setShowModal] = useState(false);
@@ -32,6 +33,7 @@ export default function Introduction_4({navigation}) {
   }
 
   const resp = () => {
+    playSound_incorrect();
     setShowModal(true);
     nextText();
     setReady(true);

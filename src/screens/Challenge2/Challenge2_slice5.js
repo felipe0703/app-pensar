@@ -14,12 +14,23 @@ export default function Challenge2_slice5({nextText}) {
   const [btnAdd, setBtnAdd] = useState(false);
   const [urls, setUrls] = useState([]);
   const [indexEditRemove, setIndexEditRemove] = useState(0);
+  const [indexEdit, setIndexEdit] = useState(0)
+  const [idURl, setIdURl] = useState(0)
+  const [error, setError] = useState(false)
   const {challenge, setChallenge} = useContext(ChallengeContext);
 
+  
+
   const addURL = () => {
-    setUrls([...urls, {url: value}]);
-    setShowModal(false);
-    setCountURL(countURL + 1);
+    if(value){
+      setUrls([...urls, {url: value, id:idURl}]);
+      setShowModal(false);
+      setCountURL(countURL + 1);
+      setIdURl(idURl+1)
+      setError(false)
+    }else{
+      setError(true)
+    }
   };
 
   const showAddURL = () => {
@@ -29,25 +40,30 @@ export default function Challenge2_slice5({nextText}) {
   };
 
   const showEditURL = (text, index) => {
-    setIndexEditRemove(index);
+    setIndexEditRemove(urls[index].id);
+    setIndexEdit(index)
     setValue(text);
     setShowModal(true);
     setBtnAdd(false);
   };
 
   const editURL = () => {
-    const temp = [...urls];
-    const temp2 = temp.splice(indexEditRemove, 1, {url: value});
-    setUrls(temp);
-    setShowModal(false);
+    if(value){
+      setError(false)
+      const temp = [...urls];
+      const temp2 = temp.splice(indexEdit, 1, {url: value, id:indexEditRemove});
+      setUrls(temp);
+      setShowModal(false);
+    }else{
+      setError(true)
+    }
   };
 
   const removeURL = () => {
-    // const temp = [...urls];
-    // const temp2 = temp.splice(indexEditRemove, 1);
-    // setArgument(temp);
-    // setCountURL(countURL - 1);
-    // setShowModal(false);
+    const data = urls.filter( url => indexEditRemove !== url.id)
+    setUrls(data)
+    setCountURL(countURL - 1);
+    setShowModal(false)
   };
 
   const goNextText = () => {
@@ -55,7 +71,7 @@ export default function Challenge2_slice5({nextText}) {
     nextText();
   };
 
-  console.log(urls);
+
   return (
     <View style={globalStyles.viewBody}>
       <ScrollView style={styles.viewURLs}>
@@ -115,7 +131,7 @@ export default function Challenge2_slice5({nextText}) {
             editable
             onChangeText={(text) => setValue(text)}
             value={value}
-            style={styles.input}
+            style={error ? styles.inputError : styles.input}
           />
           <View style={styles.viewBtn}>
             {btnAdd ? (
@@ -146,11 +162,12 @@ export default function Challenge2_slice5({nextText}) {
                   icon={<Icon name="trash" size={15} color="#fff" icon />}
                   iconRight
                 />
-              </View>
+                 </View>
             )}
           </View>
         </View>
       </Modal>
+      
     </View>
   );
 }
@@ -160,6 +177,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderColor: 'gray',
     borderWidth: 1,
+  },
+  inputError: {
+    backgroundColor: '#fff',
+    borderColor: '#ff4b4b',
+    borderWidth: 2,
   },
   txt: {
     textAlign: 'center',

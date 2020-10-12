@@ -9,6 +9,10 @@ import {
   textFeedback_2_3,
 } from './text_Intro_1';
 import Modal from '../../components/Modal';
+import {
+  playSound_correct,
+  playSound_incorrect,
+} from '../../assets/playsound/playsound';
 import globalStyles from '../../styles/global';
 
 export default function Introduction_2({navigation}) {
@@ -23,6 +27,11 @@ export default function Introduction_2({navigation}) {
   const resp = (resp) => {
     setShowModal(true);
     setShowSiguiente(true);
+    if (resp) {
+      playSound_correct();
+    } else {
+      playSound_incorrect();
+    }
     setResponse(resp);
   };
 

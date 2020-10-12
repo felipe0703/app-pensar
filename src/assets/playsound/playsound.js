@@ -1,27 +1,50 @@
 import Sound from 'react-native-sound';
 
-const playSound = () => {
-  const tada = require('./tada-a.flac');
-  const lose = require('./lose.wav');
-
-  const sound1 = new Sound(tada, (error, sound) => {
-    if (error) {
-      console.log(error);
-      return;
-    }
-    sound.play(() => {
-      sound.release();
-    });
-  });
+export const playSound_correct = () => {
+  console.log('test');
+  const sound1 = new Sound(
+    require('../../assets/playsound/correct1.wav'),
+    (error, sound) => {
+      if (error) {
+        console.log(error);
+      }
+      sound1.play();
+    },
+  );
 };
-const playSound_lose = () => {
-  const sound = new Sound(audioList[1].url, (error, sound) => {
-    if (error) {
-      console.log(error);
-      return;
-    }
-    sound.play(() => {
-      sound.release();
-    });
-  });
+
+export const playSound_incorrect = () => {
+  const sound1 = new Sound(
+    require('../../assets/playsound/incorrect1.wav'),
+    (error, sound) => {
+      if (error) {
+        console.log(error);
+      }
+      sound1.play();
+    },
+  );
+};
+
+export const playSound_feedback = () => {
+  const sound1 = new Sound(
+    require('../../assets/playsound/feedback.wav'),
+    (error, sound) => {
+      if (error) {
+        console.log(error);
+      }
+      sound1.play();
+    },
+  );
+};
+
+export const playSound_congratulation = () => {
+  const sound1 = new Sound(
+    require('../../assets/playsound/congratulation.wav'),
+    (error, sound) => {
+      if (error) {
+        console.log(error);
+      }
+      sound1.play();
+    },
+  );
 };

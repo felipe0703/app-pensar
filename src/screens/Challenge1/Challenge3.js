@@ -12,6 +12,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {challengeText_3, textFeedback_3} from './challengeText';
 import Modal from '../../components/Modal';
 import globalStyles from '../../styles/global';
+import {playSound_feedback} from '../../assets/playsound/playsound';
 
 export default function Challenge3({nextText}) {
   const [showModal, setShowModal] = useState(false);
@@ -38,6 +39,7 @@ export default function Challenge3({nextText}) {
   };
 
   const showFeedback = () => {
+    playSound_feedback();
     setShowModal(true);
     setShowNext(false);
   };

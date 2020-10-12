@@ -9,6 +9,7 @@ import {challege2Text_11} from './challenge2text';
 export default function Challenge2_slice11({nextText, navigation}) {
   const [value, setValue] = useState('');
   const [showBtnNext, setShowBtnNext] = useState(true);
+  const [error, setError] = useState(false)
   const {challenge, setChallenge} = useContext(ChallengeContext);
 
   useEffect(() => {
@@ -35,8 +36,13 @@ export default function Challenge2_slice11({nextText, navigation}) {
   };
 
   const goNextText = () => {
-    setChallenge({...challenge, conclusion: value});
-    nextText();
+    if(value){
+      setError(false)
+      setChallenge({...challenge, conclusion: value});
+      nextText();
+    }else{
+      setError(true)
+    }
   };
 
   return (
@@ -49,7 +55,7 @@ export default function Challenge2_slice11({nextText, navigation}) {
           editable
           onChangeText={(text) => setValue(text)}
           value={value}
-          style={styles.input}
+          style={error ? styles.inputError: styles.input}
         />
       </View>
       <View style={globalStyles.viewBtns}>
@@ -77,4 +83,12 @@ const styles = StyleSheet.create({
     marginTop: 30,
     width: 300,
   },
+  inputError: {
+    backgroundColor: '#fff',
+    borderColor: '#ff4b4b',
+    borderWidth: 2,
+    marginTop: 30,
+    width: 300,
+  },
+
 });

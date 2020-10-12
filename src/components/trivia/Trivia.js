@@ -2,9 +2,14 @@ import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {random} from 'lodash';
 import {questions} from './Questions';
 import Modal from '../Modal';
 import globalStyles from '../../styles/global';
+import {
+  playSound_correct,
+  playSound_incorrect,
+} from '../../assets/playsound/playsound';
 
 export default function Trivia({navigation, route}) {
   const {challenge} = route.params;
@@ -16,16 +21,15 @@ export default function Trivia({navigation, route}) {
   const [countCorrect, setCountCorrect] = useState(0);
   const numbersOfQuestions = questions.length;
 
-  // console.log(idQuestion);
   useEffect(() => {
-    const random = () => {
-      // const numberQuestion = Math.floor(Math.random() * numbersOfQuestions);
-      // const numberQuestion = 0;
-      // setIdQuestion(idQuestion + 1);
-    };
+    const id = random(numbersOfQuestions - 1);
+    setIdQuestion(id);
+    setQuestion(questions[idQuestion]);
+  }, []);
+
+  useEffect(() => {
     if (idQuestion < numbersOfQuestions) {
       setQuestion(questions[idQuestion]);
-      // random();
     } else {
       setIdQuestion(0);
     }
@@ -33,10 +37,12 @@ export default function Trivia({navigation, route}) {
 
   const resp = (resp) => {
     if (resp === question.response) {
+      playSound_correct();
       setFeedbackTitle('Bien hecho 🎊🎉🎉');
       setCorrect(true);
       setCountCorrect(countCorrect + 1);
     } else {
+      playSound_incorrect();
       setFeedbackTitle('Inténtalo de nuevo 👎😢');
       setCorrect(false);
     }
@@ -79,7 +85,10 @@ export default function Trivia({navigation, route}) {
           />
         </View>
       </View>
-      <Modal isVisible={showModal} setIsVisible={setShowModal}>
+      <Modal
+        isVisible={showModal}
+        setIsVisible={setShowModal}
+        backPrees={false}>
         <View style={correct ? globalStyles.correct : globalStyles.incorrect}>
           <Text style={styles.textTitleFeedback}>{feedbackTitle}</Text>
           <Text style={styles.textFeedback}>{question.feedback}</Text>
@@ -114,7 +123,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#78c800',
     paddingVertical: 10,
   },
-
   btnFalse: {
     borderRadius: 10,
     backgroundColor: '#ff4b4b',
