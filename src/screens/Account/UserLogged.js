@@ -1,11 +1,17 @@
-import React, {useRef, useState, useEffect} from 'react';
+import React, {useRef, useState, useEffect, useContext} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import {Button} from 'react-native-elements';
 import Toast from 'react-native-easy-toast';
+import {firebaseApp} from '../../utils/firebase';
 import * as firebase from 'firebase';
+
 import Loading from '../../components/Loading';
 import UserInfo from '../../components/Account/InfoUser';
 import AccountOptions from '../../components/Account/AccountOptions';
+import {UserContext} from '../../contexts/UserContext';
+
+firebase.firestore().settings({experimentalForceLongPolling: true});
+const db = firebase.firestore(firebaseApp);
 
 export default function UserLogged() {
   const [userInfo, setUserInfo] = useState(null);
@@ -13,6 +19,7 @@ export default function UserLogged() {
   const [loadingText, setLoadingText] = useState('');
   const [reloadUserInfo, setReloadUserInfo] = useState(false);
   const toastRef = useRef();
+  const {dataUser} = useContext(UserContext);
 
   useEffect(() => {
     (async () => {
@@ -21,6 +28,29 @@ export default function UserLogged() {
     })();
     setReloadUserInfo(false);
   }, [reloadUserInfo]);
+
+  const signOutSession = () => {
+    // const payload = {
+    //   idUser: dataUser.idUser,
+    //   nameUser: dataUser.nameUser,
+    //   email: dataUser.email,
+    //   challenge: '',
+    //   time: Date.now(),
+    //   context: 'Cerro sesión',
+    //   action: 'logout',
+    // };
+
+    // db.collection('logs')
+    //   .add(payload)
+    //   .then(() => {
+    //     console.log('data subida');
+    //     firebase.auth().signOut();
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+    firebase.auth().signOut();
+  };
 
   return (
     <View style={styles.viewUserInfo}>
@@ -35,7 +65,7 @@ export default function UserLogged() {
         title="Cerrar sesión"
         buttonStyle={styles.btnCloseSession}
         titleStyle={styles.btnCloseSessionText}
-        onPress={() => firebase.auth().signOut()}
+        onPress={signOutSession}
       />
       <Toast ref={toastRef} position="center" opacity={0.9} />
       <Loading text={loadingText} isVisible={loading} />

@@ -1,13 +1,15 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Input, Button} from 'react-native-elements';
 import * as firebase from 'firebase';
+import {UserContext} from '../../contexts/UserContext';
 
 export default function ChangeDisplayNameForm(props) {
   const {displayName, setShowModal, toastRef, setReloadUserInfo} = props;
   const [newDisplayName, setNewDisplayName] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const {dataUser, setDataUser} = useContext(UserContext);
 
   const onSubmit = () => {
     setError(null);
@@ -27,6 +29,7 @@ export default function ChangeDisplayNameForm(props) {
           setIsLoading(false);
           setShowModal(false);
           setReloadUserInfo(true);
+          setDataUser({...dataUser, nameUser: newDisplayName});
           console.log('ok');
         })
         .catch(() => {

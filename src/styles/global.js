@@ -55,6 +55,12 @@ const globalStyles = StyleSheet.create({
     backgroundColor: '#78c800',
     alignItems: 'center',
   },
+  icon: {
+    height: 40,
+    width: 40,
+    resizeMode: 'contain',
+    marginRight: 10,
+  },
   incorrect: {
     backgroundColor: '#ff4b4b',
     alignItems: 'center',
@@ -86,7 +92,10 @@ const globalStyles = StyleSheet.create({
     marginBottom: 10,
   },
   touchable: {
-    marginVertical: 6,
+    // marginVertical: 6,
+    marginVertical: 3,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   viewBody: {
     flex: 1,

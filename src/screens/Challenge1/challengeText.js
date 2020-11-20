@@ -17,7 +17,7 @@ export const textFeedback_3 = `¡Bien hecho!🎉🎉🎊
 
 Pensar críticamente comienza reflexionando sobre tus propias ideas. 👏👏👏`;
 
-export const challengeText_5 = `1.	Selección de información
+export const challengeText_5 = `Selección de información
 
 Esta etapa es fundamental. El Pensamiento Crítico se basa en ella. A continuación, te daremos algunos ejemplos para que ejercites esta primera fase.`;
 
@@ -67,9 +67,8 @@ export const challengeText_9 = `Bien hecho, ¡[]!
 
 Has ejercitado tu capacidad de seleccionar información, reconociendo y analizando el contenido, y los medios de difusión de información falsa o sesgada.|Vamos paso a paso. Un segundo paso del pensamiento crítico es la elaboración de un punto de vista, lo que se denomina ‘elaboración de tesis’ cuando se desarrolla académicamente. Vamos a ver.`;
 
-export const challengeText_10_1 = `2.  Elaboración de tesis`;
-export const challengeText_10_2 = `
-Frente al siguiente planteamiento, ¿cuál sería tu posición o punto de vista?
+export const challengeText_10_1 = `Elaboración de tesis`;
+export const challengeText_10_2 = `Frente al siguiente planteamiento, ¿cuál sería tu posición o punto de vista?
 
 Selecciona de las siguientes opciones:
 
@@ -86,7 +85,7 @@ Sin embargo, no basta con tener una postura sobre algo. El pensamiento crítico 
 
 ¿Qué argumentos usarías para apoyar tu idea?`;
 
-export const challengeText_12_1 = `3.  Desarrollo de argumentos`;
+export const challengeText_12_1 = `Desarrollo de argumentos`;
 export const challengeText_12_2 = `Selecciona alguno o varios de los siguientes argumentos que apoyan tu punto de vista`;
 
 export const challengeText_12_3 = {
@@ -115,7 +114,7 @@ export const challengeText_13 = `¡Excelente!👏👏
 
 Esto es importante, ya que de esta forma puedes ampliar tu perspectiva de razonamiento.`;
 
-export const challengeText_14_1 = `4. Desarrollo de contraargumentos`;
+export const challengeText_14_1 = `Desarrollo de contraargumentos`;
 export const challengeText_14_2 = `Selecciona de los siguientes ejemplos. `;
 
 export const challengeText_15_1 = `Bien hecho👏👏
@@ -124,7 +123,7 @@ Estos son los argumentos y contrargumentos que has considerado para apoyar tu pu
 
 export const textFeedback_15 = `Recuerda que fundamentar tus opiniones basándose en evidencia, así como comparar distintos puntos de vista y evaluar críticamente las diversas alternativas de solución a un problema son pasos importantes para el desarrollo del pensamiento crítico.`;
 
-export const challengeText_16_1 = `5. Conclusión`;
+export const challengeText_16_1 = `Conclusión`;
 export const challengeText_16_2 = `Ya has llegado casi al final de la 1a etapa. 
 
 Selecciona de las siguientes alternativas la que sintetiza de mejor forma tu postura:`;
@@ -135,6 +134,6 @@ export const challengeText_16_4 = `Considerando los argumentos elaborados, así 
 
 export const challengeText_17 = `Resumen final`;
 
-export const challengeText_18_1 = `6. Reconocimiento de sesgos cognitivos y heurísticas`;
+export const challengeText_18_1 = `Reconocimiento de sesgos cognitivos y heurísticas`;
 export const challengeText_18_2 = `Antes de continuar el viaje, te encuentras con una zona de trivia que hay que resolver. 
 Debes tener tres respuestas correctas para continuar.`;

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -11,6 +11,13 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {usePages} from '../../hooks/usePages';
 import Modal from '../../components/Modal';
 import globalStyles from '../../styles/global';
+import {firebaseApp} from '../../utils/firebase';
+import firebase from 'firebase';
+import 'firebase/storage';
+import {UserContext} from '../../contexts/UserContext';
+
+firebase.firestore().settings({experimentalForceLongPolling: true});
+const db = firebase.firestore(firebaseApp);
 
 export default function Challenge1Text({
   text,
@@ -24,8 +31,38 @@ export default function Challenge1Text({
 }) {
   const {state: page, nextText, backText} = usePages();
   const [showModal, setShowModal] = useState(false);
+  const [logs, setLogs] = useState([]);
+  const [idLog, setIdLog] = useState('');
 
   const setTextLearnMore = () => {
+    db.collection('new_logs')
+      .where('idUser', '==', firebaseApp.auth().currentUser.uid)
+      .get()
+      .then((response) => {
+        const data = response.docs.map((doc) => {
+          return {
+            id: doc.id,
+            data: doc.data().challenge,
+          };
+        });
+        setLogs(data[0].data);
+        setIdLog(data[0].id);
+      });
+
+    const payload = {
+      challenge: [
+        ...logs,
+        {
+          name: 'introducción',
+          state: 'Iniciado',
+          stage: '',
+          time: Date.now(),
+          context: '¿Quieres saber más?',
+          action: 'Si',
+        },
+      ],
+    };
+    db.collection('new_logs').doc(idLog).update(payload);
     setShowModal(true);
   };
   return (

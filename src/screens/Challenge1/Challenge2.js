@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
   View,
@@ -9,6 +9,12 @@ import {
 } from 'react-native';
 import {Button, Image} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {firebaseApp} from '../../utils/firebase';
+import firebase from 'firebase';
+import 'firebase/storage';
+
+import AsyncStorage from '@react-native-community/async-storage';
+
 import {
   challengeText_2,
   challengeText_2_1,
@@ -20,23 +26,112 @@ import {
 import Modal from '../../components/Modal';
 import globalStyles from '../../styles/global';
 
+firebase.firestore().settings({experimentalForceLongPolling: true});
+const db = firebase.firestore(firebaseApp);
+
 export default function Challenge2({nextText}) {
   const [showModal, setShowModal] = useState(false);
   const [textFeedback, setTextFeedback] = useState('');
   const [thinker, setThinker] = useState(1);
+  const [logs, setLogs] = useState([]);
+  const [idLog, setIdLog] = useState('');
+
+  useEffect(() => {
+    db.collection('new_logs')
+      .where('idUser', '==', firebaseApp.auth().currentUser.uid)
+      .get()
+      .then((response) => {
+        const data = response.docs.map((doc) => {
+          return {
+            id: doc.id,
+            data: doc.data().challenge,
+          };
+        });
+        setLogs(data[0].data);
+        setIdLog(data[0].id);
+      });
+  }, []);
+
+  useEffect(() => {
+    storeData('@page_challenge_1', '2');
+  }, []);
+
+  const storeData = async (key, value) => {
+    try {
+      await AsyncStorage.setItem(key, value);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const showInfo = (option) => {
     if (option === 1) {
       setTextFeedback(textFeedback_2_1);
+      const payload = {
+        challenge: [
+          ...logs,
+          {
+            name: 'desafío 1',
+            state: 'Iniciado',
+            stage: '',
+            time: Date.now(),
+            context: 'Martin Luther King Jr.',
+            action: 'Ver pensador',
+          },
+        ],
+      };
+      db.collection('new_logs').doc(idLog).update(payload);
       setThinker(1);
     } else if (option === 2) {
       setTextFeedback(textFeedback_2_2);
+      const payload = {
+        challenge: [
+          ...logs,
+          {
+            name: 'desafío 1',
+            state: 'Iniciado',
+            stage: '',
+            time: Date.now(),
+            context: 'Simone de Beauvoir',
+            action: 'Ver pensador',
+          },
+        ],
+      };
+      db.collection('new_logs').doc(idLog).update(payload);
       setThinker(2);
     } else if (option === 3) {
       setTextFeedback(textFeedback_2_3);
+      const payload = {
+        challenge: [
+          ...logs,
+          {
+            name: 'desafío 1',
+            state: 'Iniciado',
+            stage: '',
+            time: Date.now(),
+            context: 'Elena Caffarena',
+            action: 'Ver pensador',
+          },
+        ],
+      };
+      db.collection('new_logs').doc(idLog).update(payload);
       setThinker(3);
     } else {
       setTextFeedback(textFeedback_2_4);
+      const payload = {
+        challenge: [
+          ...logs,
+          {
+            name: 'desafío 1',
+            state: 'Iniciado',
+            stage: '',
+            time: Date.now(),
+            context: 'Camilo Henríquez',
+            action: 'Ver pensador',
+          },
+        ],
+      };
+      db.collection('new_logs').doc(idLog).update(payload);
       setThinker(4);
     }
     setShowModal(true);
@@ -113,28 +208,28 @@ export default function Challenge2({nextText}) {
           <View style={globalStyles.modalFeedback}>
             {thinker === 1 ? (
               <Image
-                style={[styles.img]}
+                style={styles.img}
                 source={require('../../assets/img/pensadores/martin-luther-king-jr.jpg')}
                 PlaceholderContent={<ActivityIndicator />}
                 containerStyle={styles.containerImg}
               />
             ) : thinker === 2 ? (
               <Image
-                style={[styles.img]}
+                style={styles.img}
                 source={require('../../assets/img/pensadores/Simone-de-Beauvoir.jpg')}
                 PlaceholderContent={<ActivityIndicator />}
                 containerStyle={styles.containerImg}
               />
             ) : thinker === 3 ? (
               <Image
-                style={[styles.img]}
+                style={styles.img}
                 source={require('../../assets/img/pensadores/elena-caffarena.jpg')}
                 PlaceholderContent={<ActivityIndicator />}
                 containerStyle={styles.containerImg}
               />
             ) : (
               <Image
-                style={[styles.img]}
+                style={styles.img}
                 source={require('../../assets/img/pensadores/camilo-henriquez.jpg')}
                 PlaceholderContent={<ActivityIndicator />}
                 containerStyle={styles.containerImg}

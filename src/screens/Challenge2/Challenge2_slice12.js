@@ -2,11 +2,18 @@ import React, {useState, useEffect, useContext} from 'react';
 import {StyleSheet, Text, View, TextInput, Keyboard} from 'react-native';
 import {Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import AsyncStorage from '@react-native-community/async-storage';
 import globalStyles from '../../styles/global';
 import {challege2Text_12, textFeedback_12} from './challenge2text';
 import Modal from '../../components/Modal';
-import {ChallengeContext} from '../../navigations/ChallengeContext';
+import {ChallengeContext} from '../../contexts/ChallengeContext';
 import {playSound_feedback} from '../../assets/playsound/playsound';
+import {firebaseApp} from '../../utils/firebase';
+import firebase from 'firebase';
+import 'firebase/storage';
+
+firebase.firestore().settings({experimentalForceLongPolling: true});
+const db = firebase.firestore(firebaseApp);
 
 export default function Challenge2_slice12({nextText, navigation}) {
   const [value, setValue] = useState('');
@@ -14,10 +21,41 @@ export default function Challenge2_slice12({nextText, navigation}) {
   const [showBtnNext, setShowBtnNext] = useState(true);
   const [error, setError] = useState(false);
   const {challenge, setChallenge} = useContext(ChallengeContext);
+  const [logs, setLogs] = useState([]);
+  const [idLog, setIdLog] = useState('');
+
+  useEffect(() => {
+    db.collection('new_logs')
+      .where('idUser', '==', firebaseApp.auth().currentUser.uid)
+      .get()
+      .then((response) => {
+        const data = response.docs.map((doc) => {
+          return {
+            id: doc.id,
+            data: doc.data().challenge,
+          };
+        });
+        setLogs(data[0].data);
+        setIdLog(data[0].id);
+      });
+  }, []);
 
   useEffect(() => {
     navigation.setParams({name: 'Sesgo', progress: 1});
   }, []);
+
+  useEffect(() => {
+    storeData('@page_challenge_2', '12');
+    getData();
+  }, []);
+
+  const storeData = async (key, value) => {
+    try {
+      await AsyncStorage.setItem(key, value);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   useEffect(() => {
     setTimeout(() => {
@@ -25,6 +63,17 @@ export default function Challenge2_slice12({nextText, navigation}) {
       setShowModal(true);
     }, 3000);
   }, []);
+
+  const getData = async () => {
+    try {
+      const value1 = await AsyncStorage.getItem('@challenge_2_slice12_sesgo');
+      if (value1 !== null) {
+        setValue(JSON.parse(value1));
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   useEffect(() => {
     Keyboard.addListener('keyboardDidShow', _keyboardDidShow);
@@ -49,6 +98,22 @@ export default function Challenge2_slice12({nextText, navigation}) {
     if (value) {
       setError(false);
       setChallenge({...challenge, slant: value});
+      storeData('@challenge_2_slice12_sesgo', JSON.stringify(value));
+
+      const payload = {
+        challenge: [
+          ...logs,
+          {
+            name: 'desafío 2',
+            state: 'Iniciado',
+            stage: 'Sesgo',
+            time: Date.now(),
+            context: 'Sesgo',
+            action: value,
+          },
+        ],
+      };
+      db.collection('new_logs').doc(idLog).update(payload);
       nextText();
     } else {
       setError(true);

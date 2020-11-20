@@ -1,14 +1,27 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {StyleSheet, Text, View, ScrollView} from 'react-native';
 import {Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import AsyncStorage from '@react-native-community/async-storage';
 import {challege2Text_9} from './challenge2text';
 import globalStyles from '../../styles/global';
-import {ChallengeContext} from '../../navigations/ChallengeContext';
+import {ChallengeContext} from '../../contexts/ChallengeContext';
 
 export default function Challenge2_slice9({nextText}) {
   const {challenge} = useContext(ChallengeContext);
   const {argument, counterargument} = challenge;
+
+  useEffect(() => {
+    storeData('@page_challenge_2', '9');
+  }, []);
+
+  const storeData = async (key, value) => {
+    try {
+      await AsyncStorage.setItem(key, value);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <View style={globalStyles.viewBody}>
@@ -38,12 +51,15 @@ export default function Challenge2_slice9({nextText}) {
           </View>
         </View>
       </ScrollView>
-      <View style={globalStyles.viewBtns}>
+      <View style={styles.viewBtns}>
+        <View style={{marginTop: 5}}>
+          <Icon name="arrow-down" size={15} color="#fff" icon />
+        </View>
         <Button
           onPress={nextText}
           title="Listo"
           buttonStyle={globalStyles.btn}
-          containerStyle={globalStyles.btnContainer}
+          containerStyle={styles.btnContainer}
           titleStyle={globalStyles.btnText}
           icon={<Icon name="arrow-right" size={15} color="#196674" icon />}
           iconRight
@@ -58,6 +74,12 @@ const styles = StyleSheet.create({
     color: '#3c3c3c',
     marginBottom: 10,
     textAlign: 'justify',
+  },
+  btnContainer: {
+    width: 150,
+    marginBottom: 25,
+    marginTop: 10,
+    marginHorizontal: 10,
   },
   textModal: {
     marginBottom: 10,
@@ -76,5 +98,9 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     borderRadius: 10,
     padding: 15,
+  },
+  viewBtns: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

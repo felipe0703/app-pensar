@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import {Button, Card} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import AsyncStorage from '@react-native-community/async-storage';
 import Modal from '../../components/Modal';
 import {
   challengeText_8,
@@ -15,10 +16,47 @@ import {
   playSound_incorrect,
 } from '../../assets/playsound/playsound';
 
+import {firebaseApp} from '../../utils/firebase';
+import firebase from 'firebase';
+import 'firebase/storage';
+
+firebase.firestore().settings({experimentalForceLongPolling: true});
+const db = firebase.firestore(firebaseApp);
+
 export default function Challenge8({nextText}) {
   const [showModal, setShowModal] = useState(false);
   const [showNext, setShowNext] = useState(false);
   const [response, setResponse] = useState(false);
+  const [logs, setLogs] = useState([]);
+  const [idLog, setIdLog] = useState('');
+
+  useEffect(() => {
+    db.collection('new_logs')
+      .where('idUser', '==', firebaseApp.auth().currentUser.uid)
+      .get()
+      .then((response) => {
+        const data = response.docs.map((doc) => {
+          return {
+            id: doc.id,
+            data: doc.data().challenge,
+          };
+        });
+        setLogs(data[0].data);
+        setIdLog(data[0].id);
+      });
+  }, []);
+
+  useEffect(() => {
+    storeData('@page_challenge_1', '8');
+  }, []);
+
+  const storeData = async (key, value) => {
+    try {
+      await AsyncStorage.setItem(key, value);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const resp = (response) => {
     setShowModal(true);
@@ -29,6 +67,21 @@ export default function Challenge8({nextText}) {
     }
     setResponse(response);
     setShowNext(true);
+
+    const payload = {
+      challenge: [
+        ...logs,
+        {
+          name: 'desafío 1',
+          state: 'Iniciado',
+          stage: 'Selección',
+          time: Date.now(),
+          context: '¿Cómo evaluarías esta información? imagen 3',
+          action: response,
+        },
+      ],
+    };
+    db.collection('new_logs').doc(idLog).update(payload);
   };
   return (
     <View style={globalStyles.viewBody}>

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -9,6 +9,12 @@ import {
 import Loading from '../../components/Loading';
 import {validateEmail} from '../../utils/validations';
 import {firebaseApp} from '../../utils/firebase';
+import firebase from 'firebase';
+import 'firebase/storage';
+import {UserContext} from '../../contexts/UserContext';
+
+firebase.firestore().settings({experimentalForceLongPolling: true});
+const db = firebase.firestore(firebaseApp);
 
 export default function RegisterForm(props) {
   const {toastRef} = props;
@@ -16,6 +22,7 @@ export default function RegisterForm(props) {
   const [formData, setFormData] = useState(defaultValue());
   const [formError, setFormError] = useState({});
   const [loading, setLoading] = useState(false);
+  const {dataUser, setDataUser} = useContext(UserContext);
 
   const register = () => {
     let errors = {};
@@ -37,12 +44,49 @@ export default function RegisterForm(props) {
       toastRef.current.show('La contraseña debe tener al menos 6 caracteres');
     } else {
       setLoading(true);
+      setDataUser({});
+      // crea el usuario y logea
       firebaseApp
         .auth()
         .createUserWithEmailAndPassword(formData.email, formData.password)
         .then((response) => {
           setLoading(false);
-          console.log(response);
+          const payload = {
+            idUser: response.user.uid,
+            consent: false,
+          };
+          db.collection('users')
+            .add(payload)
+            .then(() => {
+              console.log('usuario registrado');
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+
+          const payload2 = {
+            idUser: response.user.uid,
+            nameUser: response.user.displayName,
+            challenge: [
+              {
+                name: '',
+                state: '',
+                stage: '',
+                time: Date.now(),
+                context: 'Registro de usuario',
+                action: 'registro',
+              },
+            ],
+          };
+
+          db.collection('new_logs')
+            .add(payload2)
+            .then(() => {
+              console.log('data subida');
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         })
         .catch(() => {
           setFormError({
@@ -53,6 +97,17 @@ export default function RegisterForm(props) {
           setLoading(false);
           toastRef.current.show('Error en el registro');
         });
+      // .then(() => {
+      //   // const payload_old = {
+      //   //   idUser: dataUser.idUser,
+      //   //   nameUser: dataUser.nameUser,
+      //   //   email: formData.email,
+      //   //   challenge: '',
+      //   //   time: Date.now(),
+      //   //   context: 'Registro de usuario',
+      //   //   action: 'registro',
+      //   // };
+      // })
     }
 
     setFormError(errors);

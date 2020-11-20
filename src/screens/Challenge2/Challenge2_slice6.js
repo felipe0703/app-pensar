@@ -2,15 +2,65 @@ import React, {useState, useEffect, useContext} from 'react';
 import {StyleSheet, Text, View, TextInput, Keyboard} from 'react-native';
 import {Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {ChallengeContext} from '../../navigations/ChallengeContext';
+import AsyncStorage from '@react-native-community/async-storage';
+import {ChallengeContext} from '../../contexts/ChallengeContext';
 import globalStyles from '../../styles/global';
-import {challege2Text_6} from './challenge2text';
+import {challege2Text_6, challege2Text_6_1} from './challenge2text';
+import {firebaseApp} from '../../utils/firebase';
+import firebase from 'firebase';
+import 'firebase/storage';
+
+firebase.firestore().settings({experimentalForceLongPolling: true});
+const db = firebase.firestore(firebaseApp);
 
 export default function Challenge2_slice6({nextText, navigation}) {
   const [value, setValue] = useState('');
   const [showBtnNext, setShowBtnNext] = useState(true);
   const {challenge, setChallenge} = useContext(ChallengeContext);
-  const [error, setError] = useState(false)
+  const [error, setError] = useState(false);
+  const [logs, setLogs] = useState([]);
+  const [idLog, setIdLog] = useState('');
+
+  useEffect(() => {
+    db.collection('new_logs')
+      .where('idUser', '==', firebaseApp.auth().currentUser.uid)
+      .get()
+      .then((response) => {
+        const data = response.docs.map((doc) => {
+          return {
+            id: doc.id,
+            data: doc.data().challenge,
+          };
+        });
+        setLogs(data[0].data);
+        setIdLog(data[0].id);
+      });
+  }, []);
+
+  useEffect(() => {
+    storeData('@page_challenge_2', '6');
+    getData();
+  }, []);
+
+  const storeData = async (key, value) => {
+    try {
+      await AsyncStorage.setItem(key, value);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const getData = async () => {
+    try {
+      const value1 = await AsyncStorage.getItem('@challenge_2_slice6_tesis');
+
+      if (value1 !== null) {
+        setValue(JSON.parse(value1));
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   useEffect(() => {
     navigation.setParams({name: 'Tesis', progress: 0.42});
@@ -36,27 +86,42 @@ export default function Challenge2_slice6({nextText, navigation}) {
   };
 
   const goNextText = () => {
-    if(value){
-      setError(false)
+    if (value) {
+      setError(false);
       setChallenge({...challenge, thesis: value});
+      storeData('@challenge_2_slice6_tesis', JSON.stringify(value));
+      const payload = {
+        challenge: [
+          ...logs,
+          {
+            name: 'desafío 2',
+            state: 'Iniciado',
+            stage: 'Tesis',
+            time: Date.now(),
+            context: 'Tesis',
+            action: value,
+          },
+        ],
+      };
+      db.collection('new_logs').doc(idLog).update(payload);
       nextText();
-    }else{
-      setError(true)
+    } else {
+      setError(true);
     }
   };
-  console.log(value);
 
   return (
     <View style={globalStyles.viewBody}>
       <View style={globalStyles.viewContent}>
         <Text style={globalStyles.content}>{challege2Text_6}</Text>
+        <Text style={globalStyles.content2}>{challege2Text_6_1}</Text>
         <TextInput
           multiline
           numberOfLines={4}
           editable
           onChangeText={(val) => setValue(val)}
           value={value}
-          style={error ?styles.inputError: styles.input}
+          style={error ? styles.inputError : styles.input}
         />
       </View>
       <View style={globalStyles.viewBtns}>

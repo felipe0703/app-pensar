@@ -1,10 +1,22 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {View, Text} from 'react-native';
 import {Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import AsyncStorage from '@react-native-community/async-storage';
 import globalStyles from '../../styles/global';
 
 export default function Challenge4({nextText}) {
+  useEffect(() => {
+    storeData('@page_challenge_1', '4');
+  }, []);
+
+  const storeData = async (key, value) => {
+    try {
+      await AsyncStorage.setItem(key, value);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <View style={globalStyles.viewBody}>
       <View style={globalStyles.viewContent}>

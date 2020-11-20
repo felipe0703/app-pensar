@@ -2,10 +2,18 @@ import React, {useContext, useEffect, useState} from 'react';
 import {StyleSheet, Text, View, TextInput, ScrollView} from 'react-native';
 import {Button, ListItem} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import AsyncStorage from '@react-native-community/async-storage';
 import {challege2Text_8} from './challenge2text';
 import Modal from '../../components/Modal';
 import globalStyles from '../../styles/global';
-import {ChallengeContext} from '../../navigations/ChallengeContext';
+import {ChallengeContext} from '../../contexts/ChallengeContext';
+
+import {firebaseApp} from '../../utils/firebase';
+import firebase from 'firebase';
+import 'firebase/storage';
+
+firebase.firestore().settings({experimentalForceLongPolling: true});
+const db = firebase.firestore(firebaseApp);
 
 export default function Challenge2_slice8({nextText, navigation}) {
   const [value, setValue] = useState('');
@@ -14,24 +22,80 @@ export default function Challenge2_slice8({nextText, navigation}) {
   const [countArgument, setCountArgument] = useState(0);
   const [argument, setArgument] = useState([]);
   const [indexEditRemove, setIndexEditRemove] = useState(0);
-  const [indexEdit, setIndexEdit] = useState(0)
-  const [idArgument, setIdArgument] = useState(0)
-  const [error, setError] = useState(false)
+  const [indexEdit, setIndexEdit] = useState(0);
+  const [idArgument, setIdArgument] = useState(0);
+  const [error, setError] = useState(false);
   const {challenge, setChallenge} = useContext(ChallengeContext);
+  const [logs, setLogs] = useState([]);
+  const [idLog, setIdLog] = useState('');
+
+  useEffect(() => {
+    db.collection('new_logs')
+      .where('idUser', '==', firebaseApp.auth().currentUser.uid)
+      .get()
+      .then((response) => {
+        const data = response.docs.map((doc) => {
+          return {
+            id: doc.id,
+            data: doc.data().challenge,
+          };
+        });
+        setLogs(data[0].data);
+        setIdLog(data[0].id);
+      });
+  }, []);
 
   useEffect(() => {
     navigation.setParams({name: 'Contraargumentos', progress: 0.7});
   }, []);
 
+  useEffect(() => {
+    storeData('@page_challenge_2', '8');
+    getData();
+  }, []);
+
+  const storeData = async (key, value) => {
+    try {
+      await AsyncStorage.setItem(key, value);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const getData = async () => {
+    try {
+      const value1 = await AsyncStorage.getItem('@challenge_2_slice8_data');
+
+      if (value1 !== null) {
+        const data = JSON.parse(value1);
+        console.log(data);
+        setArgument(data[0]);
+        setCountArgument(data[2]);
+        if (data[0].length === 0) {
+          setIdArgument(0);
+        } else {
+          setIdArgument(data[1]);
+        }
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    const data = [argument, idArgument, countArgument];
+    storeData('@challenge_2_slice8_data', JSON.stringify(data));
+  }, [argument, idArgument, countArgument]);
+
   const addArgument = () => {
-    if(value){
-      setError(false)
-      setArgument([...argument, {argument: value, id:idArgument}]);
-      setIdArgument(idArgument+1)
+    if (value) {
+      setError(false);
+      setArgument([...argument, {argument: value, id: idArgument}]);
+      setIdArgument(idArgument + 1);
       setCountArgument(countArgument + 1);
       setShowModal(false);
-    }else{
-      setError(true)
+    } else {
+      setError(true);
     }
   };
 
@@ -43,32 +107,50 @@ export default function Challenge2_slice8({nextText, navigation}) {
 
   const showEditArgument = (text, index) => {
     setIndexEditRemove(argument[index].id);
-    setIndexEdit(index)
+    setIndexEdit(index);
     setValue(text);
     setShowModal(true);
     setBtnAdd(false);
   };
 
   const editArgument = () => {
-    if(value){
-      setError(false)
+    if (value) {
+      setError(false);
       const temp = [...argument];
-      const temp2 = temp.splice(indexEdit, 1, {argument: value, id:indexEditRemove});
+      const temp2 = temp.splice(indexEdit, 1, {
+        argument: value,
+        id: indexEditRemove,
+      });
       setArgument(temp);
       setShowModal(false);
-    }else{
-      setError(true)
+    } else {
+      setError(true);
     }
   };
 
   const removeArgument = () => {
-    const data = argument.filter( arg => indexEditRemove !== arg.id)
+    const data = argument.filter((arg) => indexEditRemove !== arg.id);
     setArgument(data);
     setCountArgument(countArgument - 1);
-    setShowModal(false)
+    setShowModal(false);
   };
   const goNextText = () => {
     setChallenge({...challenge, counterargument: argument});
+
+    const payload = {
+      challenge: [
+        ...logs,
+        {
+          name: 'desafío 2',
+          state: 'Iniciado',
+          stage: 'Contra-argumentos',
+          time: Date.now(),
+          context: 'Contra-argumentos',
+          action: argument,
+        },
+      ],
+    };
+    db.collection('new_logs').doc(idLog).update(payload);
     nextText();
   };
   return (
@@ -127,7 +209,7 @@ export default function Challenge2_slice8({nextText, navigation}) {
             editable
             onChangeText={(text) => setValue(text)}
             value={value}
-            style={error? styles.inputError: styles.input}
+            style={error ? styles.inputError : styles.input}
           />
           <View style={styles.viewBtn}>
             {btnAdd ? (

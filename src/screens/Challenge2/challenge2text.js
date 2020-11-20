@@ -26,7 +26,7 @@ export const challege2Text_3 = `¿Estás listo para continuar?
 
 ¡Vamos!💪😁`;
 
-export const challege2Text_4 = `En esta etapa eres el agente de tu propio pensamiento, por lo que podrás elaborar tu propio pensamiento crítico
+export const challege2Text_4 = `En esta etapa eres el agente de tu propio pensamiento. El propósito de esta etapa es que puedas practicar el pensamiento crítico de manera más autónoma desarrollando tu propia tesis, argumentos, selección de información y conclusión.
 
 ¿Con cuál pregunta quieres empezar para elaborar la tesis?`;
 
@@ -45,13 +45,15 @@ export const challege2Text_5_1 = `Busca en Google evidencia y datos que apoyen t
 
 export const challege2Text_6 = `En el siguiente recuadro plantea tu tesis:`;
 
+export const challege2Text_6_1 = `Considerando la pregunta escogida para elaborar la tesis y la información seleccionada de la web, elabora tu tesis`;
+
 export const challege2Text_7 = `¡Muy bien!🎉🎉
 
 Ahora puedes continuar con la formulación de tu tesis.
 
-¿Qué argumentos apoyan tu tesis?`;
+Apoyándote en la información encontrada, ¿Qué argumentos incluiría para apoyar tu tesis?`;
 
-export const challege2Text_8 = `¿Qué contra-argumentos utilizarías?`;
+export const challege2Text_8 = `Apoyándote en la información encontrada, ¿Qué contra-argumentos incluiría?`;
 
 export const challege2Text_9 = `Bien hecho👏👏
 
@@ -69,7 +71,7 @@ export const challege2Text_12 = `¡Estás cerca de ver tu resultado final!
 
 export const textFeedback_12 = `Te puedes guiar por las siguientes preguntas:
 
-¿Qué limites podría tener tu propia argumentación?
+¿Qué límites podría tener tu propia argumentación?
 
 ¿Puedes identificar el contexto en que surgen tus propios pensamientos?
  

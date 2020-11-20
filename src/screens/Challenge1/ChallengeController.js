@@ -33,7 +33,7 @@ export default function ControllerChallenge({navigation}) {
 
   return (
     <View style={styles.viewBody}>
-      {slice === 0 && <Challenge1 nextText={nextText} />}
+      {slice === 0 && <Challenge1 nextText={nextText} setSlice={setSlice} />}
       {slice === 1 && <Challenge2 nextText={nextText} />}
       {slice === 2 && <Challenge3 nextText={nextText} />}
       {slice === 3 && <Challenge4 nextText={nextText} />}

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {
   StyleSheet,
   View,
@@ -8,11 +8,20 @@ import {
 } from 'react-native';
 import {validateEmail} from '../../utils/validations';
 import {firebaseApp} from '../../utils/firebase';
+import firebase from 'firebase';
+import 'firebase/storage';
+import {UserContext} from '../../contexts/UserContext';
+
+firebase.firestore().settings({experimentalForceLongPolling: true});
+const db = firebase.firestore(firebaseApp);
 
 export default function LoginFrom(props) {
   const {changeForm} = props;
   const [formData, setFormData] = useState(defaultValue());
   const [formError, setFormError] = useState({});
+  const {dataUser, setDataUser} = useContext(UserContext);
+  const [logs, setLogs] = useState([]);
+  const [idLog, setIdLog] = useState('');
 
   const login = () => {
     let errors = {};
@@ -22,10 +31,39 @@ export default function LoginFrom(props) {
     } else if (!validateEmail(formData.email)) {
       errors.email = true;
     } else {
+      setDataUser({});
       firebaseApp
         .auth()
         .signInWithEmailAndPassword(formData.email, formData.password)
-        .then(() => {})
+        .then(() => {
+          // db.collection('new_logs')
+          //   .where('idUser', '==', firebaseApp.auth().currentUser.uid)
+          //   .get()
+          //   .then((response) => {
+          //     const data = response.docs.map((doc) => {
+          //       return {
+          //         id: doc.id,
+          //         data: doc.data().challenge,
+          //       };
+          //     });
+          //     setLogs(data[0].data);
+          //     setIdLog(data[0].id);
+          //   });
+          // const payload = {
+          //   challenge: [
+          //     ...logs,
+          //     {
+          //       name: '',
+          //       estado: '',
+          //       etapa: '',
+          //       time: Date.now(),
+          //       context: 'Login del usuario',
+          //       action: 'login',
+          //     },
+          //   ],
+          // };
+          // db.collection('new_logs').doc(idLog).update(payload);
+        })
         .catch(() => {
           setFormError({
             email: true,

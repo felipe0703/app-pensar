@@ -1,9 +1,8 @@
 import React from 'react';
-import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
+import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Icon} from 'react-native-elements';
 
-import ChallengesStack from './ChallengesStack';
 import HomeStack from './HomeStack';
 import AccountStack from './AccountStack';
 
@@ -23,34 +22,36 @@ const MyTheme = {
 
 export default function Navigation() {
   return (
-    <NavigationContainer theme={MyTheme}>
-      <Tab.Navigator
-        initialRouteName="home"
-        tabBarOptions={{
-          showLabel: false,
-          inactiveTintColor: '#777',
-          activeTintColor: '#196674',
-          activeBackgroundColor: '#C2DDC7',
-          inactiveBackgroundColor: '#C2DDC7',
-          // borderTopWidth: 0,
-        }}
-        screenOptions={({route}) => ({
-          tabBarIcon: ({focused}) => screenOptions(route, focused),
-        })}>
-        <Tab.Screen
-          name="home"
-          component={HomeStack}
-          options={{
-            title: 'Inicio',
+    <>
+      <NavigationContainer theme={MyTheme}>
+        <Tab.Navigator
+          initialRouteName="home"
+          tabBarOptions={{
+            showLabel: false,
+            inactiveTintColor: '#777',
+            activeTintColor: '#196674',
+            activeBackgroundColor: '#C2DDC7',
+            inactiveBackgroundColor: '#C2DDC7',
+            // borderTopWidth: 0,
           }}
-        />
-        <Tab.Screen
-          name="account"
-          component={AccountStack}
-          options={{title: 'Cuenta'}}
-        />
-      </Tab.Navigator>
-    </NavigationContainer>
+          screenOptions={({route}) => ({
+            tabBarIcon: ({focused}) => screenOptions(route, focused),
+          })}>
+          <Tab.Screen
+            name="home"
+            component={HomeStack}
+            options={{
+              title: 'Inicio',
+            }}
+          />
+          <Tab.Screen
+            name="account"
+            component={AccountStack}
+            options={{title: 'Cuenta'}}
+          />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </>
   );
 }
 

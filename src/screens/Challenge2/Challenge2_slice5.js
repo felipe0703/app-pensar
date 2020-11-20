@@ -1,11 +1,19 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {View, Text, StyleSheet, TextInput, ScrollView} from 'react-native';
 import {Button, ListItem} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import AsyncStorage from '@react-native-community/async-storage';
 import {challege2Text_5, challege2Text_5_1} from './challenge2text';
 import globalStyles from '../../styles/global';
 import Modal from '../../components/Modal';
-import {ChallengeContext} from '../../navigations/ChallengeContext';
+import {ChallengeContext} from '../../contexts/ChallengeContext';
+
+import {firebaseApp} from '../../utils/firebase';
+import firebase from 'firebase';
+import 'firebase/storage';
+
+firebase.firestore().settings({experimentalForceLongPolling: true});
+const db = firebase.firestore(firebaseApp);
 
 export default function Challenge2_slice5({nextText}) {
   const [showModal, setShowModal] = useState(false);
@@ -14,24 +22,78 @@ export default function Challenge2_slice5({nextText}) {
   const [btnAdd, setBtnAdd] = useState(false);
   const [urls, setUrls] = useState([]);
   const [indexEditRemove, setIndexEditRemove] = useState(0);
-  const [indexEdit, setIndexEdit] = useState(0)
-  const [idURl, setIdURl] = useState(0)
-  const [error, setError] = useState(false)
+  const [indexEdit, setIndexEdit] = useState(0);
+  const [idURl, setIdURl] = useState(0);
+  const [error, setError] = useState(false);
   const {challenge, setChallenge} = useContext(ChallengeContext);
+  const [logs, setLogs] = useState([]);
+  const [idLog, setIdLog] = useState('');
 
-  
+  useEffect(() => {
+    db.collection('new_logs')
+      .where('idUser', '==', firebaseApp.auth().currentUser.uid)
+      .get()
+      .then((response) => {
+        const data = response.docs.map((doc) => {
+          return {
+            id: doc.id,
+            data: doc.data().challenge,
+          };
+        });
+        setLogs(data[0].data);
+        setIdLog(data[0].id);
+      });
+  }, []);
 
-  const addURL = () => {
-    if(value){
-      setUrls([...urls, {url: value, id:idURl}]);
-      setShowModal(false);
-      setCountURL(countURL + 1);
-      setIdURl(idURl+1)
-      setError(false)
-    }else{
-      setError(true)
+  useEffect(() => {
+    storeData('@page_challenge_2', '5');
+    getData();
+  }, []);
+
+  const storeData = async (key, value) => {
+    try {
+      await AsyncStorage.setItem(key, value);
+    } catch (err) {
+      console.log(err);
     }
   };
+
+  const getData = async () => {
+    try {
+      const value1 = await AsyncStorage.getItem('@challenge_2_slice5_data');
+
+      if (value1 !== null) {
+        const data = JSON.parse(value1);
+        // console.log(data);
+        setUrls(data[0]);
+        setCountURL(data[2]);
+        if (data[0].length === 0) {
+          setIdURl(0);
+        } else {
+          setIdURl(data[1]);
+        }
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const addURL = () => {
+    if (value) {
+      setUrls([...urls, {url: value, id: idURl}]);
+      setShowModal(false);
+      setCountURL(countURL + 1);
+      setIdURl(idURl + 1);
+      setError(false);
+    } else {
+      setError(true);
+    }
+  };
+
+  useEffect(() => {
+    const data = [urls, idURl, countURL];
+    storeData('@challenge_2_slice5_data', JSON.stringify(data));
+  }, [urls, idURl, countURL]);
 
   const showAddURL = () => {
     setValue('');
@@ -41,36 +103,53 @@ export default function Challenge2_slice5({nextText}) {
 
   const showEditURL = (text, index) => {
     setIndexEditRemove(urls[index].id);
-    setIndexEdit(index)
+    setIndexEdit(index);
     setValue(text);
     setShowModal(true);
     setBtnAdd(false);
   };
 
   const editURL = () => {
-    if(value){
-      setError(false)
+    if (value) {
+      setError(false);
       const temp = [...urls];
-      const temp2 = temp.splice(indexEdit, 1, {url: value, id:indexEditRemove});
+      const temp2 = temp.splice(indexEdit, 1, {
+        url: value,
+        id: indexEditRemove,
+      });
       setUrls(temp);
       setShowModal(false);
-    }else{
-      setError(true)
+    } else {
+      setError(true);
     }
   };
 
   const removeURL = () => {
-    const data = urls.filter( url => indexEditRemove !== url.id)
-    setUrls(data)
+    const data = urls.filter((url) => indexEditRemove !== url.id);
+    setUrls(data);
     setCountURL(countURL - 1);
-    setShowModal(false)
+    setShowModal(false);
   };
 
   const goNextText = () => {
     setChallenge({...challenge, selectionURL: urls});
+
+    const payload = {
+      challenge: [
+        ...logs,
+        {
+          name: 'desafío 2',
+          state: 'Iniciado',
+          stage: 'Selección',
+          time: Date.now(),
+          context: 'Selección',
+          action: urls,
+        },
+      ],
+    };
+    db.collection('new_logs').doc(idLog).update(payload);
     nextText();
   };
-
 
   return (
     <View style={globalStyles.viewBody}>
@@ -162,12 +241,11 @@ export default function Challenge2_slice5({nextText}) {
                   icon={<Icon name="trash" size={15} color="#fff" icon />}
                   iconRight
                 />
-                 </View>
+              </View>
             )}
           </View>
         </View>
       </Modal>
-      
     </View>
   );
 }

@@ -15,7 +15,7 @@ import Introduction_6 from '../screens/Intro/Introduction_6';
 import Introduction_7 from '../screens/Intro/Introduction_7';
 import Trivia from '../components/trivia/Trivia';
 import Congratulation from '../components/trivia/Congratulation';
-import {ChallengeContext} from './ChallengeContext';
+import {ChallengeContext} from '../contexts/ChallengeContext';
 import HeaderBar from '../components/HeaderBar';
 
 const Stack = createStackNavigator();
@@ -97,6 +97,18 @@ export default function HomeStack() {
           component={Introduction_7}
           options={{title: 'Introducción'}}
         />
+
+        <Stack.Screen
+          name="trivia"
+          component={Trivia}
+          options={{title: 'Trivia'}}
+        />
+        <Stack.Screen
+          name="congratulation"
+          component={Congratulation}
+          options={{title: 'Trivia'}}
+        />
+        {/* rutas sin usar */}
         <Stack.Screen
           name="thesis"
           component={Thesis}
@@ -111,16 +123,6 @@ export default function HomeStack() {
           name="against-arguments"
           component={AgainstArguments}
           options={{title: 'Contra Argumentos'}}
-        />
-        <Stack.Screen
-          name="trivia"
-          component={Trivia}
-          options={{title: 'Trivia'}}
-        />
-        <Stack.Screen
-          name="congratulation"
-          component={Congratulation}
-          options={{title: 'Trivia'}}
         />
       </Stack.Navigator>
     </ChallengeContext.Provider>

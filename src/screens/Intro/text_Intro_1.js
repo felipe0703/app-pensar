@@ -41,6 +41,8 @@ export const textFeedback_6_1 = `❌ El pensamiento crítico, contrario a lo que
 export const textFeedback_6_2 = `❌ El pensamiento crítico no busca determinar lo bueno y lo malo, sino ponderar el valor de proposiciones intelectuales a través del análisis de los argumentos en que se sostienen.`;
 export const textFeedback_6_3 = `❌ El pensamiento crítico debe estar conectado con fenómenos que ocurren en la realidad.`;
 
+export const textFeedback_6_4 = `✔ Muy bien, el pensamiento crítico contrario a lo que se asume coloquialmente, no es una crítica, es un pensamiento constructivo, no destructivo y en consecuencia busca proponer ideas a partir de la evidencia. El pensamiento crítico no busca determinar lo bueno y lo malo, sino ponderar el valor de proposiciones intelectuales a través del análisis de los argumentos que se sostienen. El pensamiento crítico debe estar conectado con fenómenos que ocurren en la realidad.`;
+
 export const textIntro_7_1 = `Estos son algunos pasos esenciales.`;
 
 export const textIntro_7_1_1 = `Pincha en cada uno de los pasos para saber más.`;
@@ -53,3 +55,7 @@ export const textFeedback_7_3 = `Desarrollo de argumentos: incluye fundamentar l
 export const textFeedback_7_4 = `Desarrollo de contraargumentos: implica incluir un argumento distinto al propuesto lo cual permite ampliar la mirada a la tesis propuesta y enriquecer el análisis propio.`;
 export const textFeedback_7_5 = `Conclusión: es la síntesis de las ideas planteadas. `;
 export const textFeedback_7_6 = `Reconocimiento de sesgos cognitivos y heurísticas: incluye reconocer supuesto que subyacen a los propios argumentos, límites a la propia argumentación y el contexto particular en el que surgen `;
+
+export const textFeedback_7_7 = `Antes de revisar cada uno de los pasos, recuerda que el pensamiento crítico se puede definir como un proceso que resulta en un juicio basado en criterios como la precisión, consistencia y pertinencia. Implica el análisis de problemas complejos y de preguntas que no tienen una respuesta definitiva. La respuesta tentativa a estas preguntas es nuestra tesis.
+
+Para que la tesis esté basada en pensamiento crítico (y no pensamiento a secas) debe tener validez. Si la tesis está fundada en argumentos fundados y válidos, podemos hablar de que se ha aplicado el pensamiento crítico y uso de evidencia apropiada para sacar conclusiones.`;

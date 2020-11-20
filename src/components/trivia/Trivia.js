@@ -10,6 +10,12 @@ import {
   playSound_correct,
   playSound_incorrect,
 } from '../../assets/playsound/playsound';
+import {firebaseApp} from '../../utils/firebase';
+import firebase from 'firebase';
+import 'firebase/storage';
+
+firebase.firestore().settings({experimentalForceLongPolling: true});
+const db = firebase.firestore(firebaseApp);
 
 export default function Trivia({navigation, route}) {
   const {challenge} = route.params;
@@ -20,6 +26,24 @@ export default function Trivia({navigation, route}) {
   const [question, setQuestion] = useState({});
   const [countCorrect, setCountCorrect] = useState(0);
   const numbersOfQuestions = questions.length;
+  const [logs, setLogs] = useState([]);
+  const [idLog, setIdLog] = useState('');
+
+  useEffect(() => {
+    db.collection('new_logs')
+      .where('idUser', '==', firebaseApp.auth().currentUser.uid)
+      .get()
+      .then((response) => {
+        const data = response.docs.map((doc) => {
+          return {
+            id: doc.id,
+            data: doc.data().challenge,
+          };
+        });
+        setLogs(data[0].data);
+        setIdLog(data[0].id);
+      });
+  }, []);
 
   useEffect(() => {
     const id = random(numbersOfQuestions - 1);
@@ -46,6 +70,22 @@ export default function Trivia({navigation, route}) {
       setFeedbackTitle('Inténtalo de nuevo 👎😢');
       setCorrect(false);
     }
+
+    const payload = {
+      challenge: [
+        ...logs,
+        {
+          name: 'trivia',
+          state: 'Iniciado',
+          stage: '',
+          time: Date.now(),
+          context: question.question,
+          action: resp,
+        },
+      ],
+    };
+    db.collection('new_logs').doc(idLog).update(payload);
+
     setShowModal(true);
   };
 

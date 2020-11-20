@@ -1,7 +1,6 @@
 import Sound from 'react-native-sound';
 
 export const playSound_correct = () => {
-  console.log('test');
   const sound1 = new Sound(
     require('../../assets/playsound/correct1.wav'),
     (error, sound) => {

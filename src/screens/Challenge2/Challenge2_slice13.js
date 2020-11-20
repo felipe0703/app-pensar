@@ -1,8 +1,9 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {StyleSheet, Text, View, ScrollView} from 'react-native';
 import {Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {ChallengeContext} from '../../navigations/ChallengeContext';
+import AsyncStorage from '@react-native-community/async-storage';
+import {ChallengeContext} from '../../contexts/ChallengeContext';
 import {challenge2Text_13} from './challenge2text';
 import globalStyles from '../../styles/global';
 
@@ -17,6 +18,18 @@ export default function Challenge2_slice13({nextText}) {
     conclusion,
     slant,
   } = challenge;
+
+  useEffect(() => {
+    storeData('@page_challenge_2', '13');
+  }, []);
+
+  const storeData = async (key, value) => {
+    try {
+      await AsyncStorage.setItem(key, value);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <View style={globalStyles.viewBody}>
@@ -78,12 +91,15 @@ export default function Challenge2_slice13({nextText}) {
           </View>
         </View>
       </ScrollView>
-      <View style={globalStyles.viewBtns}>
+      <View style={styles.viewBtns}>
+        <View style={{marginTop: 5}}>
+          <Icon name="arrow-down" size={15} color="#fff" icon />
+        </View>
         <Button
           onPress={nextText}
           title="Siguiente"
           buttonStyle={globalStyles.btn}
-          containerStyle={globalStyles.btnContainer}
+          containerStyle={styles.btnContainer}
           titleStyle={globalStyles.btnText}
           icon={<Icon name="arrow-right" size={15} color="#196674" icon />}
           iconRight
@@ -98,6 +114,12 @@ const styles = StyleSheet.create({
     color: '#3c3c3c',
     marginBottom: 10,
     textAlign: 'justify',
+  },
+  btnContainer: {
+    width: 150,
+    marginBottom: 25,
+    marginTop: 10,
+    marginHorizontal: 10,
   },
   textModal: {
     marginBottom: 10,
@@ -116,5 +138,9 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     borderRadius: 10,
     padding: 15,
+  },
+  viewBtns: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
