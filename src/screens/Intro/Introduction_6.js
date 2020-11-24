@@ -49,7 +49,6 @@ export default function Introduction_4({navigation}) {
     try {
       const value = await AsyncStorage.getItem('@intro_6_checkeds');
       const data = JSON.parse(value);
-      console.log(data);
       if (data !== null) {
         setChecked_1(data[0]);
         setChecked_2(data[1]);
@@ -141,15 +140,25 @@ export default function Introduction_4({navigation}) {
           />
         )}
         {ready && (
-          <Button
-            onPress={goNext}
-            title="Siguiente"
-            icon={<Icon name="arrow-right" size={15} color="#196674" />}
-            buttonStyle={globalStyles.btn}
-            containerStyle={globalStyles.btnContainer}
-            titleStyle={globalStyles.btnText}
-            iconRight
-          />
+          <>
+            <Button
+              onPress={() => navigation.goBack()}
+              title="Anterior"
+              buttonStyle={globalStyles.btn}
+              containerStyle={globalStyles.btnContainer}
+              titleStyle={globalStyles.btnText}
+              icon={<Icon name="arrow-left" size={15} color="#196674" icon />}
+            />
+            <Button
+              onPress={goNext}
+              title="Siguiente"
+              icon={<Icon name="arrow-right" size={15} color="#196674" />}
+              buttonStyle={globalStyles.btn}
+              containerStyle={globalStyles.btnContainer}
+              titleStyle={globalStyles.btnText}
+              iconRight
+            />
+          </>
         )}
       </View>
       <Modal isVisible={showModal} setIsVisible={setShowModal}>

@@ -40,7 +40,6 @@ export default function Home(props) {
             data: doc.data(),
           };
         });
-        console.log('gender', data[0].data.gender);
         if (data.length === 0) {
           createLogUser(); // creo el usuario si es que no existe
         } else if (!data[0].data.consent || data[0].data.career === undefined) {
@@ -76,7 +75,7 @@ export default function Home(props) {
       .catch((err) => {
         console.log(err);
       });
-  }, [valueName]);
+  }, [gender]);
 
   const createLogUser = () => {
     const payload = {
@@ -114,7 +113,7 @@ export default function Home(props) {
     db.collection('new_logs')
       .add(payload)
       .then(() => {
-        console.log('data subida');
+        console.log('createLog subida');
       })
       .catch((err) => {
         console.log(err);
@@ -215,7 +214,7 @@ export default function Home(props) {
         setIsVisible={setShowModal}
         backPrees={false}>
         <View style={globalStyles.modalFeedback}>
-          {showConsent ? (
+          {showConsent && idConsent !== '' && idLog !== '' ? (
             <View style={styles.viewConset}>
               <Text style={{marginVertical: 10, textAlign: 'justify'}}>
                 {home_consent}

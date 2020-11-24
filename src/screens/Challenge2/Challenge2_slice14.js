@@ -93,15 +93,17 @@ export default function Challenge2_slice14({navigation}) {
         <Text style={globalStyles.content}>{allText}</Text>
       </View>
       <View style={globalStyles.viewBtns}>
-        <Button
-          onPress={goTrivia}
-          title="Listo"
-          buttonStyle={globalStyles.btn}
-          containerStyle={globalStyles.btnContainer}
-          titleStyle={globalStyles.btnText}
-          icon={<Icon name="arrow-right" size={15} color="#196674" icon />}
-          iconRight
-        />
+        {idLog !== '' && (
+          <Button
+            onPress={goTrivia}
+            title="Listo"
+            buttonStyle={globalStyles.btn}
+            containerStyle={globalStyles.btnContainer}
+            titleStyle={globalStyles.btnText}
+            icon={<Icon name="arrow-right" size={15} color="#196674" icon />}
+            iconRight
+          />
+        )}
       </View>
     </View>
   );

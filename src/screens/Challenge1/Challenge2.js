@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {
   StyleSheet,
   View,
@@ -29,12 +29,20 @@ import globalStyles from '../../styles/global';
 firebase.firestore().settings({experimentalForceLongPolling: true});
 const db = firebase.firestore(firebaseApp);
 
-export default function Challenge2({nextText}) {
+export default function Challenge2({previousText, nextText}) {
   const [showModal, setShowModal] = useState(false);
   const [textFeedback, setTextFeedback] = useState('');
-  const [thinker, setThinker] = useState(1);
+  const [thinker, setThinker] = useState(0);
   const [logs, setLogs] = useState([]);
   const [idLog, setIdLog] = useState('');
+
+  const isMounted = useRef(true);
+
+  useEffect(() => {
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
 
   useEffect(() => {
     db.collection('new_logs')
@@ -47,8 +55,10 @@ export default function Challenge2({nextText}) {
             data: doc.data().challenge,
           };
         });
-        setLogs(data[0].data);
-        setIdLog(data[0].id);
+        if (isMounted.current) {
+          setLogs(data[0].data);
+          setIdLog(data[0].id);
+        }
       });
   }, []);
 
@@ -64,74 +74,86 @@ export default function Challenge2({nextText}) {
     }
   };
 
+  useEffect(() => {
+    if (isMounted.current) {
+      if (idLog !== '') {
+        if (thinker === 1) {
+          const payload = {
+            challenge: [
+              ...logs,
+              {
+                name: 'desafío 1',
+                state: 'Iniciado',
+                stage: '',
+                time: Date.now(),
+                context: 'Martin Luther King Jr.',
+                action: 'Ver pensador',
+              },
+            ],
+          };
+          db.collection('new_logs').doc(idLog).update(payload);
+        } else if (thinker === 2) {
+          const payload = {
+            challenge: [
+              ...logs,
+              {
+                name: 'desafío 1',
+                state: 'Iniciado',
+                stage: '',
+                time: Date.now(),
+                context: 'Simone de Beauvoir',
+                action: 'Ver pensador',
+              },
+            ],
+          };
+          db.collection('new_logs').doc(idLog).update(payload);
+        } else if (thinker === 3) {
+          const payload = {
+            challenge: [
+              ...logs,
+              {
+                name: 'desafío 1',
+                state: 'Iniciado',
+                stage: '',
+                time: Date.now(),
+                context: 'Elena Caffarena',
+                action: 'Ver pensador',
+              },
+            ],
+          };
+          db.collection('new_logs').doc(idLog).update(payload);
+        } else if (thinker === 4) {
+          const payload = {
+            challenge: [
+              ...logs,
+              {
+                name: 'desafío 1',
+                state: 'Iniciado',
+                stage: '',
+                time: Date.now(),
+                context: 'Camilo Henríquez',
+                action: 'Ver pensador',
+              },
+            ],
+          };
+          db.collection('new_logs').doc(idLog).update(payload);
+        }
+      }
+    }
+  }, [thinker, idLog]);
+
   const showInfo = (option) => {
     if (option === 1) {
       setTextFeedback(textFeedback_2_1);
-      const payload = {
-        challenge: [
-          ...logs,
-          {
-            name: 'desafío 1',
-            state: 'Iniciado',
-            stage: '',
-            time: Date.now(),
-            context: 'Martin Luther King Jr.',
-            action: 'Ver pensador',
-          },
-        ],
-      };
-      db.collection('new_logs').doc(idLog).update(payload);
       setThinker(1);
     } else if (option === 2) {
       setTextFeedback(textFeedback_2_2);
-      const payload = {
-        challenge: [
-          ...logs,
-          {
-            name: 'desafío 1',
-            state: 'Iniciado',
-            stage: '',
-            time: Date.now(),
-            context: 'Simone de Beauvoir',
-            action: 'Ver pensador',
-          },
-        ],
-      };
-      db.collection('new_logs').doc(idLog).update(payload);
       setThinker(2);
     } else if (option === 3) {
       setTextFeedback(textFeedback_2_3);
-      const payload = {
-        challenge: [
-          ...logs,
-          {
-            name: 'desafío 1',
-            state: 'Iniciado',
-            stage: '',
-            time: Date.now(),
-            context: 'Elena Caffarena',
-            action: 'Ver pensador',
-          },
-        ],
-      };
-      db.collection('new_logs').doc(idLog).update(payload);
       setThinker(3);
     } else {
       setTextFeedback(textFeedback_2_4);
-      const payload = {
-        challenge: [
-          ...logs,
-          {
-            name: 'desafío 1',
-            state: 'Iniciado',
-            stage: '',
-            time: Date.now(),
-            context: 'Camilo Henríquez',
-            action: 'Ver pensador',
-          },
-        ],
-      };
-      db.collection('new_logs').doc(idLog).update(payload);
       setThinker(4);
     }
     setShowModal(true);
@@ -187,6 +209,14 @@ export default function Challenge2({nextText}) {
         </View>
       </View>
       <View style={globalStyles.viewBtns}>
+        <Button
+          onPress={previousText}
+          title="Anterior"
+          buttonStyle={globalStyles.btn}
+          containerStyle={globalStyles.btnContainer}
+          titleStyle={globalStyles.btnText}
+          icon={<Icon name="arrow-left" size={15} color="#196674" icon />}
+        />
         <Button
           onPress={nextText}
           title="Siguiente"

@@ -29,11 +29,12 @@ import globalStyles from '../../styles/global';
 firebase.firestore().settings({experimentalForceLongPolling: true});
 const db = firebase.firestore(firebaseApp);
 
-export default function Challenge2_slice2({nextText}) {
+export default function Challenge2_slice2({previousText, nextText}) {
   const [showModal, setShowModal] = useState(false);
   const [textFeedback, setTextFeedback] = useState('');
   const [logs, setLogs] = useState([]);
   const [idLog, setIdLog] = useState('');
+  const [opt, setOpt] = useState(0);
 
   useEffect(() => {
     db.collection('new_logs')
@@ -52,6 +53,102 @@ export default function Challenge2_slice2({nextText}) {
   }, []);
 
   useEffect(() => {
+    if (idLog !== '' && showModal) {
+      if (opt === 1) {
+        const payload = {
+          challenge: [
+            ...logs,
+            {
+              name: 'Desafío 2',
+              state: 'Iniciado',
+              stage: '',
+              time: Date.now(),
+              context: 'Selección de información',
+              action: 'Ver Información',
+            },
+          ],
+        };
+        db.collection('new_logs').doc(idLog).update(payload);
+      } else if (opt === 2) {
+        const payload = {
+          challenge: [
+            ...logs,
+            {
+              name: 'Desafío 2',
+              state: 'Iniciado',
+              stage: '',
+              time: Date.now(),
+              context: 'Elaboración de tesis',
+              action: 'Ver Información',
+            },
+          ],
+        };
+        db.collection('new_logs').doc(idLog).update(payload);
+      } else if (opt === 3) {
+        const payload = {
+          challenge: [
+            ...logs,
+            {
+              name: 'Desafío 2',
+              state: 'Iniciado',
+              stage: '',
+              time: Date.now(),
+              context: 'Desarrollo de argumentos',
+              action: 'Ver Información',
+            },
+          ],
+        };
+        db.collection('new_logs').doc(idLog).update(payload);
+      } else if (opt === 4) {
+        const payload = {
+          challenge: [
+            ...logs,
+            {
+              name: 'Desafío 2',
+              state: 'Iniciado',
+              stage: '',
+              time: Date.now(),
+              context: 'Desarrollo de contraargumentos',
+              action: 'Ver Información',
+            },
+          ],
+        };
+        db.collection('new_logs').doc(idLog).update(payload);
+      } else if (opt === 5) {
+        const payload = {
+          challenge: [
+            ...logs,
+            {
+              name: 'Desafío 2',
+              state: 'Iniciado',
+              stage: '',
+              time: Date.now(),
+              context: 'Conclusión',
+              action: 'Ver Información',
+            },
+          ],
+        };
+        db.collection('new_logs').doc(idLog).update(payload);
+      } else if (opt === 6) {
+        const payload = {
+          challenge: [
+            ...logs,
+            {
+              name: 'Desafío 2',
+              state: 'Iniciado',
+              stage: '',
+              time: Date.now(),
+              context: 'Reconocimiento de sesgos cognitivos y heurísticas',
+              action: 'Ver Información',
+            },
+          ],
+        };
+        db.collection('new_logs').doc(idLog).update(payload);
+      }
+    }
+  }, [idLog, showModal]);
+
+  useEffect(() => {
     storeData('@page_challenge_2', '2');
   }, []);
 
@@ -66,100 +163,22 @@ export default function Challenge2_slice2({nextText}) {
   const showInfo = (option) => {
     if (option === 1) {
       setTextFeedback(textFeedback_7_1);
-      const payload = {
-        challenge: [
-          ...logs,
-          {
-            name: 'Desafío 2',
-            state: 'Iniciado',
-            stage: '',
-            time: Date.now(),
-            context: 'Selección de información',
-            action: 'Ver Información',
-          },
-        ],
-      };
-      db.collection('new_logs').doc(idLog).update(payload);
+      setOpt(1);
     } else if (option === 2) {
       setTextFeedback(textFeedback_7_2);
-      const payload = {
-        challenge: [
-          ...logs,
-          {
-            name: 'Desafío 2',
-            state: 'Iniciado',
-            stage: '',
-            time: Date.now(),
-            context: 'Elaboración de tesis',
-            action: 'Ver Información',
-          },
-        ],
-      };
-      db.collection('new_logs').doc(idLog).update(payload);
+      setOpt(2);
     } else if (option === 3) {
       setTextFeedback(textFeedback_7_3);
-      const payload = {
-        challenge: [
-          ...logs,
-          {
-            name: 'Desafío 2',
-            state: 'Iniciado',
-            stage: '',
-            time: Date.now(),
-            context: 'Desarrollo de argumentos',
-            action: 'Ver Información',
-          },
-        ],
-      };
-      db.collection('new_logs').doc(idLog).update(payload);
+      setOpt(3);
     } else if (option === 4) {
       setTextFeedback(textFeedback_7_4);
-      const payload = {
-        challenge: [
-          ...logs,
-          {
-            name: 'Desafío 2',
-            state: 'Iniciado',
-            stage: '',
-            time: Date.now(),
-            context: 'Desarrollo de contraargumentos',
-            action: 'Ver Información',
-          },
-        ],
-      };
-      db.collection('new_logs').doc(idLog).update(payload);
+      setOpt(4);
     } else if (option === 5) {
       setTextFeedback(textFeedback_7_5);
-      const payload = {
-        challenge: [
-          ...logs,
-          {
-            name: 'Desafío 2',
-            state: 'Iniciado',
-            stage: '',
-            time: Date.now(),
-            context: 'Conclusión',
-            action: 'Ver Información',
-          },
-        ],
-      };
-      db.collection('new_logs').doc(idLog).update(payload);
+      setOpt(5);
     } else {
       setTextFeedback(textFeedback_7_6);
-      const payload = {
-        challenge: [
-          ...logs,
-          {
-            name: 'Desafío 2',
-            state: 'Iniciado',
-            stage: '',
-            time: Date.now(),
-            context: 'Reconocimiento de sesgos cognitivos y heurísticas',
-            action: 'Ver Información',
-          },
-        ],
-      };
-      db.collection('new_logs').doc(idLog).update(payload);
+      setOpt(6);
     }
     setShowModal(true);
   };
@@ -266,15 +285,27 @@ export default function Challenge2_slice2({nextText}) {
         </View>
       </View>
       <View style={globalStyles.viewBtns}>
-        <Button
-          onPress={nextText}
-          title="siguiente"
-          buttonStyle={globalStyles.btn}
-          containerStyle={globalStyles.btnContainer}
-          titleStyle={globalStyles.btnText}
-          icon={<Icon name="arrow-right" size={15} color="#196674" icon />}
-          iconRight
-        />
+        {idLog !== '' && (
+          <>
+            <Button
+              onPress={previousText}
+              title="Anterior"
+              buttonStyle={globalStyles.btn}
+              containerStyle={globalStyles.btnContainer}
+              titleStyle={globalStyles.btnText}
+              icon={<Icon name="arrow-left" size={15} color="#196674" icon />}
+            />
+            <Button
+              onPress={nextText}
+              title="siguiente"
+              buttonStyle={globalStyles.btn}
+              containerStyle={globalStyles.btnContainer}
+              titleStyle={globalStyles.btnText}
+              icon={<Icon name="arrow-right" size={15} color="#196674" icon />}
+              iconRight
+            />
+          </>
+        )}
       </View>
       <Modal isVisible={showModal} setIsVisible={setShowModal}>
         <Text style={styles.textFeedback}>{textFeedback}</Text>

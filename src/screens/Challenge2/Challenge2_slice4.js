@@ -18,7 +18,11 @@ import 'firebase/storage';
 firebase.firestore().settings({experimentalForceLongPolling: true});
 const db = firebase.firestore(firebaseApp);
 
-export default function Challenge2_slice4({nextText, navigation}) {
+export default function Challenge2_slice4({
+  previousText,
+  nextText,
+  navigation,
+}) {
   const [question1, setQuestion1] = useState(false);
   const [question2, setQuestion2] = useState(false);
   const [question3, setQuestion3] = useState(false);
@@ -45,7 +49,7 @@ export default function Challenge2_slice4({nextText, navigation}) {
   }, []);
 
   useEffect(() => {
-    storeData('@page_challenge_2', '3');
+    storeData('@page_challenge_2', '4');
     getData();
   }, []);
 
@@ -150,16 +154,26 @@ export default function Challenge2_slice4({nextText, navigation}) {
         </View>
       </ScrollView>
       <View style={globalStyles.viewBtns}>
-        {showNext && (
-          <Button
-            onPress={pushInfo}
-            title="siguiente"
-            buttonStyle={globalStyles.btn}
-            containerStyle={globalStyles.btnContainer}
-            titleStyle={globalStyles.btnText}
-            icon={<Icon name="arrow-right" size={15} color="#196674" icon />}
-            iconRight
-          />
+        {showNext && idLog !== '' && (
+          <>
+            <Button
+              onPress={previousText}
+              title="Anterior"
+              buttonStyle={globalStyles.btn}
+              containerStyle={globalStyles.btnContainer}
+              titleStyle={globalStyles.btnText}
+              icon={<Icon name="arrow-left" size={15} color="#196674" icon />}
+            />
+            <Button
+              onPress={pushInfo}
+              title="siguiente"
+              buttonStyle={globalStyles.btn}
+              containerStyle={globalStyles.btnContainer}
+              titleStyle={globalStyles.btnText}
+              icon={<Icon name="arrow-right" size={15} color="#196674" icon />}
+              iconRight
+            />
+          </>
         )}
       </View>
     </View>

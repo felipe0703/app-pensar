@@ -37,6 +37,7 @@
 		1F5B053816F84B8BAB25882E /* DINRoundPro-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07E12E43FA4440DAAB652EA6 /* DINRoundPro-Light.ttf */; };
 		EB696AFB44D04DCC9ED610EA /* DINRoundPro-Medi.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6167BFD395974589A5EF1B7B /* DINRoundPro-Medi.ttf */; };
 		C38A798961E049F3A299DB9A /* DINRoundPro.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88146FE17F77440CAF9839CE /* DINRoundPro.ttf */; };
+		5C0835F2CFF9401C90C37ABB /* Quicksand-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 20B71C7C5701458EAD1B99B1 /* Quicksand-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +94,7 @@
 		07E12E43FA4440DAAB652EA6 /* DINRoundPro-Light.ttf */ = {isa = PBXFileReference; name = "DINRoundPro-Light.ttf"; path = "../assets/fonts/DINRoundPro-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		6167BFD395974589A5EF1B7B /* DINRoundPro-Medi.ttf */ = {isa = PBXFileReference; name = "DINRoundPro-Medi.ttf"; path = "../assets/fonts/DINRoundPro-Medi.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		88146FE17F77440CAF9839CE /* DINRoundPro.ttf */ = {isa = PBXFileReference; name = "DINRoundPro.ttf"; path = "../assets/fonts/DINRoundPro.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		20B71C7C5701458EAD1B99B1 /* Quicksand-Regular.ttf */ = {isa = PBXFileReference; name = "Quicksand-Regular.ttf"; path = "../assets/fonts/Quicksand-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,6 +226,7 @@
 				07E12E43FA4440DAAB652EA6 /* DINRoundPro-Light.ttf */,
 				6167BFD395974589A5EF1B7B /* DINRoundPro-Medi.ttf */,
 				88146FE17F77440CAF9839CE /* DINRoundPro.ttf */,
+				20B71C7C5701458EAD1B99B1 /* Quicksand-Regular.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -388,6 +391,7 @@
 				1F5B053816F84B8BAB25882E /* DINRoundPro-Light.ttf in Resources */,
 				EB696AFB44D04DCC9ED610EA /* DINRoundPro-Medi.ttf in Resources */,
 				C38A798961E049F3A299DB9A /* DINRoundPro.ttf in Resources */,
+				5C0835F2CFF9401C90C37ABB /* Quicksand-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

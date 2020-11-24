@@ -50,7 +50,7 @@ export default function Challenge2_slice1({nextText, setSlice}) {
       const value = await AsyncStorage.getItem('@page_challenge_2');
 
       if (value !== null) {
-        if (value === '1') {
+        if (value === '1' || value === '2') {
           storeData('@page_challenge_2', '1');
           setShowModal(false);
         } else {
@@ -84,13 +84,14 @@ export default function Challenge2_slice1({nextText, setSlice}) {
     try {
       const value = await AsyncStorage.getItem('@page_challenge_2');
       setShowModal(false);
-      setSlice(JSON.parse(value));
+      const page = JSON.parse(value);
+      setSlice(page - 1);
     } catch (err) {
       console.log(err);
     }
   };
 
-  const continueChallenge = () => {
+  const resetChallenge = () => {
     setShowModal(false);
     removeData();
     storeData('@page_challenge_2', '1');
@@ -128,7 +129,7 @@ export default function Challenge2_slice1({nextText, setSlice}) {
           <Text>¿Qué quieres hacer?</Text>
           <View style={styles.viewBtns}>
             <Button
-              onPress={continueChallenge}
+              onPress={resetChallenge}
               title="Reiniciar"
               buttonStyle={globalStyles.btn}
               containerStyle={globalStyles.btnContainer}

@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   StyleSheet,
   View,
@@ -17,17 +17,15 @@ import {playSound_feedback} from '../../assets/playsound/playsound';
 import {firebaseApp} from '../../utils/firebase';
 import firebase from 'firebase';
 import 'firebase/storage';
-import {UserContext} from '../../contexts/UserContext';
 
 firebase.firestore().settings({experimentalForceLongPolling: true});
 const db = firebase.firestore(firebaseApp);
 
-export default function Challenge3({nextText}) {
+export default function Challenge3({previousText, nextText}) {
   const [showModal, setShowModal] = useState(false);
-  const [showNext, setShowNext] = useState(true);
+  const [showNext, setShowNext] = useState(false);
   const [value, setValue] = useState('');
   const textIntro = challengeText_3.split('|');
-  const {dataUser} = useContext(UserContext);
   const [logs, setLogs] = useState([]);
   const [idLog, setIdLog] = useState('');
 
@@ -48,6 +46,12 @@ export default function Challenge3({nextText}) {
   }, []);
 
   useEffect(() => {
+    if (idLog === '') {
+      setShowNext(true);
+    }
+  }, [idLog]);
+
+  useEffect(() => {
     storeData('@page_challenge_1', '3');
     getData();
   }, []);
@@ -62,7 +66,6 @@ export default function Challenge3({nextText}) {
   const getData = async () => {
     try {
       const value1 = await AsyncStorage.getItem('@challenge_1_slice3_data');
-
       if (value1 !== null) {
         setValue(JSON.parse(value1));
       }
@@ -125,15 +128,25 @@ export default function Challenge3({nextText}) {
       </View>
       <View style={globalStyles.viewBtns}>
         {showNext && (
-          <Button
-            onPress={showFeedback}
-            title="siguiente"
-            buttonStyle={globalStyles.btn}
-            containerStyle={globalStyles.btnContainer}
-            titleStyle={globalStyles.btnText}
-            icon={<Icon name="arrow-right" size={15} color="#196674" icon />}
-            iconRight
-          />
+          <>
+            <Button
+              onPress={previousText}
+              title="Anterior"
+              buttonStyle={globalStyles.btn}
+              containerStyle={globalStyles.btnContainer}
+              titleStyle={globalStyles.btnText}
+              icon={<Icon name="arrow-left" size={15} color="#196674" icon />}
+            />
+            <Button
+              onPress={showFeedback}
+              title="siguiente"
+              buttonStyle={globalStyles.btn}
+              containerStyle={globalStyles.btnContainer}
+              titleStyle={globalStyles.btnText}
+              icon={<Icon name="arrow-right" size={15} color="#196674" icon />}
+              iconRight
+            />
+          </>
         )}
       </View>
       <Modal

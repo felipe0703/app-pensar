@@ -17,15 +17,20 @@ import 'firebase/storage';
 
 firebase.firestore().settings({experimentalForceLongPolling: true});
 const db = firebase.firestore(firebaseApp);
-export default function Challenge12({nextText, thesis, navigation}) {
+export default function Challenge12({
+  previousText,
+  nextText,
+  thesis,
+  navigation,
+}) {
   const [argument, setArgument] = useState([]);
   const {thesis1, thesis2} = challengeText_12_3;
   const {challenge, setChallenge} = useContext(ChallengeContext);
   const [logs, setLogs] = useState([]);
   const [idLog, setIdLog] = useState('');
   const [stateArgument, setStateArgument] = useState([]);
+  const [thesisAsync, setThesisAsync] = useState('');
 
-  console.log(argument);
   useEffect(() => {
     storeData('@page_challenge_1', '12');
     getData();
@@ -68,8 +73,22 @@ export default function Challenge12({nextText, thesis, navigation}) {
     try {
       const value = await AsyncStorage.getItem('@challenge_1_slice12_data');
       const data = JSON.parse(value);
-      setStateArgument(data[0]);
-      setArgument(data[1]);
+      if (data !== null) {
+        setStateArgument(data[0]);
+        setArgument(data[1]);
+      }
+
+      const value_thesis = await AsyncStorage.getItem(
+        '@challenge_1_slice10_thesis',
+      );
+
+      if (value_thesis !== null) {
+        if (value_thesis === '1') {
+          setThesisAsync('1');
+        } else if (value_thesis === '2') {
+          setThesisAsync('2');
+        }
+      }
     } catch (err) {
       console.log(err);
     }
@@ -108,7 +127,7 @@ export default function Challenge12({nextText, thesis, navigation}) {
         </Text>
         <Text style={globalStyles.content}>{challengeText_12_2}</Text>
         <ScrollView>
-          {thesis === 1 &&
+          {(thesis === 1 || thesisAsync === '1') &&
             thesis1.map((text, id) => (
               <Argument
                 key={id}
@@ -120,7 +139,7 @@ export default function Challenge12({nextText, thesis, navigation}) {
                 setStateArgument={setStateArgument}
               />
             ))}
-          {thesis === 2 &&
+          {(thesis === 2 || thesisAsync === '2') &&
             thesis2.map((text, id) => (
               <Argument
                 key={id}
@@ -135,16 +154,26 @@ export default function Challenge12({nextText, thesis, navigation}) {
         </ScrollView>
       </View>
       <View style={globalStyles.viewBtns}>
-        {argument.length > 0 && (
-          <Button
-            onPress={setContext}
-            title="Siguiente"
-            buttonStyle={globalStyles.btn}
-            containerStyle={globalStyles.btnContainer}
-            titleStyle={globalStyles.btnText}
-            icon={<Icon name="arrow-right" size={15} color="#196674" icon />}
-            iconRight
-          />
+        {argument.length > 0 && idLog !== '' && (
+          <>
+            <Button
+              onPress={previousText}
+              title="Anterior"
+              buttonStyle={globalStyles.btn}
+              containerStyle={globalStyles.btnContainer}
+              titleStyle={globalStyles.btnText}
+              icon={<Icon name="arrow-left" size={15} color="#196674" icon />}
+            />
+            <Button
+              onPress={setContext}
+              title="Siguiente"
+              buttonStyle={globalStyles.btn}
+              containerStyle={globalStyles.btnContainer}
+              titleStyle={globalStyles.btnText}
+              icon={<Icon name="arrow-right" size={15} color="#196674" icon />}
+              iconRight
+            />
+          </>
         )}
       </View>
     </View>

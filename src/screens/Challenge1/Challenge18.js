@@ -94,13 +94,15 @@ export default function Challenge18({navigation}) {
         <Text style={globalStyles.content}>{challengeText_18_2}</Text>
       </View>
       <View style={globalStyles.viewBtns}>
-        <Button
-          onPress={go}
-          title="Vamos"
-          buttonStyle={globalStyles.btn}
-          containerStyle={globalStyles.btnContainer}
-          titleStyle={globalStyles.btnText}
-        />
+        {idLog !== '' && (
+          <Button
+            onPress={go}
+            title="Vamos"
+            buttonStyle={globalStyles.btn}
+            containerStyle={globalStyles.btnContainer}
+            titleStyle={globalStyles.btnText}
+          />
+        )}
       </View>
     </View>
   );

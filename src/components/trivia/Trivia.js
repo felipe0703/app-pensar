@@ -106,23 +106,29 @@ export default function Trivia({navigation, route}) {
           <Text style={styles.content}>{question.question}</Text>
         </View>
         <View style={styles.viewBtns}>
-          <Button
-            onPress={() => resp(true)}
-            title="Verdadero"
-            icon={<Icon name="thumbs-up" size={15} color="#196674" />}
-            buttonStyle={globalStyles.btn}
-            containerStyle={globalStyles.btnContainer}
-            titleStyle={globalStyles.btnText}
-          />
-          <Button
-            onPress={() => resp(false)}
-            title="Falso"
-            buttonStyle={globalStyles.btn}
-            containerStyle={globalStyles.btnContainer}
-            titleStyle={globalStyles.btnText}
-            icon={<Icon name="thumbs-down" size={15} color="#196674" icon />}
-            iconRight
-          />
+          {idLog !== '' && (
+            <>
+              <Button
+                onPress={() => resp(true)}
+                title="Verdadero"
+                icon={<Icon name="thumbs-up" size={15} color="#196674" />}
+                buttonStyle={globalStyles.btn}
+                containerStyle={globalStyles.btnContainer}
+                titleStyle={globalStyles.btnText}
+              />
+              <Button
+                onPress={() => resp(false)}
+                title="Falso"
+                buttonStyle={globalStyles.btn}
+                containerStyle={globalStyles.btnContainer}
+                titleStyle={globalStyles.btnText}
+                icon={
+                  <Icon name="thumbs-down" size={15} color="#196674" icon />
+                }
+                iconRight
+              />
+            </>
+          )}
         </View>
       </View>
       <Modal

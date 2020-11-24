@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {StyleSheet, Text, View, ScrollView} from 'react-native';
 import {Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -7,17 +7,49 @@ import {challege2Text_9} from './challenge2text';
 import globalStyles from '../../styles/global';
 import {ChallengeContext} from '../../contexts/ChallengeContext';
 
-export default function Challenge2_slice9({nextText}) {
+export default function Challenge2_slice9({
+  previousText,
+  nextText,
+  navigation,
+}) {
   const {challenge} = useContext(ChallengeContext);
   const {argument, counterargument} = challenge;
+  const [argumentAsync, setArgumentAsync] = useState([]);
+  const [counterargumentAsync, setCounterargumentAsync] = useState([]);
 
   useEffect(() => {
     storeData('@page_challenge_2', '9');
+    getData();
+  }, []);
+
+  useEffect(() => {
+    navigation.setParams({name: 'Contraargumentos', progress: 0.7});
   }, []);
 
   const storeData = async (key, value) => {
     try {
       await AsyncStorage.setItem(key, value);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const getData = async () => {
+    try {
+      if (argument === undefined) {
+        const value1 = await AsyncStorage.getItem('@challenge_2_slice7_data');
+        const arg = JSON.parse(value1);
+        if (arg !== null) {
+          setArgumentAsync(arg[0]);
+        }
+      }
+      if (counterargument === undefined) {
+        const value2 = await AsyncStorage.getItem('@challenge_2_slice8_data');
+        const counter = JSON.parse(value2);
+        if (counter !== null) {
+          setCounterargumentAsync(counter[0]);
+        }
+      }
     } catch (err) {
       console.log(err);
     }
@@ -35,19 +67,31 @@ export default function Challenge2_slice9({nextText}) {
         <View style={globalStyles.viewOptions}>
           <View style={styles.viewArgument}>
             <Text style={styles.title}>Argumentos:</Text>
-            {argument.map((item, index) => (
-              <Text key={index} style={styles.tick}>
-                ✔ <Text style={styles.argument}>{item.argument}</Text>
-              </Text>
-            ))}
+            {argument !== undefined
+              ? argument.map((item, index) => (
+                  <Text key={index} style={styles.tick}>
+                    ✔ <Text style={styles.argument}>{item.argument}</Text>
+                  </Text>
+                ))
+              : argumentAsync.map((item, index) => (
+                  <Text key={index} style={styles.tick}>
+                    ✔ <Text style={styles.argument}>{item.argument}</Text>
+                  </Text>
+                ))}
           </View>
           <View style={styles.viewArgument}>
             <Text style={styles.title}>Contra-argumentos:</Text>
-            {counterargument.map((item, index) => (
-              <Text key={index} style={styles.tick}>
-                ✔ <Text style={styles.argument}>{item.argument}</Text>
-              </Text>
-            ))}
+            {counterargument !== undefined
+              ? counterargument.map((item, index) => (
+                  <Text key={index} style={styles.tick}>
+                    ✔ <Text style={styles.argument}>{item.argument}</Text>
+                  </Text>
+                ))
+              : counterargumentAsync.map((item, index) => (
+                  <Text key={index} style={styles.tick}>
+                    ✔ <Text style={styles.argument}>{item.argument}</Text>
+                  </Text>
+                ))}
           </View>
         </View>
       </ScrollView>
@@ -55,15 +99,25 @@ export default function Challenge2_slice9({nextText}) {
         <View style={{marginTop: 5}}>
           <Icon name="arrow-down" size={15} color="#fff" icon />
         </View>
-        <Button
-          onPress={nextText}
-          title="Listo"
-          buttonStyle={globalStyles.btn}
-          containerStyle={styles.btnContainer}
-          titleStyle={globalStyles.btnText}
-          icon={<Icon name="arrow-right" size={15} color="#196674" icon />}
-          iconRight
-        />
+        <View style={globalStyles.viewBtns}>
+          <Button
+            onPress={previousText}
+            title="Anterior"
+            buttonStyle={globalStyles.btn}
+            containerStyle={styles.btnContainer}
+            titleStyle={globalStyles.btnText}
+            icon={<Icon name="arrow-left" size={15} color="#196674" icon />}
+          />
+          <Button
+            onPress={nextText}
+            title="Siguiente"
+            buttonStyle={globalStyles.btn}
+            containerStyle={styles.btnContainer}
+            titleStyle={globalStyles.btnText}
+            icon={<Icon name="arrow-right" size={15} color="#196674" icon />}
+            iconRight
+          />
+        </View>
       </View>
     </View>
   );

@@ -36,6 +36,8 @@ export default function Introduction_3({navigation}) {
       go={goNext}
       isVisibleLearnMore={true}
       learnMore={textLearMore}
+      previousText={() => navigation.goBack()}
+      showPrevious={true}
     />
   );
 }

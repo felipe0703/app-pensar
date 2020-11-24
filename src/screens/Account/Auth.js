@@ -46,8 +46,9 @@ const styles = StyleSheet.create({
     marginTop: 30,
     color: 'white',
     fontSize: 24,
-    fontWeight: 'bold',
+    // fontWeight: 'bold',
     textAlign: 'center',
+    fontFamily: 'Quicksand-SemiBold',
   },
   viewBody: {
     flex: 1,

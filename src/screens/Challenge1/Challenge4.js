@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import AsyncStorage from '@react-native-community/async-storage';
 import globalStyles from '../../styles/global';
 
-export default function Challenge4({nextText}) {
+export default function Challenge4({previousText, nextText}) {
   useEffect(() => {
     storeData('@page_challenge_1', '4');
   }, []);
@@ -23,6 +23,14 @@ export default function Challenge4({nextText}) {
         <Text style={globalStyles.content}>Empecemos el Desafío 1</Text>
       </View>
       <View style={globalStyles.viewBtns}>
+        <Button
+          onPress={previousText}
+          title="Anterior"
+          buttonStyle={globalStyles.btn}
+          containerStyle={globalStyles.btnContainer}
+          titleStyle={globalStyles.btnText}
+          icon={<Icon name="arrow-left" size={15} color="#196674" icon />}
+        />
         <Button
           title="Vamos"
           type="solid"

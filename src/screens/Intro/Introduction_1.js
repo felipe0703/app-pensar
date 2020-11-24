@@ -45,11 +45,8 @@ export default function Introduction({navigation}) {
       if (value !== null) {
         if (value === '1') {
           storeData('1');
-          // setShowModal(false);
-          console.log('es uno', value);
         } else {
           setShowModal(true);
-          console.log('no es uno', value);
         }
       }
     } catch (err) {

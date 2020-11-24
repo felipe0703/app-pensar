@@ -22,5 +22,12 @@ export default function Introduction_3({navigation}) {
     navigation.navigate('introduction_6');
   };
 
-  return <ShowInfo text={allText} go={goNext} />;
+  return (
+    <ShowInfo
+      text={allText}
+      go={goNext}
+      previousText={() => navigation.goBack()}
+      showPrevious={true}
+    />
+  );
 }

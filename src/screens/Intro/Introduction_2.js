@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {Text, View, StyleSheet, ActivityIndicator} from 'react-native';
 import {Button, Image} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -29,6 +29,14 @@ export default function Introduction_2({navigation}) {
   const [logs, setLogs] = useState([]);
   const [idLog, setIdLog] = useState('');
 
+  const isMounted = useRef(true);
+
+  useEffect(() => {
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
+
   useEffect(() => {
     db.collection('new_logs')
       .where('idUser', '==', firebaseApp.auth().currentUser.uid)
@@ -40,8 +48,10 @@ export default function Introduction_2({navigation}) {
             data: doc.data().challenge,
           };
         });
-        setLogs(data[0].data);
-        setIdLog(data[0].id);
+        if (isMounted.current) {
+          setLogs(data[0].data);
+          setIdLog(data[0].id);
+        }
       });
   }, []);
 
@@ -72,11 +82,15 @@ export default function Introduction_2({navigation}) {
   const goChallenge = () => {
     navigation.navigate('introduction_3');
   };
+  const backChallenge = () => {
+    navigation.goBack();
+  };
 
   const resp = (resp) => {
     storeData('@intro_2', 'resp');
     setShowModal(true);
     setShowSiguiente(true);
+    setResponse(resp);
     if (resp) {
       playSound_correct();
 
@@ -114,7 +128,6 @@ export default function Introduction_2({navigation}) {
       };
       db.collection('new_logs').doc(idLog).update(payload);
     }
-    setResponse(resp);
   };
 
   return (
@@ -147,15 +160,29 @@ export default function Introduction_2({navigation}) {
             />
           </>
         ) : (
-          <Button
-            onPress={goChallenge}
-            title="Siguiente"
-            buttonStyle={globalStyles.btn}
-            containerStyle={globalStyles.btnContainer}
-            titleStyle={globalStyles.btnText}
-            icon={<Icon name="arrow-right" size={15} color="#196674" icon />}
-            iconRight
-          />
+          idLog !== '' && (
+            <>
+              <Button
+                onPress={backChallenge}
+                title="Anterior"
+                buttonStyle={globalStyles.btn}
+                containerStyle={globalStyles.btnContainer}
+                titleStyle={globalStyles.btnText}
+                icon={<Icon name="arrow-left" size={15} color="#196674" icon />}
+              />
+              <Button
+                onPress={goChallenge}
+                title="Siguiente"
+                buttonStyle={globalStyles.btn}
+                containerStyle={globalStyles.btnContainer}
+                titleStyle={globalStyles.btnText}
+                icon={
+                  <Icon name="arrow-right" size={15} color="#196674" icon />
+                }
+                iconRight
+              />
+            </>
+          )
         )}
       </View>
       <Modal isVisible={showModal} setIsVisible={setShowModal}>

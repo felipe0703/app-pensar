@@ -22,7 +22,12 @@ import 'firebase/storage';
 firebase.firestore().settings({experimentalForceLongPolling: true});
 const db = firebase.firestore(firebaseApp);
 
-export default function Challenge10({nextText, setThesis, navigation}) {
+export default function Challenge10({
+  previousText,
+  nextText,
+  setThesis,
+  navigation,
+}) {
   const [showModal, setShowModal] = useState(false);
   const [showNext, setShowNext] = useState(false);
   const [allowShowNext, setAllowShowNext] = useState(false);
@@ -158,15 +163,25 @@ export default function Challenge10({nextText, setThesis, navigation}) {
       </View>
       <View style={globalStyles.viewBtns}>
         {showNext && (
-          <Button
-            onPress={pushInfo}
-            title="Siguiente"
-            buttonStyle={globalStyles.btn}
-            containerStyle={globalStyles.btnContainer}
-            titleStyle={globalStyles.btnText}
-            icon={<Icon name="arrow-right" size={15} color="#196674" icon />}
-            iconRight
-          />
+          <>
+            <Button
+              onPress={previousText}
+              title="Anterior"
+              buttonStyle={globalStyles.btn}
+              containerStyle={globalStyles.btnContainer}
+              titleStyle={globalStyles.btnText}
+              icon={<Icon name="arrow-left" size={15} color="#196674" icon />}
+            />
+            <Button
+              onPress={pushInfo}
+              title="Siguiente"
+              buttonStyle={globalStyles.btn}
+              containerStyle={globalStyles.btnContainer}
+              titleStyle={globalStyles.btnText}
+              icon={<Icon name="arrow-right" size={15} color="#196674" icon />}
+              iconRight
+            />
+          </>
         )}
       </View>
 

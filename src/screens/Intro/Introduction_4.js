@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import {
   Text,
   View,
@@ -41,6 +41,14 @@ export default function Introduction_4({navigation}) {
 
   const allText = textIntro_4.split('|');
 
+  const isMounted = useRef(true);
+
+  useEffect(() => {
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
+
   useEffect(() => {
     db.collection('new_logs')
       .where('idUser', '==', firebaseApp.auth().currentUser.uid)
@@ -52,8 +60,10 @@ export default function Introduction_4({navigation}) {
             data: doc.data().challenge,
           };
         });
-        setLogs(data[0].data);
-        setIdLog(data[0].id);
+        if (isMounted.current) {
+          setLogs(data[0].data);
+          setIdLog(data[0].id);
+        }
       });
   }, []);
 
@@ -86,8 +96,6 @@ export default function Introduction_4({navigation}) {
     try {
       const value = await AsyncStorage.getItem('@intro_4_checkeds');
       const data = JSON.parse(value);
-      console.log(data);
-
       if (data !== null) {
         setChecked_1(data[0]);
         setChecked_2(data[1]);
@@ -150,9 +158,7 @@ export default function Introduction_4({navigation}) {
   // todo: MERJORAR
   const pushInfo = () => {
     if (checked_1) {
-      console.log('check1');
       setInfoPush('sgadas');
-      console.log(infoPush);
     }
     if (checked_2) {
       setInfoPush([...infoPush, 'Nuevas']);
@@ -244,15 +250,25 @@ export default function Introduction_4({navigation}) {
           />
         )}
         {ready && (
-          <Button
-            onPress={goNext}
-            title="Siguiente"
-            icon={<Icon name="arrow-right" size={15} color="#196674" />}
-            buttonStyle={globalStyles.btn}
-            containerStyle={globalStyles.btnContainer}
-            titleStyle={globalStyles.btnText}
-            iconRight
-          />
+          <>
+            <Button
+              onPress={() => navigation.goBack()}
+              title="Anterior"
+              buttonStyle={globalStyles.btn}
+              containerStyle={globalStyles.btnContainer}
+              titleStyle={globalStyles.btnText}
+              icon={<Icon name="arrow-left" size={15} color="#196674" icon />}
+            />
+            <Button
+              onPress={goNext}
+              title="Siguiente"
+              icon={<Icon name="arrow-right" size={15} color="#196674" />}
+              buttonStyle={globalStyles.btn}
+              containerStyle={globalStyles.btnContainer}
+              titleStyle={globalStyles.btnText}
+              iconRight
+            />
+          </>
         )}
       </View>
       <Modal isVisible={showModal} setIsVisible={setShowModal}>

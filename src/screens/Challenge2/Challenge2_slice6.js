@@ -13,7 +13,11 @@ import 'firebase/storage';
 firebase.firestore().settings({experimentalForceLongPolling: true});
 const db = firebase.firestore(firebaseApp);
 
-export default function Challenge2_slice6({nextText, navigation}) {
+export default function Challenge2_slice6({
+  previousText,
+  nextText,
+  navigation,
+}) {
   const [value, setValue] = useState('');
   const [showBtnNext, setShowBtnNext] = useState(true);
   const {challenge, setChallenge} = useContext(ChallengeContext);
@@ -125,16 +129,26 @@ export default function Challenge2_slice6({nextText, navigation}) {
         />
       </View>
       <View style={globalStyles.viewBtns}>
-        {showBtnNext && (
-          <Button
-            onPress={goNextText}
-            title="Listo"
-            buttonStyle={globalStyles.btn}
-            containerStyle={globalStyles.btnContainer}
-            titleStyle={globalStyles.btnText}
-            icon={<Icon name="arrow-right" size={15} color="#196674" icon />}
-            iconRight
-          />
+        {showBtnNext && idLog !== '' && (
+          <>
+            <Button
+              onPress={previousText}
+              title="Anterior"
+              buttonStyle={globalStyles.btn}
+              containerStyle={globalStyles.btnContainer}
+              titleStyle={globalStyles.btnText}
+              icon={<Icon name="arrow-left" size={15} color="#196674" icon />}
+            />
+            <Button
+              onPress={goNextText}
+              title="Siguiente"
+              buttonStyle={globalStyles.btn}
+              containerStyle={globalStyles.btnContainer}
+              titleStyle={globalStyles.btnText}
+              icon={<Icon name="arrow-right" size={15} color="#196674" icon />}
+              iconRight
+            />
+          </>
         )}
       </View>
     </View>

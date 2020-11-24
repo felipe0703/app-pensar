@@ -78,13 +78,15 @@ export default function Congratulation({navigation, route}) {
         <Text style={globalStyles.content3}>{text}</Text>
       </View>
       <View style={globalStyles.viewBtns}>
-        <Button
-          onPress={go}
-          title="Continuar"
-          buttonStyle={globalStyles.btn}
-          containerStyle={globalStyles.btnContainer}
-          titleStyle={globalStyles.btnText}
-        />
+        {idLog !== '' && (
+          <Button
+            onPress={go}
+            title="Continuar"
+            buttonStyle={globalStyles.btn}
+            containerStyle={globalStyles.btnContainer}
+            titleStyle={globalStyles.btnText}
+          />
+        )}
       </View>
     </View>
   );

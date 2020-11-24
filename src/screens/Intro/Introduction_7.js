@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
   StyleSheet,
   TouchableOpacity,
@@ -45,6 +45,14 @@ export default function Introduction_3({navigation}) {
   const text_1 = textIntro_7_1.split('|');
   const text_2 = textIntro_7_2.split('|');
 
+  const isMounted = useRef(true);
+
+  useEffect(() => {
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
+
   useEffect(() => {
     db.collection('new_logs')
       .where('idUser', '==', firebaseApp.auth().currentUser.uid)
@@ -56,8 +64,10 @@ export default function Introduction_3({navigation}) {
             data: doc.data().challenge,
           };
         });
-        setLogs(data[0].data);
-        setIdLog(data[0].id);
+        if (isMounted.current) {
+          setLogs(data[0].data);
+          setIdLog(data[0].id);
+        }
       });
   }, []);
 

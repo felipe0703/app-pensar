@@ -15,7 +15,11 @@ import 'firebase/storage';
 firebase.firestore().settings({experimentalForceLongPolling: true});
 const db = firebase.firestore(firebaseApp);
 
-export default function Challenge2_slice5({nextText}) {
+export default function Challenge2_slice5({
+  previousText,
+  nextText,
+  navigation,
+}) {
   const [showModal, setShowModal] = useState(false);
   const [countURL, setCountURL] = useState(0);
   const [value, setValue] = useState('');
@@ -43,6 +47,10 @@ export default function Challenge2_slice5({nextText}) {
         setLogs(data[0].data);
         setIdLog(data[0].id);
       });
+  }, []);
+
+  useEffect(() => {
+    navigation.setParams({name: 'Selección', progress: 0.28});
   }, []);
 
   useEffect(() => {
@@ -184,10 +192,17 @@ export default function Challenge2_slice5({nextText}) {
           />
         ))}
       </ScrollView>
-      {countURL > 0 && (
+      {countURL > 0 && idLog !== '' && (
         <>
-          {/* <Text style={globalStyles.content}>🎉 ¡Excelente trabajo! 🎉</Text> */}
           <View style={globalStyles.viewBtns}>
+            <Button
+              onPress={previousText}
+              title="Anterior"
+              buttonStyle={globalStyles.btn}
+              containerStyle={globalStyles.btnContainer}
+              titleStyle={globalStyles.btnText}
+              icon={<Icon name="arrow-left" size={15} color="#196674" icon />}
+            />
             <Button
               onPress={goNextText}
               title="siguiente"

@@ -31,30 +31,82 @@ export default function ChallengeController2({navigation}) {
       {slice === 0 && (
         <Challenge2_slice1 nextText={nextText} setSlice={setSlice} />
       )}
-      {slice === 1 && <Challenge2_slice2 nextText={nextText} />}
-      {slice === 2 && <Challenge2_slice3 nextText={nextText} />}
-      {slice === 3 && (
-        <Challenge2_slice4 nextText={nextText} navigation={navigation} />
+      {slice === 1 && (
+        <Challenge2_slice2 previousText={previousText} nextText={nextText} />
       )}
-      {slice === 4 && <Challenge2_slice5 nextText={nextText} />}
+      {slice === 2 && (
+        <Challenge2_slice3 previousText={previousText} nextText={nextText} />
+      )}
+      {slice === 3 && (
+        <Challenge2_slice4
+          previousText={previousText}
+          nextText={nextText}
+          navigation={navigation}
+        />
+      )}
+      {slice === 4 && (
+        <Challenge2_slice5
+          previousText={previousText}
+          nextText={nextText}
+          navigation={navigation}
+        />
+      )}
       {slice === 5 && (
-        <Challenge2_slice6 nextText={nextText} navigation={navigation} />
+        <Challenge2_slice6
+          previousText={previousText}
+          nextText={nextText}
+          navigation={navigation}
+        />
       )}
       {slice === 6 && (
-        <Challenge2_slice7 nextText={nextText} navigation={navigation} />
+        <Challenge2_slice7
+          previousText={previousText}
+          nextText={nextText}
+          navigation={navigation}
+        />
       )}
       {slice === 7 && (
-        <Challenge2_slice8 nextText={nextText} navigation={navigation} />
+        <Challenge2_slice8
+          previousText={previousText}
+          nextText={nextText}
+          navigation={navigation}
+        />
       )}
-      {slice === 8 && <Challenge2_slice9 nextText={nextText} />}
-      {slice === 9 && <Challenge2_slice10 nextText={nextText} />}
+      {slice === 8 && (
+        <Challenge2_slice9
+          previousText={previousText}
+          nextText={nextText}
+          navigation={navigation}
+        />
+      )}
+      {slice === 9 && (
+        <Challenge2_slice10
+          previousText={previousText}
+          nextText={nextText}
+          navigation={navigation}
+        />
+      )}
       {slice === 10 && (
-        <Challenge2_slice11 nextText={nextText} navigation={navigation} />
+        <Challenge2_slice11
+          previousText={previousText}
+          nextText={nextText}
+          navigation={navigation}
+        />
       )}
       {slice === 11 && (
-        <Challenge2_slice12 nextText={nextText} navigation={navigation} />
+        <Challenge2_slice12
+          previousText={previousText}
+          nextText={nextText}
+          navigation={navigation}
+        />
       )}
-      {slice === 12 && <Challenge2_slice13 nextText={nextText} />}
+      {slice === 12 && (
+        <Challenge2_slice13
+          previousText={previousText}
+          nextText={nextText}
+          navigation={navigation}
+        />
+      )}
       {slice === 13 && <Challenge2_slice14 navigation={navigation} />}
     </View>
   );

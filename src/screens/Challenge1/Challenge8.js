@@ -23,7 +23,7 @@ import 'firebase/storage';
 firebase.firestore().settings({experimentalForceLongPolling: true});
 const db = firebase.firestore(firebaseApp);
 
-export default function Challenge8({nextText}) {
+export default function Challenge8({previousText, nextText, navigation}) {
   const [showModal, setShowModal] = useState(false);
   const [showNext, setShowNext] = useState(false);
   const [response, setResponse] = useState(false);
@@ -47,8 +47,31 @@ export default function Challenge8({nextText}) {
   }, []);
 
   useEffect(() => {
+    navigation.setParams({name: 'Selección', progress: 0.28});
+  }, []);
+
+  useEffect(() => {
     storeData('@page_challenge_1', '8');
   }, []);
+
+  useEffect(() => {
+    if (idLog !== '' && showNext) {
+      const payload = {
+        challenge: [
+          ...logs,
+          {
+            name: 'desafío 1',
+            state: 'Iniciado',
+            stage: 'Selección',
+            time: Date.now(),
+            context: '¿Cómo evaluarías esta información? imagen 3',
+            action: response,
+          },
+        ],
+      };
+      db.collection('new_logs').doc(idLog).update(payload);
+    }
+  }, [idLog, showNext]);
 
   const storeData = async (key, value) => {
     try {
@@ -67,21 +90,6 @@ export default function Challenge8({nextText}) {
     }
     setResponse(response);
     setShowNext(true);
-
-    const payload = {
-      challenge: [
-        ...logs,
-        {
-          name: 'desafío 1',
-          state: 'Iniciado',
-          stage: 'Selección',
-          time: Date.now(),
-          context: '¿Cómo evaluarías esta información? imagen 3',
-          action: response,
-        },
-      ],
-    };
-    db.collection('new_logs').doc(idLog).update(payload);
   };
   return (
     <View style={globalStyles.viewBody}>
@@ -115,16 +123,26 @@ export default function Challenge8({nextText}) {
             />
           </>
         ) : (
-          <Button
-            title="Siguiente"
-            type="solid"
-            icon={<Icon name="arrow-right" size={15} color="#196674" />}
-            iconRight
-            buttonStyle={globalStyles.btn}
-            titleStyle={globalStyles.btnText}
-            containerStyle={globalStyles.btnContainer}
-            onPress={nextText}
-          />
+          <>
+            <Button
+              onPress={previousText}
+              title="Anterior"
+              buttonStyle={globalStyles.btn}
+              containerStyle={globalStyles.btnContainer}
+              titleStyle={globalStyles.btnText}
+              icon={<Icon name="arrow-left" size={15} color="#196674" icon />}
+            />
+            <Button
+              title="Siguiente"
+              type="solid"
+              icon={<Icon name="arrow-right" size={15} color="#196674" />}
+              iconRight
+              buttonStyle={globalStyles.btn}
+              titleStyle={globalStyles.btnText}
+              containerStyle={globalStyles.btnContainer}
+              onPress={nextText}
+            />
+          </>
         )}
       </View>
       <Modal isVisible={showModal} setIsVisible={setShowModal}>

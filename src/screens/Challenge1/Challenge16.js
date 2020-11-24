@@ -18,7 +18,7 @@ import 'firebase/storage';
 firebase.firestore().settings({experimentalForceLongPolling: true});
 const db = firebase.firestore(firebaseApp);
 
-export default function Challenge16({nextText, navigation}) {
+export default function Challenge16({previousText, nextText, navigation}) {
   const [showNext, setShowNext] = useState(false);
   const [checkedConclusion1, setCheckedConclusion1] = useState(false);
   const [checkedConclusion2, setCheckedConclusion2] = useState(false);
@@ -145,16 +145,26 @@ export default function Challenge16({nextText, navigation}) {
         </View>
       </ScrollView>
       <View style={globalStyles.viewBtns}>
-        {showNext && (
-          <Button
-            onPress={pushInfo}
-            title="Siguiente"
-            buttonStyle={globalStyles.btn}
-            containerStyle={globalStyles.btnContainer}
-            titleStyle={globalStyles.btnText}
-            icon={<Icon name="arrow-right" size={15} color="#196674" icon />}
-            iconRight
-          />
+        {showNext && idLog !== '' && (
+          <>
+            <Button
+              onPress={previousText}
+              title="Anterior"
+              buttonStyle={globalStyles.btn}
+              containerStyle={globalStyles.btnContainer}
+              titleStyle={globalStyles.btnText}
+              icon={<Icon name="arrow-left" size={15} color="#196674" icon />}
+            />
+            <Button
+              onPress={pushInfo}
+              title="Siguiente"
+              buttonStyle={globalStyles.btn}
+              containerStyle={globalStyles.btnContainer}
+              titleStyle={globalStyles.btnText}
+              icon={<Icon name="arrow-right" size={15} color="#196674" icon />}
+              iconRight
+            />
+          </>
         )}
       </View>
     </View>

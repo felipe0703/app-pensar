@@ -14,7 +14,6 @@ import globalStyles from '../../styles/global';
 import {firebaseApp} from '../../utils/firebase';
 import firebase from 'firebase';
 import 'firebase/storage';
-import {UserContext} from '../../contexts/UserContext';
 
 firebase.firestore().settings({experimentalForceLongPolling: true});
 const db = firebase.firestore(firebaseApp);
@@ -22,12 +21,14 @@ const db = firebase.firestore(firebaseApp);
 export default function Challenge1Text({
   text,
   go,
-  textButton = 'Siguiente',
+  textButton = 'siguiente',
   isVisibleLearnMore = false,
   learnMore = '',
   pageToLearMore = 0,
   showBrain = false,
   showLike = false,
+  previousText,
+  showPrevious = false,
 }) {
   const {state: page, nextText, backText} = usePages();
   const [showModal, setShowModal] = useState(false);
@@ -45,26 +46,34 @@ export default function Challenge1Text({
             data: doc.data().challenge,
           };
         });
+        console.log(data);
         setLogs(data[0].data);
         setIdLog(data[0].id);
       });
-
-    const payload = {
-      challenge: [
-        ...logs,
-        {
-          name: 'introducción',
-          state: 'Iniciado',
-          stage: '',
-          time: Date.now(),
-          context: '¿Quieres saber más?',
-          action: 'Si',
-        },
-      ],
-    };
-    db.collection('new_logs').doc(idLog).update(payload);
     setShowModal(true);
   };
+
+  useEffect(() => {
+    if (idLog !== '') {
+      console.log('estoy vacio');
+      const payload = {
+        challenge: [
+          ...logs,
+          {
+            name: 'introducción',
+            state: 'Iniciado',
+            stage: '',
+            time: Date.now(),
+            context: '¿Quieres saber más?',
+            action: 'Si',
+          },
+        ],
+      };
+      console.log('idLog', idLog);
+      db.collection('new_logs').doc(idLog).update(payload);
+    }
+  }, [idLog]);
+
   return (
     <View style={globalStyles.viewBody}>
       <View style={globalStyles.viewContent}>
@@ -89,9 +98,20 @@ export default function Challenge1Text({
         </View>
       )}
       <View style={globalStyles.viewBtns}>
+        {/* primero */}
         {page > 0 && page < text.length - 1 && (
           <Button
             onPress={backText}
+            title="anterior"
+            icon={<Icon name="arrow-left" size={15} color="#196674" />}
+            buttonStyle={globalStyles.btn}
+            containerStyle={globalStyles.btnContainer}
+            titleStyle={globalStyles.btnText}
+          />
+        )}
+        {showPrevious && (
+          <Button
+            onPress={previousText}
             title="anterior"
             icon={<Icon name="arrow-left" size={15} color="#196674" />}
             buttonStyle={globalStyles.btn}
@@ -110,6 +130,7 @@ export default function Challenge1Text({
             iconRight
           />
         )}
+        {/* ultimo */}
         {page === text.length - 1 && (
           <Button
             onPress={go}
@@ -117,6 +138,8 @@ export default function Challenge1Text({
             buttonStyle={globalStyles.btn}
             containerStyle={globalStyles.btnContainer}
             titleStyle={globalStyles.btnText}
+            icon={<Icon name="arrow-right" size={15} color="#196674" icon />}
+            iconRight
           />
         )}
       </View>

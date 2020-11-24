@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import AsyncStorage from '@react-native-community/async-storage';
 
 export default function Challenge5(props) {
-  const {nextText, navigation} = props;
+  const {nextText, navigation, previousText} = props;
 
   const textIntro = challengeText_5.split('|');
 
@@ -40,6 +40,14 @@ export default function Challenge5(props) {
         </Text>
       </View>
       <View style={globalStyles.viewBtns}>
+        <Button
+          onPress={previousText}
+          title="Anterior"
+          buttonStyle={globalStyles.btn}
+          containerStyle={globalStyles.btnContainer}
+          titleStyle={globalStyles.btnText}
+          icon={<Icon name="arrow-left" size={15} color="#196674" icon />}
+        />
         <Button
           onPress={nextText}
           title="Vamos"

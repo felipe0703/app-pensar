@@ -15,7 +15,11 @@ import 'firebase/storage';
 firebase.firestore().settings({experimentalForceLongPolling: true});
 const db = firebase.firestore(firebaseApp);
 
-export default function Challenge2_slice8({nextText, navigation}) {
+export default function Challenge2_slice8({
+  previousText,
+  nextText,
+  navigation,
+}) {
   const [value, setValue] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [btnAdd, setBtnAdd] = useState(false);
@@ -188,16 +192,26 @@ export default function Challenge2_slice8({nextText, navigation}) {
       </ScrollView>
 
       <View style={globalStyles.viewBtns}>
-        {countArgument > 0 && (
-          <Button
-            onPress={goNextText}
-            title="Listo"
-            buttonStyle={globalStyles.btn}
-            containerStyle={globalStyles.btnContainer}
-            titleStyle={globalStyles.btnText}
-            icon={<Icon name="arrow-right" size={15} color="#196674" icon />}
-            iconRight
-          />
+        {countArgument > 0 && idLog !== '' && (
+          <>
+            <Button
+              onPress={previousText}
+              title="Anterior"
+              buttonStyle={globalStyles.btn}
+              containerStyle={globalStyles.btnContainer}
+              titleStyle={globalStyles.btnText}
+              icon={<Icon name="arrow-left" size={15} color="#196674" icon />}
+            />
+            <Button
+              onPress={goNextText}
+              title="Listo"
+              buttonStyle={globalStyles.btn}
+              containerStyle={globalStyles.btnContainer}
+              titleStyle={globalStyles.btnText}
+              icon={<Icon name="arrow-right" size={15} color="#196674" icon />}
+              iconRight
+            />
+          </>
         )}
       </View>
       <Modal isVisible={showModal} setIsVisible={setShowModal}>

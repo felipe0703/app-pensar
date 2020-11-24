@@ -3,7 +3,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import {challege2Text_3} from './challenge2text';
 import ShowInfo from '../Challenge/ShowInfo';
 
-export default function Challenge2_slice3({nextText}) {
+export default function Challenge2_slice3({previousText, nextText}) {
   const allText = challege2Text_3.split('|');
 
   useEffect(() => {
@@ -18,5 +18,12 @@ export default function Challenge2_slice3({nextText}) {
     }
   };
 
-  return <ShowInfo text={allText} go={nextText} />;
+  return (
+    <ShowInfo
+      text={allText}
+      go={nextText}
+      previousText={previousText}
+      showPrevious={true}
+    />
+  );
 }

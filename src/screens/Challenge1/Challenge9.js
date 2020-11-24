@@ -4,7 +4,7 @@ import ShowInfo from '../Challenge/ShowInfo';
 import {challengeText_9} from './challengeText';
 import {UserContext} from '../../contexts/UserContext';
 
-export default function Challenge9({nextText}) {
+export default function Challenge9({previousText, nextText, navigation}) {
   const [userInfo, setUserInfo] = useState(null);
   const {dataUser} = useContext(UserContext);
   const textWithName = challengeText_9.replace('[]', userInfo);
@@ -12,6 +12,10 @@ export default function Challenge9({nextText}) {
 
   useEffect(() => {
     setUserInfo(dataUser.nameUser);
+  }, []);
+
+  useEffect(() => {
+    navigation.setParams({name: 'Selección', progress: 0.28});
   }, []);
 
   useEffect(() => {
@@ -26,5 +30,12 @@ export default function Challenge9({nextText}) {
     }
   };
 
-  return <ShowInfo text={textIntro} go={nextText} />;
+  return (
+    <ShowInfo
+      text={textIntro}
+      go={nextText}
+      previousText={previousText}
+      showPrevious={true}
+    />
+  );
 }
