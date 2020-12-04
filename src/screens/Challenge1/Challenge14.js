@@ -112,8 +112,12 @@ export default function Challenge14({
         },
       ],
     };
-    db.collection('new_logs').doc(idLog).update(payload);
-    nextText();
+    db.collection('new_logs')
+      .doc(idLog)
+      .update(payload)
+      .then(() => {
+        nextText();
+      });
   };
 
   return (

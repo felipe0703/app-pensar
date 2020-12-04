@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
   StyleSheet,
   View,
@@ -36,6 +36,14 @@ export default function Challenge2_slice2({previousText, nextText}) {
   const [idLog, setIdLog] = useState('');
   const [opt, setOpt] = useState(0);
 
+  const isMounted = useRef(true);
+
+  useEffect(() => {
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
+
   useEffect(() => {
     db.collection('new_logs')
       .where('idUser', '==', firebaseApp.auth().currentUser.uid)
@@ -47,10 +55,12 @@ export default function Challenge2_slice2({previousText, nextText}) {
             data: doc.data().challenge,
           };
         });
-        setLogs(data[0].data);
-        setIdLog(data[0].id);
+        if (isMounted.current) {
+          setLogs(data[0].data);
+          setIdLog(data[0].id);
+        }
       });
-  }, []);
+  }, [showModal]);
 
   useEffect(() => {
     if (idLog !== '' && showModal) {

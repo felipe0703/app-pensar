@@ -103,8 +103,12 @@ export default function Challenge16({previousText, nextText, navigation}) {
         },
       ],
     };
-    db.collection('new_logs').doc(idLog).update(payload);
-    nextText();
+    db.collection('new_logs')
+      .doc(idLog)
+      .update(payload)
+      .then(() => {
+        nextText();
+      });
   };
 
   return (

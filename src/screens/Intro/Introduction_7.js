@@ -69,7 +69,7 @@ export default function Introduction_3({navigation}) {
           setIdLog(data[0].id);
         }
       });
-  }, []);
+  }, [showModal]);
 
   useEffect(() => {
     storeData('@page_intro', '7');

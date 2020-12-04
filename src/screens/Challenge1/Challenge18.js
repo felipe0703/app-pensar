@@ -77,8 +77,12 @@ export default function Challenge18({navigation}) {
         },
       ],
     };
-    db.collection('new_logs').doc(idLog).update(payload);
-    navigation.navigate('trivia', {challenge: 1});
+    db.collection('new_logs')
+      .doc(idLog)
+      .update(payload)
+      .then(() => {
+        navigation.navigate('trivia', {challenge: 1});
+      });
   };
   return (
     <View style={globalStyles.viewBody}>

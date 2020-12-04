@@ -13,7 +13,10 @@ import {
 import Modal from '../../components/Modal';
 import {usePages} from '../../hooks/usePages';
 import globalStyles from '../../styles/global';
-import {playSound_incorrect} from '../../assets/playsound/playsound';
+import {
+  playSound_incorrect,
+  playSound_correct,
+} from '../../assets/playsound/playsound';
 
 export default function Introduction_4({navigation}) {
   const [showModal, setShowModal] = useState(false);
@@ -87,7 +90,11 @@ export default function Introduction_4({navigation}) {
   }
 
   const resp = () => {
-    playSound_incorrect();
+    if (checked_4) {
+      playSound_correct();
+    } else {
+      playSound_incorrect();
+    }
     setShowModal(true);
     nextText();
     setReady(true);
@@ -163,11 +170,19 @@ export default function Introduction_4({navigation}) {
       </View>
       <Modal isVisible={showModal} setIsVisible={setShowModal}>
         <View style={checked_4 ? globalStyles.correct : globalStyles.incorrect}>
-          <Image
-            style={globalStyles.brain}
-            source={require('../../assets/img/cerebrito/cerebro-dudando.png')}
-            PlaceholderContent={<ActivityIndicator />}
-          />
+          {checked_4 ? (
+            <Image
+              style={globalStyles.brain}
+              source={require('../../assets/img/cerebrito/cerebro-like-rosa.png')}
+              PlaceholderContent={<ActivityIndicator />}
+            />
+          ) : (
+            <Image
+              style={globalStyles.brain}
+              source={require('../../assets/img/cerebrito/cerebro-dudando.png')}
+              PlaceholderContent={<ActivityIndicator />}
+            />
+          )}
           {checked_1 && (
             <Text style={globalStyles.options}>{textFeedback_6_1}</Text>
           )}

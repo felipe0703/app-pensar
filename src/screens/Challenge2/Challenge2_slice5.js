@@ -150,13 +150,17 @@ export default function Challenge2_slice5({
           state: 'Iniciado',
           stage: 'Selección',
           time: Date.now(),
-          context: 'Selección',
+          context: 'Selección urls',
           action: urls,
         },
       ],
     };
-    db.collection('new_logs').doc(idLog).update(payload);
-    nextText();
+    db.collection('new_logs')
+      .doc(idLog)
+      .update(payload)
+      .then(() => {
+        nextText();
+      });
   };
 
   return (

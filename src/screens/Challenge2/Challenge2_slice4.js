@@ -117,8 +117,12 @@ export default function Challenge2_slice4({
         },
       ],
     };
-    db.collection('new_logs').doc(idLog).update(payload);
-    nextText();
+    db.collection('new_logs')
+      .doc(idLog)
+      .update(payload)
+      .then(() => {
+        nextText();
+      });
   };
   return (
     <View style={globalStyles.viewBody}>

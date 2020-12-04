@@ -36,8 +36,6 @@ export default function Challenge1({nextText, setSlice}) {
     try {
       const value = await AsyncStorage.getItem('@page_challenge_1');
 
-      console.log('ultima pagina', value);
-
       if (value !== null) {
         if (value === '1' || value === '2') {
           storeData('@page_challenge_1', '1');

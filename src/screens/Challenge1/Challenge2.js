@@ -22,6 +22,8 @@ import {
   textFeedback_2_2,
   textFeedback_2_3,
   textFeedback_2_4,
+  textFeedback_2_5,
+  textFeedback_2_6,
 } from './challengeText';
 import Modal from '../../components/Modal';
 import globalStyles from '../../styles/global';
@@ -60,7 +62,7 @@ export default function Challenge2({previousText, nextText}) {
           setIdLog(data[0].id);
         }
       });
-  }, []);
+  }, [showModal]);
 
   useEffect(() => {
     storeData('@page_challenge_1', '2');
@@ -137,6 +139,36 @@ export default function Challenge2({previousText, nextText}) {
             ],
           };
           db.collection('new_logs').doc(idLog).update(payload);
+        } else if (thinker === 5) {
+          const payload = {
+            challenge: [
+              ...logs,
+              {
+                name: 'desafío 1',
+                state: 'Iniciado',
+                stage: '',
+                time: Date.now(),
+                context: 'Marie Curie',
+                action: 'Ver pensador',
+              },
+            ],
+          };
+          db.collection('new_logs').doc(idLog).update(payload);
+        } else if (thinker === 6) {
+          const payload = {
+            challenge: [
+              ...logs,
+              {
+                name: 'desafío 1',
+                state: 'Iniciado',
+                stage: '',
+                time: Date.now(),
+                context: 'Bertrand Rusell',
+                action: 'Ver pensador',
+              },
+            ],
+          };
+          db.collection('new_logs').doc(idLog).update(payload);
         }
       }
     }
@@ -152,23 +184,17 @@ export default function Challenge2({previousText, nextText}) {
     } else if (option === 3) {
       setTextFeedback(textFeedback_2_3);
       setThinker(3);
-    } else {
+    } else if (option === 4) {
       setTextFeedback(textFeedback_2_4);
       setThinker(4);
+    } else if (option === 5) {
+      setTextFeedback(textFeedback_2_5);
+      setThinker(5);
+    } else if (option === 6) {
+      setTextFeedback(textFeedback_2_6);
+      setThinker(6);
     }
     setShowModal(true);
-  };
-
-  const thinkers = () => {
-    if (thinker === 1) {
-      return require('../../assets/img/pensadores/martin-luther-king-jr.jpg');
-    } else if (thinker === 2) {
-      return require('../../assets/img/pensadores/Simone-de-Beauvoir.jpg');
-    } else if (thinker === 3) {
-      return require('../../assets/img/pensadores/elena-caffarena.jpg');
-    } else {
-      return require('../../assets/img/pensadores/camilo-henriquez.jpg');
-    }
   };
 
   return (
@@ -204,6 +230,20 @@ export default function Challenge2({previousText, nextText}) {
             style={globalStyles.touchable}>
             <Text style={{fontSize: 16, color: '#fff'}}>
               4. <Text style={globalStyles.textInfo}>Camilo Henríquez</Text>
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => showInfo(5)}
+            style={globalStyles.touchable}>
+            <Text style={{fontSize: 16, color: '#fff'}}>
+              5. <Text style={globalStyles.textInfo}>Marie Curie</Text>
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => showInfo(6)}
+            style={globalStyles.touchable}>
+            <Text style={{fontSize: 16, color: '#fff'}}>
+              6. <Text style={globalStyles.textInfo}>Bertrand Rusell</Text>
             </Text>
           </TouchableOpacity>
         </View>
@@ -257,10 +297,24 @@ export default function Challenge2({previousText, nextText}) {
                 PlaceholderContent={<ActivityIndicator />}
                 containerStyle={styles.containerImg}
               />
-            ) : (
+            ) : thinker === 4 ? (
               <Image
                 style={styles.img}
                 source={require('../../assets/img/pensadores/camilo-henriquez.jpg')}
+                PlaceholderContent={<ActivityIndicator />}
+                containerStyle={styles.containerImg}
+              />
+            ) : thinker === 5 ? (
+              <Image
+                style={styles.img}
+                source={require('../../assets/img/pensadores/Marie_Curie.jpg')}
+                PlaceholderContent={<ActivityIndicator />}
+                containerStyle={styles.containerImg}
+              />
+            ) : (
+              <Image
+                style={styles.img}
+                source={require('../../assets/img/pensadores/Bertrand_Russell.jpg')}
                 PlaceholderContent={<ActivityIndicator />}
                 containerStyle={styles.containerImg}
               />

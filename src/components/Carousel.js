@@ -88,8 +88,12 @@ export default function CorouselChallenge({navigation}) {
             },
           ],
         };
-        db.collection('new_logs').doc(idLog).update(payload);
-        navigation.navigate('introduction');
+        db.collection('new_logs')
+          .doc(idLog)
+          .update(payload)
+          .then(() => {
+            navigation.navigate('introduction');
+          });
       } else if (id === 1) {
         const payload = {
           challenge: [
@@ -104,8 +108,12 @@ export default function CorouselChallenge({navigation}) {
             },
           ],
         };
-        db.collection('new_logs').doc(idLog).update(payload);
-        navigation.navigate('challenge', {id, name, progress: 0.14});
+        db.collection('new_logs')
+          .doc(idLog)
+          .update(payload)
+          .then(() => {
+            navigation.navigate('challenge', {id, name, progress: 0.14});
+          });
       } else {
         const payload = {
           challenge: [
@@ -120,8 +128,12 @@ export default function CorouselChallenge({navigation}) {
             },
           ],
         };
-        db.collection('new_logs').doc(idLog).update(payload);
-        navigation.navigate('challenge2', {id, name, progress: 0.14});
+        db.collection('new_logs')
+          .doc(idLog)
+          .update(payload)
+          .then(() => {
+            navigation.navigate('challenge2', {id, name, progress: 0.14});
+          });
       }
     };
 

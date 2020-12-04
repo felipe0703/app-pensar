@@ -27,15 +27,6 @@ export default function App() {
     firebaseApp.auth().onAuthStateChanged((response) => {
       setUser(response);
       if (response) {
-        // db.collection('new_logs')
-        //   .where('idUser', '==', firebaseApp.auth().currentUser.uid)
-        //   .get()
-        //   .then((response) => {
-        //     const data = response.docs.map((doc) => {
-        //       return doc.id;
-        //     });
-        //     setIdLog(data[0]);
-        //   });
         setDataUser({
           idUser: firebaseApp.auth().currentUser.uid,
           nameUser: firebaseApp.auth().currentUser.displayName,

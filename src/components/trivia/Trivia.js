@@ -43,7 +43,7 @@ export default function Trivia({navigation, route}) {
         setLogs(data[0].data);
         setIdLog(data[0].id);
       });
-  }, []);
+  }, [showModal]);
 
   useEffect(() => {
     const id = random(numbersOfQuestions - 1);
@@ -65,26 +65,41 @@ export default function Trivia({navigation, route}) {
       setFeedbackTitle('Bien hecho 🎊🎉🎉');
       setCorrect(true);
       setCountCorrect(countCorrect + 1);
+
+      const payload = {
+        challenge: [
+          ...logs,
+          {
+            name: 'trivia',
+            state: 'Iniciado',
+            stage: '',
+            time: Date.now(),
+            context: question.question,
+            action: 'correcto',
+          },
+        ],
+      };
+      db.collection('new_logs').doc(idLog).update(payload);
     } else {
       playSound_incorrect();
       setFeedbackTitle('Inténtalo de nuevo 👎😢');
       setCorrect(false);
-    }
 
-    const payload = {
-      challenge: [
-        ...logs,
-        {
-          name: 'trivia',
-          state: 'Iniciado',
-          stage: '',
-          time: Date.now(),
-          context: question.question,
-          action: resp,
-        },
-      ],
-    };
-    db.collection('new_logs').doc(idLog).update(payload);
+      const payload = {
+        challenge: [
+          ...logs,
+          {
+            name: 'trivia',
+            state: 'Iniciado',
+            stage: '',
+            time: Date.now(),
+            context: question.question,
+            action: 'incorrecto',
+          },
+        ],
+      };
+      db.collection('new_logs').doc(idLog).update(payload);
+    }
 
     setShowModal(true);
   };

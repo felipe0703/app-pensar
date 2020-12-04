@@ -78,8 +78,12 @@ export default function Challenge2_slice14({navigation}) {
         },
       ],
     };
-    db.collection('new_logs').doc(idLog).update(payload);
-    navigation.navigate('trivia', {challenge: 2});
+    db.collection('new_logs')
+      .doc(idLog)
+      .update(payload)
+      .then(() => {
+        navigation.navigate('trivia', {challenge: 2});
+      });
   };
 
   return (

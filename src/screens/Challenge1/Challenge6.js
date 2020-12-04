@@ -64,7 +64,7 @@ export default function Challenge6({previousText, nextText, navigation}) {
             stage: 'Selección',
             time: Date.now(),
             context: '¿Cómo evaluarías esta información? imagen 1',
-            action: response,
+            action: response ? 'incorrecto' : 'correcto',
           },
         ],
       };

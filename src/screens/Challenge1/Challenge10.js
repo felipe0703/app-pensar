@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect, useContext, useRef} from 'react';
 import {StyleSheet, View, Text, ActivityIndicator} from 'react-native';
 import {Button, CheckBox, Image} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -38,6 +38,8 @@ export default function Challenge10({
   const [logs, setLogs] = useState([]);
   const [idLog, setIdLog] = useState('');
 
+  const isMounted = useRef(true);
+
   useEffect(() => {
     db.collection('new_logs')
       .where('idUser', '==', firebaseApp.auth().currentUser.uid)
@@ -49,8 +51,10 @@ export default function Challenge10({
             data: doc.data().challenge,
           };
         });
-        setLogs(data[0].data);
-        setIdLog(data[0].id);
+        if (isMounted.current) {
+          setLogs(data[0].data);
+          setIdLog(data[0].id);
+        }
       });
   }, []);
 
@@ -126,9 +130,12 @@ export default function Challenge10({
         },
       ],
     };
-    db.collection('new_logs').doc(idLog).update(payload);
-
-    nextText();
+    db.collection('new_logs')
+      .doc(idLog)
+      .update(payload)
+      .then(() => {
+        nextText();
+      });
   };
 
   return (

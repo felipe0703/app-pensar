@@ -3,8 +3,7 @@ export const challege2Text_1 = `¡Hola []!
 ¡Has llegado a la 2ª etapa!
 🎊Felicitaciones🎉
 
-Has avanzado mucho en comprender cómo se desarrolla el pensamiento crítico y cuáles son sus dificultades considerando los sesgos que todos los seres humanos tenemos para percibir el mundo. 
-`;
+Has avanzado mucho en comprender cómo se desarrolla el pensamiento crítico y cuáles son sus dificultades considerando los sesgos que todos los seres humanos tenemos para percibir el mundo`;
 
 export const challege2Text_2 = `Desafío 2
 
@@ -26,7 +25,7 @@ export const challege2Text_3 = `¿Estás listo para continuar?
 
 ¡Vamos!💪😁`;
 
-export const challege2Text_4 = `En esta etapa eres el agente de tu propio pensamiento. El propósito de esta etapa es que puedas practicar el pensamiento crítico de manera más autónoma desarrollando tu propia tesis, argumentos, selección de información y conclusión.
+export const challege2Text_4 = `En esta etapa eres el agente de tu propio pensamiento. El propósito de esta etapa es que puedas practicar el pensamiento crítico de manera más autónoma desarrollando tu propia tesis, argumentos, selección de información y conclusión
 
 ¿Con cuál pregunta quieres empezar para elaborar la tesis?`;
 
@@ -37,7 +36,7 @@ export const challege2Text_4_2 = `¿Crees que los robots deben participar en el 
 
 export const challege2Text_4_3 = `¿Crees que los productos de belleza influyen en la apariencia estética de las personas o es más bien una estrategia de márketing?`;
 
-export const challege2Text_5 = `Antes de empezar, reflexiona unos segundos sobre tu tesis. 
+export const challege2Text_5 = `Antes de empezar, reflexiona unos segundos sobre tu tesis
 
 Ahora, ¿qué evidencia y datos usarías para respaldar tu tesis?`;
 
@@ -49,7 +48,7 @@ export const challege2Text_6_1 = `Considerando la pregunta escogida para elabora
 
 export const challege2Text_7 = `¡Muy bien!🎉🎉
 
-Ahora puedes continuar con la formulación de tu tesis.
+Ahora puedes continuar con la formulación de tu tesis
 
 Apoyándote en la información encontrada, ¿Qué argumentos incluiría para apoyar tu tesis?`;
 
@@ -61,7 +60,7 @@ Estos son los argumentos y contrargumentos que has considerado para apoyar tu pu
 
 export const challege2Text_10 = `🎊 ¡Genial! 🎊
 
-Has hecho un viaje excelente. Faltan los últimos kilómetros de la segunda etapa del trayecto.`;
+Has hecho un viaje excelente. Faltan los últimos kilómetros de la segunda etapa del trayecto`;
 
 export const challege2Text_11 = `¿Cuál es la conclusión de tu argumento?`;
 
@@ -82,7 +81,7 @@ export const challenge2Text_13 = `Resumen final`;
 
 export const challege2Text_14 = `🎊 ¡Excelente! 🎊
 
-Para finalizar el viaje, contesta estas tres preguntas que te ayudarán a aprender un poco más sobre los sesgos cognitivos y la evaluación de información.`;
+Para finalizar el viaje, contesta estas tres preguntas que te ayudarán a aprender un poco más sobre los sesgos cognitivos y la evaluación de información`;
 
 export const congratulation_challenge1 = `Sabías que en los programas y bases curriculares de Historia, Geografía y Cs. Sociales se señalan que “el énfasis está en desarrollar un pensamiento crítico basado en la capacidad de integrar elementos para el análisis y de reconocer la complejidad inherente a los fenómenos humanos que estudian la Historia y las Ciencias Sociales  (Ministerio de educación, 2016b, p. 44)`;
 
