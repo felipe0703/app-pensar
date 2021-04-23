@@ -6,6 +6,7 @@ import Modal from '../Modal';
 import ChangeDisplayNameForm from './ChangeDisplayNameForm';
 import ChangeEmailForm from './ChangeEmailForm';
 import ChangePasswordForm from './ChangePasswordForm';
+import InfoApp from './InfoApp';
 
 export default function AccountOptions(props) {
   const {userInfo, toastRef, setReloadUserInfo} = props;
@@ -43,6 +44,10 @@ export default function AccountOptions(props) {
             toastRef={toastRef}
           />,
         );
+        setShowModal(true);
+        break;
+      case 'information':
+        setRenderComponent(<InfoApp setShowModal={setShowModal} />);
         setShowModal(true);
         break;
       default:
@@ -112,6 +117,15 @@ function generateOptions(selectedComponent) {
       iconNameRight: 'chevron-right',
       iconColorRight: '#C2DDC7',
       onPress: () => selectedComponent('password'),
+    },
+    {
+      title: 'Acerca de',
+      iconType: 'material-community',
+      iconNameLeft: 'information',
+      iconColorLeft: '#C2DDC7',
+      iconNameRight: 'chevron-right',
+      iconColorRight: '#C2DDC7',
+      onPress: () => selectedComponent('information'),
     },
   ];
 }
